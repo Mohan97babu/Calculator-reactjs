@@ -1,8 +1,7 @@
 
 import React from "react";
 import { useState } from "react";
-import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import radioButton from "./radiobutton";
 // import '../node_modules/bootstrap/dist/js/bootstrap';
 // import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 
@@ -175,8 +174,9 @@ const trigooption =[
 
         <div className="card p-3 w-25 backcolor ">
           <h5 className="text-center cardcolor"> Calculator</h5>
-
-          <div className="radios">
+             <radioButton
+            myprop ={setTrigo} />
+          {/* <div className="radios">
             <div className="form-check" >
               <input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" onClick={() => {
                 setTrigo(false)  
@@ -193,7 +193,7 @@ const trigooption =[
                 Trigonometry Functions
               </label>
             </div>
-          </div>
+          </div> */}
           { (!trigo ? <label htmlFor="basicselect" className="form-label cardcolor mt-3 " id="hideLabel1">Basic Operators</label> :null)}
           {(!trigo ? <select id="basicselect" value={basic} className="form-select mb-3" onChange={(e) => setBasic(e.target.value)  } aria-label="Default select example" required>
             {basicOption.map((option) =>
