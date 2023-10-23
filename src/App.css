@@ -1,0 +1,22 @@
+
+.aligne
+{
+  height:100vh;
+  background-color: gray;
+  
+}
+.cardcolor
+{
+  
+  color: chocolate;
+}
+
+.backcolor{
+  background-color: whitesmoke !important;
+}
+.position
+{
+  position: absolute;
+    top: 88%;
+    left: 46%;
+}
