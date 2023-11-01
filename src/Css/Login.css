@@ -1,6 +1,6 @@
 *
 {
-  overflow:hidden;
+  overflow-x:hidden;
 }
 .back
 {
@@ -15,7 +15,7 @@
 {
     font-size:12px;
 }
-.btncolor
+.btncolor 
 {
     background-color:#310750!important;
     
@@ -84,4 +84,24 @@
     height: 131px;
     margin:auto;
     margin-bottom:23px;    
+}
+.heights
+{
+  height:100vh;
+}
+.textcolor1
+{
+  color:#7464bc;
+}
+a:hover
+{
+  background-color:#310750!important;
+}
+.CreAvavtar
+{
+  margin-left: auto;
+}
+.address
+{
+  resize :none;
 }

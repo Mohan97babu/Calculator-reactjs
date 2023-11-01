@@ -15,8 +15,7 @@ const Login = () => {
         setLogin({...login,[e.target.name] : [e.target.value]})
     };
     const handleSubmit =() =>
-    {
-        
+    {  
         setLogin({...login,show:!login.show})
         console.log(login)
     }
