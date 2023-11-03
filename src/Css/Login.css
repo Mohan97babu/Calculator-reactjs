@@ -1,7 +1,7 @@
-*
+/* *
 {
   overflow-x:hidden;
-}
+} */
 .back
 {
   background-color: #7464bc !important;
@@ -87,13 +87,13 @@
 }
 .heights
 {
-  height:100vh;
+  height:100%;
 }
 .textcolor1
 {
   color:#7464bc;
 }
-a:hover
+.a:hover
 {
   background-color:#310750!important;
 }
@@ -105,3 +105,32 @@ a:hover
 {
   resize :none;
 }
+.alignnav
+{
+  width:100vw;
+}
+a
+{
+  text-decoration: none !important;
+}
+.a2:active
+{
+  background-color:#310750!important;
+}
+.cursorpoint
+{
+  cursor:default;
+}
+.a1 :hover  {
+  background-color: #7464bc !important;
+  color:white !important;
+  
+}
+.a3{
+  border-radius: 5px !important;
+}
+
+
+
+
+

@@ -1,9 +1,10 @@
 import { useState } from "react"
 import Reactlogin from "../src/images/Reactlogin.png"
-import reactlogotrans1 from "../src/images/reactlogotrans1.png"
-import { Link } from "react-router-dom";
+import reactlogotrans1 from "../src/images/reactwhitetextlogin-removebg-preview.png"
+
+import { useNavigate } from "react-router-dom";
 const Login = () => {
-   
+     const navigate = useNavigate();
     const [login,setLogin] = useState({
         userName :"",
         password :"",
@@ -18,6 +19,7 @@ const Login = () => {
     {  
         setLogin({...login,show:!login.show})
         console.log(login)
+        navigate("/dashboard")
     }
     return (
         <>
@@ -27,17 +29,17 @@ const Login = () => {
                     <div className="col-6 d-flex justify-content-center align-items-center back curved  p-0">
                         <div className="card rounded-0 border-0 back1 w-75">
                             <div className="row back1 ">
-                                <img src={reactlogotrans1} width="200px" height="200px" alt="....." className="logo1 back" />
+                                <img src={reactlogotrans1} width="200px" height="200px" alt="....." className="logo1 back " />
                             </div>
                             <div className="row back bord ">
-                                <h3 className="border-0 textcolor text-center">Welcome To CONNECT</h3>
+                                <h3 className="border-0 text-white text-center">Welcome To CONNECT</h3>
                             </div>
                             <div className="row alignimage  ">
                             <img src={Reactlogin} className="image back "  alt="...." />
                             </div>
                             <div className="row back bord ">
-                            <p className="border-0 textcolor fs-5 fw-medium text-center"> A Connect Between Job Providers And Job Seekers </p>
-                              <h3 className="border-0 textcolor text-center"> Sign Up for free!!!!</h3> 
+                            <p className="border-0 text-white fs-5 fw-medium text-center"> A Connect Between Job Providers And Job Seekers </p>
+                               
                             </div>
                         </div>
                     </div>
@@ -65,14 +67,14 @@ const Login = () => {
                                     <span>forgot Password ?</span>
                                 </div>
                             </div>
-                           <Link to="/dashboard">
+                           
                            <button type="button" className="btn btn-primary btncolor inputfield textcolor border-0 w-100" onClick={(e) => handleSubmit(e) }>LOGIN</button>
-                           </Link> 
-                            <div className="row mt-3">
+                            
+                            {/* <div className="row mt-3">
                                 <div className="col-12 text-center textcolor">
                                     <span>Need an account?</span><span>Sign up!</span>
                                 </div>
-                            </div>
+                            </div> */}
                         </div>
                     </div>
                 </div>}

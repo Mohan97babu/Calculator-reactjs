@@ -14,17 +14,18 @@ export default function App (){
   return (
     <>
     {/* <Demo /> */}
-    {/* <BrowserRouter>
+    <BrowserRouter>
     <Routes>
       <Route path="/" element = {<Login/>}/>
       <Route path= "dashboard" element= {<Dashboard/>} /> 
+      <Route path="CreateProfile" element ={<CreateProfile />} />
     </Routes>
-    </BrowserRouter> */}
+    </BrowserRouter>
      {/* <Login /> */}
      {/* <Dashboard /> */}
      {/* <SideBar /> */}
      {/* <NavBar /> */}
-     <CreateProfile />
+     {/* <CreateProfile /> */}
     </>
   )
 }
