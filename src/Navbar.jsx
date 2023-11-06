@@ -1,7 +1,8 @@
-import "../src/Css/Login.css"
+
 import reactlogotrans1 from "../src/images/reactwhitetextlogin-removebg-preview.png"
 import avatar from "../src/images/avatar.png"
 import { Link } from "react-router-dom"
+
 const NavBar = () => {
     return (
 

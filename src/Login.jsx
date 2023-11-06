@@ -8,23 +8,23 @@ const Login = () => {
     const [login,setLogin] = useState({
         userName :"",
         password :"",
-        show:true
+        
     })
     
     const handleChange =(e) =>
     {
-        setLogin({...login,[e.target.name] : [e.target.value]})
+        setLogin({...login,[e.target.name] : e.target.value})
     };
     const handleSubmit =() =>
     {  
-        setLogin({...login,show:!login.show})
+        
         console.log(login)
         navigate("/dashboard")
     }
     return (
         <>
             <div className="container-fluid background d-flex justify-content-center align-items-center p-0 cardcolor ">
-            { 
+            
             <div className="row w-100 h-100">
                     <div className="col-6 d-flex justify-content-center align-items-center back curved  p-0">
                         <div className="card rounded-0 border-0 back1 w-75">
@@ -77,7 +77,7 @@ const Login = () => {
                             </div> */}
                         </div>
                     </div>
-                </div>}
+                </div>
             </div>
            {/* <Outlet /> */}
         </>

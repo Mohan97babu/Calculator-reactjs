@@ -6,7 +6,8 @@ import BasicOperation from "../components/BasicSelect";
 import TrigoOperation from "../components/TrigonometrySelect";
 import Number1Input from "../components/Number1Input";
 import Buttons from "../components/Buttons";
-import CalculatorImg from "../images/CalculatorImg.jpg"
+
+
 const Demo = () => {
   const [input1, setInput1] = useState([]);
   const [input2, setInput2] = useState([]);
@@ -81,10 +82,10 @@ const Demo = () => {
   }
 
   return (
-    <div className="App">
+    <div className="App image2">
       <div className="container-fluid d-flex justify-content-center align-items-center cardalign ">
-        <div className="card p-3 ms-5 w-25 backcardcolor">
-          <h5 className="text-center textcolor ">Calculator</h5>
+        <div className="card p-3 ms-5 w-25 back ">
+          <h5 className="text-center text-white ">Calculator</h5>
           <RadioButton
             setTrigo={setTrigo}
             trigo={trigo}
@@ -117,9 +118,9 @@ const Demo = () => {
             clearState={clearState}
              />
              <div className="bg-white pt-2">
-          {!trigo ? (basic === '4' ? (<p className="textcolor">  Quotient :- {result} Remainder :- {remainder}</p>)
-            : <p className="textcolor"> Result is:{result} </p>)
-            : (result ? <p className="textcolor"> Result is:{result1} </p> : null)}
+          {!trigo ? (basic === '4' ? (<p className=" ms-2 pt-1">  Quotient :- {result} Remainder :- {remainder}</p>)
+            : <p className=" ms-2 pt-1"> Result is:{result} </p>)
+            : (result ? <p className=" ms-2 pt-1"> Result is:{result1} </p> : null)}
             </div>
         </div>
       </div>

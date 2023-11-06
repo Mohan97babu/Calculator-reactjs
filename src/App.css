@@ -1,17 +1,153 @@
-.App
+/* *
 {
-  
-  background-image: url("./images/CalculatorImg.jpg");
+  overflow-x:hidden;
+} */
+.back
+{
+  background-color: #7464bc !important;
+}
+.inputfield
+{
+    border-radius:50px !important;
+    height:60px;
+}
+.text
+{
+    font-size:12px;
+}
+.btncolor 
+{
+    background-color:#310750!important;
+    
+}
+.checkbox
+{
+    border-color:black !important;
+    border:2px solid !important;
+}
+.background
+{
+  /* background-image: url("../images/reactbackground.jpg");
   background-position: center;
-  background-size: cover;
-  opacity:0.7;
+  background-size:cover; */
+  height:100vh;
+}
+
+.cardcolor
+{
+  background-color:  #cdc1f2;
+}
+.curved
+{
+  border-bottom-right-radius: 10%;
+  
+}
+.text1
+{
+  font-size:15px;
+
+}
+.image
+{
+  width:200px !important;
+  height:200px !important;
+
+}
+.alignimage
+{
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #7464bc !important;
+  
+}
+.bord
+{
+   border-color: #7464bc;
+}
+.logo
+{
+  width:300px;
+  height:100px;
+  align-self: center;
+}
+.textcolor
+{
+  color: #e5caf8;
+}
+.back1
+{
+  background-color: #7464bc !important;
+}
+.logo1{
+    width: 301px !important;
+    height: 131px;
+    margin:auto;
+    margin-bottom:23px;    
+}
+.heights
+{
+  height:100%;
+}
+.textcolor1
+{
+  color:#7464bc;
+}
+.a:hover
+{
+  background-color:#310750!important;
+}
+.CreAvavtar
+{
+  margin-left: auto;
+}
+.address
+{
+  resize :none;
+}
+.alignnav
+{
+  width:100vw;
+}
+a
+{
+  text-decoration: none !important;
+}
+.a2:active
+{
+  background-color:#310750!important;
+}
+.cursorpoint
+{
+  cursor:default;
+}
+.a1 :hover  {
+  background-color: #7464bc !important;
+  color:white !important;
+  
+}
+.a3{
+  border-radius: 5px !important;
+}
+.image1
+{ 
+  background-image: url("../src/images/math-rulers-supplies-with-dices-empty-notebook.jpg");
+  background-size: contain;
+  
+  background-position-x: 655px;
+  background-position-y: 452px;
+}
+.image2
+{
+  background-image: url("../src/images/wepik-export-20231106130024VXnB.jpeg");
+  background-position: bottom;
 }
 
 .cardalign
 {
   height:100vh;
 }
-.textcolor
+.textcolor5
 { 
   color: rgb(80, 98, 119); 
 }
@@ -23,5 +159,9 @@
 }
 input[type=radio]:checked {
   background-color:#105692 ;
+}
+.colortable
+{
+  background-color: #7464bc !important;
 }
 

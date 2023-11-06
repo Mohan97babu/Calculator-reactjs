@@ -17,7 +17,7 @@ const BasicOperation = ({basic,setBasic}) => {
   
   return (
     <>
-       <label htmlFor="basicselect" className="form-label textcolor mt-3 " id="hideLabel1">Basic Operators</label> 
+       <label htmlFor="basicselect" className="form-label text-white mt-3 " id="hideLabel1">Basic Operators</label> 
       <select id="basicselect" value={basic} className="form-select mb-3" onChange={(e) => handleBasicSelect(e)} aria-label="Default select example" required>
         {basicOption.map((option,index) =>
         {
