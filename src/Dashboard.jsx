@@ -1,10 +1,28 @@
-import CreateProfile from "./CreateProfile";
+
+import { useState } from "react";
 import NavBar from "./Navbar";
 import SideBar from "./SideBar";
-import { Icon } from '@iconify/react';
-import { Link } from "react-router-dom";
+import TableMain from "./Tablemain";
 
-const Dashboard = () => {
+const Dashboard = ({createProfile,createProfileData,setCreateProfileData,edit,setEdit}) => {
+    const tablehead =[
+        {label:"S.No."},
+        {label:"E-Mail"},
+        {label:"Username"},
+        {label:"Mobile Number"},
+        {label:"Created at"},
+        {label:"Modified At"},
+        {label:"Actions"}
+    ];
+   
+    const handleInput =(e) =>
+    {  
+        console.log(typeof(createProfile),"5555")
+        e.preventDefault();
+    }
+    // let result= [Object.entries(createProfile)];
+
+    
     return (
         <>
             {/* <div className="row">
@@ -39,7 +57,7 @@ const Dashboard = () => {
                             <div className="col-6 ">                               
                                     <form className="d-flex justify-content-end" role="search">
                                         <input className="form-control me-2 w-50" type="search" placeholder="Search" aria-label="Search" />
-                                        <button className="btn btn-primary btncolor w-25" type="submit">Search</button>
+                                        <button className="btn btn-primary btncolor w-25" type="submit" onClick={(e) =>handleInput(e)}>Search</button>
                                     </form>
                             </div>
                               </div>
@@ -48,26 +66,29 @@ const Dashboard = () => {
                                 <table className="table border border-secondary-subtle   cursorpoint">
                                     <thead className="" >
                                         <tr  >
-                                            <th ><span className="text-secondary ">S.no</span></th>
+                                            {/* <th ><span className="text-secondary ">S.no</span></th>
                                             <th ><span className="text-secondary">E-mail</span></th>
                                             <th><span className="text-secondary">Username</span></th>
                                             <th><span className="text-secondary">Mobile Number</span></th>
                                             <th><span className="text-secondary">Created at</span></th>
                                             <th><span className="text-secondary">Modified At</span></th>
-                                            <th className=""><span className="text-secondary ">Actions</span></th>
+                                            <th className=""><span className="text-secondary ">Actions</span></th> */}
+                                            {tablehead.map((option)=>{
+                                                return <th><span className="text-secondary ">{option.label}</span></th>
+                                            })}
                                         </tr>
                                     </thead>
-                                    {/* <div className="row d-flex p-0 justify-content-between w-100">
-                                        <div className="col-1">S.no</div>
-                                        <div className="col-3">E-mail</div>
-                                        <div className="col-2">Username</div>
-                                        <div className="col-2">Mobile Number</div>
-                                        <div className="col-1">Created at</div>
-                                        <div className="col-1">Modified At</div>
-                                        <div className="col-2">Actions</div>
-                                    </div> */}
+                                   
                                     <tbody>
-                                        <tr className="  cardcolor ">
+                                        <TableMain 
+                                        // createProfile ={createProfile}
+                                        createProfileData={createProfileData}
+                                        setCreateProfileData={setCreateProfileData}
+                                        edit={edit}
+                                        setEdit={setEdit}
+                                        />
+                                        
+                                        {/* <tr className="  cardcolor ">
                                             <td>1</td>
                                             <td>dshadwef45@gmail.com</td>
                                             <td>cdfefw</td>
@@ -75,7 +96,7 @@ const Dashboard = () => {
                                             <td>31/Jan/2023</td>
                                             <td>23/Apr/2023</td>
                                             <td>
-                                                <div className="row d-flex justify-content-end pe-3  ">
+                                                <div className="row d-flex  pe-3  ">
                                                  <Link to="/CreateProfile" className="w-25">  <Icon icon="uil:edit" color="#7464bc" width="20" height="20"  /> </Link>
                                                     <Icon icon="fluent:delete-16-filled" color="#7464bc" width="20" height="20" className="w-25" />
                                                     <Icon icon="carbon:view" color="#7464bc" width="20" height="20" className="w-25" />
@@ -90,7 +111,7 @@ const Dashboard = () => {
                                             <td>31/Jan/2023</td>
                                             <td>10/Mar/2023</td>
                                             <td>
-                                                <div className="row d-flex justify-content-end pe-3 ">
+                                                <div className="row d-flex pe-3 ">
                                                 <Link to="/CreateProfile" className="w-25"> <Icon icon="uil:edit" color="#7464bc" width="20" height="20"  /> </Link> 
                                                     <Icon icon="fluent:delete-16-filled" color="#7464bc" width="20" height="20" className="w-25" />
                                                     <Icon icon="carbon:view" color="#7464bc" width="20" height="20" className="w-25" />
@@ -105,13 +126,13 @@ const Dashboard = () => {
                                             <td>31/Jan/2023</td>
                                             <td>26/Feb/2023</td>
                                             <td>
-                                                <div className="row d-flex justify-content-end pe-3 ">
+                                                <div className="row d-flex  pe-3 ">
                                                 <Link to="/CreateProfile" className="w-25">  <Icon icon="uil:edit" color="#7464bc" width="20" height="20"  /> </Link>
                                                     <Icon icon="fluent:delete-16-filled" color="#7464bc" width="20" height="20" className="w-25" />
                                                     <Icon icon="carbon:view" color="#7464bc" width="20" height="20" className="w-25" />
                                                 </div>
                                             </td>
-                                        </tr>
+                                        </tr> */}
                                     </tbody>
                                 </table>
                                 <div className="d-flex justify-content-between px-2">

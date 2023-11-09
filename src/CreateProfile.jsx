@@ -6,25 +6,25 @@ import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 
 
-const CreateProfile = () => {
-    const [createProfile, setCreateProfile] = useState({
-        firstName: "",
-        lastName: "",
-        gender: "",
-        email: "",
-        mobile: "",
-        dob: "",
-        address: "",
-        pinCode: "",
-        country: "",
-        colName: "",
-        degree: "",
-        skills: "",
-        passout: "",
-        jobType: [],
-        incomeRange: "",
-        cvFile: "",
-    })
+const CreateProfile = ({setCreateProfile,createProfile,setCreateProfileData,createProfileData ,edit,setEdit}) => {
+    // const [createProfile, setCreateProfile] = useState({
+    //     firstName: "",
+    //     lastName: "",
+    //     gender: "",
+    //     email: "",
+    //     mobile: "",
+    //     dob: "",
+    //     address: "",
+    //     pinCode: "",
+    //     country: "",
+    //     colName: "",
+    //     degree: "",
+    //     skills: "",
+    //     passout: "",
+    //     jobType: [],
+    //     incomeRange: "",
+    //     cvFile: "",
+    // })
     const navigate = useNavigate();
     const clearState = () => {
         setCreateProfile({
@@ -38,16 +38,17 @@ const CreateProfile = () => {
             pinCode: "",
             country: "",
             colName: "",
-            degree: "",
+            degree: "",                                                                                                                                                
             skills: "",
             passout: "",
             jobType: [],
             incomeRange: "",
             cvFile: "",
         });
-        // navigate("/dashboard");
+        navigate("/dashboard");
 
     }
+
     const degree =[
         {label :"Choose Degree", value :" "},
         {label :"B.E", value :"B.E"},
@@ -94,8 +95,25 @@ const CreateProfile = () => {
     }
 
     const handleSubmit = () => {
-        console.log(createProfile);
-        navigate("/dashboard");
+       
+        // e.preventDefault()
+        // setCreateProfile({...createProfile})
+        
+                if (!edit.check) {
+                   
+                    setCreateProfileData([...createProfileData, createProfile]);
+                   
+                } else {                 
+                    const data = [...createProfileData];                   
+                    data[edit.index] = createProfile;            
+                    setCreateProfileData(data);
+                }
+                
+               
+                console.log(edit);
+                // console.log(index);
+                navigate("/dashboard");
+
     }
     return (
         <div className="container-fluid px-0 alignnav ">
@@ -116,9 +134,7 @@ const CreateProfile = () => {
                                     <div className="text-center" >
                                         <img src={createProfile.cvFile} width="200px" height="200px" className="rounded-pill CreAvavtar" />
                                     </div>
-                                    <div className="text-center">
-                                        <a href="#" className="btn btn-primary btncolor mt-3 fw-medium ">Upload</a>
-                                    </div>
+                                    
                                 </div>
                             </div>
                         </div>
@@ -252,13 +268,13 @@ const CreateProfile = () => {
                                             <label htmlFor="inputGroupFile01" className="form-label">Upload CV:</label>
                                             <div className="input-group mb-3">
 
-                                                <input type="file" className="form-control" id="inputGroupFile01" name="cvFile" value={createProfile.cvFile} onInput={(e) => handleChange(e)} />
+                                                <input type="file" className="form-control" id="inputGroupFile01" name="cvFile" value={createProfile.cvFile} onChange={(e) => handleChange(e)} />
                                             </div>
                                         </div>
-                                        <div className="col-6">
+                                        {/* <div className="col-6">
                                             <label htmlFor="inputGroupFile01" className="form-label">Enter Image Url:</label>
                                             <input type="text" className="form-control" id="inputGroupFile01" aria-describedby="emailHelp" name="cvFile" value={createProfile.cvFile} onChange={(e) => handleChange(e)} />
-                                        </div>
+                                        </div> */}
 
                                     </div>
                                     <button className="btn btn-primary btncolor fw-medium" onClick={() => handleSubmit()}>Submit</button>
