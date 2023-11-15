@@ -1,8 +1,10 @@
 
 import { useState } from "react";
 import NavBar from "./Navbar";
-import SideBar from "./SideBar";
+
 import TableMain from "./Tablemain";
+import SideBar from "./Sidebar";
+
 
 const Dashboard = ({createProfile,createProfileData,setCreateProfileData,edit,setEdit}) => {
     const tablehead =[
@@ -15,7 +17,7 @@ const Dashboard = ({createProfile,createProfileData,setCreateProfileData,edit,se
         {label:"Actions"}
     ];
    
-    const handleInput =(e) =>
+    const handleInput = (e) =>
     {  
         console.log(typeof(createProfile),"5555")
         e.preventDefault();
@@ -43,7 +45,9 @@ const Dashboard = ({createProfile,createProfileData,setCreateProfileData,edit,se
                 <NavBar />
                 <div className="row">
                     <div className="col-2 background ">
-                        <SideBar />
+                        <SideBar
+                        setEdit={setEdit}
+                        />
                     </div>
                     <div className="col-10">
                         <div className="row pt-4">
@@ -86,6 +90,7 @@ const Dashboard = ({createProfile,createProfileData,setCreateProfileData,edit,se
                                         setCreateProfileData={setCreateProfileData}
                                         edit={edit}
                                         setEdit={setEdit}
+                                        
                                         />
                                         
                                         {/* <tr className="  cardcolor ">
@@ -143,6 +148,7 @@ const Dashboard = ({createProfile,createProfileData,setCreateProfileData,edit,se
                                         <option value="3">6 items per page</option>
                                     </select>
                                     <p className="cursorpoint">Total of Entries</p>
+                                    
                                     <nav aria-label="Page navigation example">
                                         <ul className="pagination">
                                             <li className="page-item">

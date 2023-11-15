@@ -6,12 +6,13 @@ import Dashboard from './Dashboard';
 import { useState } from 'react';
 import Login from './Login';
 import { BrowserRouter,Routes,Route } from 'react-router-dom';
-import SideBar from './SideBar';
-import NavBar from './Navbar';
+import SideBar from './Sidebar';
+
 import CreateProfile from './CreateProfile';
 import Demo from './main file/Calculator';
 
 export default function App (){
+
   const [createProfile, setCreateProfile] = useState({
     firstName: "",
     lastName: "",
@@ -30,11 +31,13 @@ export default function App (){
     incomeRange: "",
     cvFile: "",
 })
+
 const [createProfileData,setCreateProfileData] = useState([]);
 const[edit,setEdit] = useState({
   check:false,
   index:"",
 });
+console.log(edit,"5412");
   return (
     <>
     {/* <Demo /> */}
@@ -42,7 +45,7 @@ const[edit,setEdit] = useState({
     <Routes>
       <Route path="/" element = {<Login />}/>
       <Route path= "dashboard" element= {<Dashboard createProfile={createProfile} createProfileData={createProfileData} setCreateProfileData={setCreateProfileData} edit={edit} setEdit={setEdit} />} /> 
-      <Route path="CreateProfile" element ={<CreateProfile  setCreateProfile={setCreateProfile} createProfile={createProfile}  createProfileData={createProfileData} setCreateProfileData={setCreateProfileData} edit={edit} setEdit={setEdit}/>} />
+      <Route path="CreateProfile" element ={<CreateProfile  setCreateProfile={setCreateProfile} createProfile={createProfile}  createProfileData={createProfileData} setCreateProfileData={setCreateProfileData} edit={edit} setEdit={setEdit} />} />
       <Route path="Calculator" element ={<Demo />} />
     </Routes>
     </BrowserRouter>

@@ -1,12 +1,13 @@
 // import { useState } from "react"
 import avatar from "../src/images/avatar.png"
 import NavBar from "./Navbar"
-import SideBar from "./SideBar"
+
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
+import SideBar from "./Sidebar"
 
 
-const CreateProfile = ({setCreateProfile,createProfile,setCreateProfileData,createProfileData ,edit,setEdit}) => {
+const CreateProfile = ({setCreateProfile,createProfile,setCreateProfileData,createProfileData ,edit}) => {
     // const [createProfile, setCreateProfile] = useState({
     //     firstName: "",
     //     lastName: "",
@@ -46,8 +47,8 @@ const CreateProfile = ({setCreateProfile,createProfile,setCreateProfileData,crea
             cvFile: "",
         });
         navigate("/dashboard");
-
-    }
+      
+      }
 
     const degree =[
         {label :"Choose Degree", value :" "},
@@ -102,6 +103,7 @@ const CreateProfile = ({setCreateProfile,createProfile,setCreateProfileData,crea
                 if (!edit.check) {
                    
                     setCreateProfileData([...createProfileData, createProfile]);
+                    
                    
                 } else {                 
                     const data = [...createProfileData];                   
@@ -109,8 +111,12 @@ const CreateProfile = ({setCreateProfile,createProfile,setCreateProfileData,crea
                     setCreateProfileData(data);
                 }
                 
+                // const key= JSON.stringify(edit.index +1);
+                // const value =JSON.stringify(createProfileData)
                
-                console.log(edit);
+                localStorage.setItem(JSON.stringify(edit.index),JSON.stringify(createProfileData))
+                console.log(localStorage.getItem("1"));
+                localStorage.getItem("1")
                 // console.log(index);
                 navigate("/dashboard");
 
@@ -120,7 +126,9 @@ const CreateProfile = ({setCreateProfile,createProfile,setCreateProfileData,crea
             <NavBar />
             <div className="row ">
                 <div className="col-2 ">
-                    <SideBar />
+                    <SideBar
+                    
+                     />
                 </div>
                 <div className="col-10">
                     <div className="row pt-4">
@@ -278,7 +286,7 @@ const CreateProfile = ({setCreateProfile,createProfile,setCreateProfileData,crea
 
                                     </div>
                                     <button className="btn btn-primary btncolor fw-medium" onClick={() => handleSubmit()}>Submit</button>
-                                    <button className="btn btn-primary btncolor fw-medium ms-3" onClick={clearState}>Cancel</button>
+                                    <button className="btn btn-primary btncolor fw-medium ms-3" onClick={()=>clearState()}>Cancel</button>
 
 
                                 </div>

@@ -23,7 +23,7 @@ const TableMain =({createProfileData,setCreateProfileData,edit,setEdit})=>
         createProfileData={createProfileData}
         edit={edit}
         setEdit={setEdit}
-        
+       
         />
     )
 }
