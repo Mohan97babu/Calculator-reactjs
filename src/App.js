@@ -2,7 +2,8 @@ import React from 'react';
 import '../src/App.css';
 
 import Dashboard from './Dashboard';
-
+import NewUser from './NewUser';
+import ApiTable from './ApiTable';
 import { useState } from 'react';
 import Login from './Login';
 import { BrowserRouter,Routes,Route } from 'react-router-dom';
@@ -47,6 +48,9 @@ console.log(edit,"5412");
       <Route path= "dashboard" element= {<Dashboard createProfile={createProfile} createProfileData={createProfileData} setCreateProfileData={setCreateProfileData} edit={edit} setEdit={setEdit} />} /> 
       <Route path="CreateProfile" element ={<CreateProfile  setCreateProfile={setCreateProfile} createProfile={createProfile}  createProfileData={createProfileData} setCreateProfileData={setCreateProfileData} edit={edit} setEdit={setEdit} />} />
       <Route path="Calculator" element ={<Demo />} />
+      <Route path="NewUser" element ={<NewUser />} />
+      <Route path="ApiTable" element ={<ApiTable />} />
+
     </Routes>
     </BrowserRouter>
      {/* <Login /> */}
@@ -54,7 +58,8 @@ console.log(edit,"5412");
      {/* <SideBar /> */}
      {/* <NavBar /> */}
      {/* <CreateProfile /> */}
-     
+     {/* <NewUser /> */}
+     {/* <ApiTable />  */}
     </>
   )
 }
