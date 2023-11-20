@@ -3,9 +3,6 @@ import { Link } from "react-router-dom";
 
 const TableRows =({deleteRow,createProfileData,setEdit}) =>
 {
-   console.log(createProfileData,"556")
- 
-   
     return createProfileData?.map ((item,index) =>
     {
         index=index+1;
@@ -14,9 +11,7 @@ const TableRows =({deleteRow,createProfileData,setEdit}) =>
             <td>{index}</td>
             <td>{item.email}</td>
             <td>{item.firstName}</td>
-            <td>{item.mobile}</td>
-            
-            
+            <td>{item.mobile}</td>           
             <td>
                 <div className="row d-flex  pe-3  ">
                  <Link to="/CreateProfile" className="w-25" onClick={()=>setEdit({check:true,index:index})} >  <Icon icon="uil:edit" color="#7464bc" width="20" height="20"  /> </Link>

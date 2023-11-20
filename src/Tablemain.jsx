@@ -3,11 +3,7 @@ import TableRows from "./TableRows";
 const TableMain =({createProfileData,setCreateProfileData,edit,setEdit})=>
 {
     
-    // const [profile,setProfile] = useState([]);
-    // const addRow =() =>
-    // {
-
-    // }
+   
    
     const deleteRow = (index ) =>
     {

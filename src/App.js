@@ -1,19 +1,19 @@
 import React from 'react';
-import '../src/App.css';
+import '../src/assets/css/App.css';
 
-import Dashboard from './Dashboard';
-import NewUser from './NewUser';
-import ApiTable from './ApiTable';
+import Dashboard from './pages/Dashboard';
+import NewUser from './pages/NewUser';
+import ApiTable from './pages/RegisterUser';
 import { useState } from 'react';
-import Login from './Login';
+import Login from './pages/Login';
 import { BrowserRouter,Routes,Route } from 'react-router-dom';
-import SideBar from './Sidebar';
 
-import CreateProfile from './CreateProfile';
-import Demo from './main file/Calculator';
+
+import CreateProfile from './pages/CreateProfile';
+import Demo from './pages/Calculator';
 
 export default function App (){
-
+  const[data,setData] =useState([]);
   const [createProfile, setCreateProfile] = useState({
     firstName: "",
     lastName: "",
@@ -38,28 +38,22 @@ const[edit,setEdit] = useState({
   check:false,
   index:"",
 });
-console.log(edit,"5412");
+const [active,setActive] =useState('');
+
   return (
     <>
-    {/* <Demo /> */}
     <BrowserRouter>
     <Routes>
       <Route path="/" element = {<Login />}/>
-      <Route path= "dashboard" element= {<Dashboard createProfile={createProfile} createProfileData={createProfileData} setCreateProfileData={setCreateProfileData} edit={edit} setEdit={setEdit} />} /> 
-      <Route path="CreateProfile" element ={<CreateProfile  setCreateProfile={setCreateProfile} createProfile={createProfile}  createProfileData={createProfileData} setCreateProfileData={setCreateProfileData} edit={edit} setEdit={setEdit} />} />
-      <Route path="Calculator" element ={<Demo />} />
-      <Route path="NewUser" element ={<NewUser />} />
-      <Route path="ApiTable" element ={<ApiTable />} />
+      <Route path= "dashboard" element= {<Dashboard createProfile={createProfile} createProfileData={createProfileData} setCreateProfileData={setCreateProfileData} edit={edit} setEdit={setEdit} active={active} setActive={setActive}/>} /> 
+      <Route path="CreateProfile" element ={<CreateProfile  setCreateProfile={setCreateProfile} createProfile={createProfile}  createProfileData={createProfileData} setCreateProfileData={setCreateProfileData} edit={edit} setEdit={setEdit} active={active} setActive={setActive} />} />
+      <Route path="Calculator" element ={<Demo active={active} setActive={setActive} setEdit={setEdit} />} />
+      <Route path="NewUser" element ={<NewUser active={active} setActive={setActive} setEdit={setEdit} data={data} setData={setData}/>} />
+      <Route path="ApiTable" element ={<ApiTable active={active} setActive={setActive} setEdit={setEdit} data={data} setData={setData} />} />
 
     </Routes>
     </BrowserRouter>
-     {/* <Login /> */}
-     {/* <Dashboard /> */}
-     {/* <SideBar /> */}
-     {/* <NavBar /> */}
-     {/* <CreateProfile /> */}
-     {/* <NewUser /> */}
-     {/* <ApiTable />  */}
+
     </>
   )
 }

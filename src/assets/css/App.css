@@ -121,7 +121,7 @@ a
 {
   cursor:default;
 }
-.a1 :hover  {
+.a1  {
   background-color: #7464bc !important;
   color:white !important;
   
@@ -129,7 +129,7 @@ a
 .a3{
   border-radius: 5px !important;
 }
-.image1
+/* .image1
 { 
   background-image: url("../src/images/math-rulers-supplies-with-dices-empty-notebook.jpg");
   background-size: contain;
@@ -141,7 +141,7 @@ a
 {
   background-image: url("../src/images/wepik-export-20231106130024VXnB.jpeg");
   background-position: bottom;
-}
+} */
 
 .cardalign
 {

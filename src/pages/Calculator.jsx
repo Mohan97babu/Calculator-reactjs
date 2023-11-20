@@ -1,14 +1,16 @@
 
 import React from "react";
 import { useState } from "react";
-import RadioButton from "../components/Radiobutton";
-import BasicOperation from "../components/BasicSelect";
-import TrigoOperation from "../components/TrigonometrySelect";
-import Number1Input from "../components/Number1Input";
-import Buttons from "../components/Buttons";
+import RadioButton from "../components/Calculator/Radiobutton";
+import BasicOperation from "../components/Calculator/BasicSelect";
+import TrigoOperation from "../components/Calculator/TrigonometrySelect";
+import Number1Input from "../components/Calculator/Number1Input";
+import Buttons from "../components/Calculator/Buttons";
+import NavBar from "../components/layout/Navbar";
+import SideBar from "../components/layout/Sidebar";
 
 
-const Demo = () => {
+const Demo = ({setActive,active,setEdit}) => {
   const [input1, setInput1] = useState([]);
   const [input2, setInput2] = useState([]);
   const [trigo, setTrigo] = useState([] && false);
@@ -82,9 +84,19 @@ const Demo = () => {
   }
 
   return (
-    <div className="App image2">
-      <div className="container-fluid d-flex justify-content-center align-items-center cardalign ">
-        <div className="card p-3 ms-5 w-25 back ">
+    <div className="App ">
+      <div className="container-fluid background ps-0">
+
+      <NavBar />
+      <div className="row">
+        <div className="col-2 background">
+          <SideBar 
+          active={active}
+          setActive={setActive}
+          setEdit={setEdit}/>
+        </div>
+        <div className="col-10 mt-4 d-flex justify-content-center"> 
+        <div className="card p-3 ms-5 w-50 h-75  back ">
           <h5 className="text-center text-white ">Calculator</h5>
           <RadioButton
             setTrigo={setTrigo}
@@ -123,6 +135,9 @@ const Demo = () => {
             : (result ? <p className=" ms-2 pt-1"> Result is:{result1} </p> : null)}
             </div>
         </div>
+      
+        </div>
+      </div>
       </div>
     </div>
   );

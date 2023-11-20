@@ -1,6 +1,6 @@
 import { useState } from "react"
-import Reactlogin from "../src/images/Reactlogin.png"
-import reactlogotrans1 from "../src/images/reactwhitetextlogin-removebg-preview.png"
+import Reactlogin from "../assets/images/Reactlogin.png"
+import reactlogotrans1 from "../assets/images/reactwhitetextlogin-removebg-preview.png"
 
 import { useNavigate } from "react-router-dom";
 const Login = () => {
@@ -70,16 +70,12 @@ const Login = () => {
                            
                            <button type="button" className="btn btn-primary btncolor inputfield textcolor border-0 w-100" onClick={(e) => handleSubmit(e) }>LOGIN</button>
                             
-                            {/* <div className="row mt-3">
-                                <div className="col-12 text-center textcolor">
-                                    <span>Need an account?</span><span>Sign up!</span>
-                                </div>
-                            </div> */}
+                           
                         </div>
                     </div>
                 </div>
             </div>
-           {/* <Outlet /> */}
+           
         </>
     )
 
