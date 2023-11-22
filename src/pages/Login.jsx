@@ -44,7 +44,7 @@ const Login = () => {
                         </div>
                     </div>
                     <div className="col-6 d-flex justify-content-center align-items-center  cardcolor border-0">
-                        <div className="card w-75 p-3 cardcolor back border-0 rounded-5">
+                        <div className="card w-75 p-3  back border-0 rounded-5">
                             <img src={reactlogotrans1} alt="....." className="logo" />
                             <div className="mb-3">
                                 <label htmlFor="exampleformControlInput1" className="form-label text1 textcolor fw-medium">Username</label>

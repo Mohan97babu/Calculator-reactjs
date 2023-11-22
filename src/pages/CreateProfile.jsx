@@ -100,7 +100,7 @@ const CreateProfile = ({ setCreateProfile, createProfile, setCreateProfileData, 
                 </div>
                 <div className="col-10">
                     <div className="row pt-4">
-                        <div className="d-flex fw-medium "><h5 className="pe-2 text-secondary">Create Profile</h5> &#10095; <h5 className="ps-2">Add User</h5> </div>
+                        <div className="d-flex fw-medium "><h5 className="pe-2 text-secondary">Create Profile</h5> &#10095; <h5 className="ps-2">Account Details</h5> </div>
                     </div>
                     <div className="row">
                         <div className="col-3 ">

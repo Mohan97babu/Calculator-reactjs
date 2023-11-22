@@ -46,10 +46,10 @@ const [active,setActive] =useState('');
     <Routes>
       <Route path="/" element = {<Login />}/>
       <Route path= "dashboard" element= {<Dashboard createProfile={createProfile} createProfileData={createProfileData} setCreateProfileData={setCreateProfileData} edit={edit} setEdit={setEdit} active={active} setActive={setActive}/>} /> 
-      <Route path="CreateProfile" element ={<CreateProfile  setCreateProfile={setCreateProfile} createProfile={createProfile}  createProfileData={createProfileData} setCreateProfileData={setCreateProfileData} edit={edit} setEdit={setEdit} active={active} setActive={setActive} />} />
-      <Route path="Calculator" element ={<Demo active={active} setActive={setActive} setEdit={setEdit} />} />
-      <Route path="NewUser" element ={<NewUser active={active} setActive={setActive} setEdit={setEdit} data={data} setData={setData}/>} />
-      <Route path="ApiTable" element ={<ApiTable active={active} setActive={setActive} setEdit={setEdit} data={data} setData={setData} />} />
+      <Route path="create-profile" element ={<CreateProfile  setCreateProfile={setCreateProfile} createProfile={createProfile}  createProfileData={createProfileData} setCreateProfileData={setCreateProfileData} edit={edit} setEdit={setEdit} active={active} setActive={setActive} />} />
+      <Route path="calculator" element ={<Demo active={active} setActive={setActive} setEdit={setEdit} />} />
+      <Route path="new-user" element ={<NewUser active={active} setActive={setActive} setEdit={setEdit} data={data} setData={setData}/>} />
+      <Route path="user-list" element ={<ApiTable active={active} setActive={setActive} setEdit={setEdit} data={data} setData={setData} />} />
 
     </Routes>
     </BrowserRouter>

@@ -10,7 +10,7 @@ import NavBar from "../components/layout/Navbar";
 import SideBar from "../components/layout/Sidebar";
 
 
-const Demo = ({setActive,active,setEdit}) => {
+const Demo = ({ setActive, active, setEdit }) => {
   const [input1, setInput1] = useState([]);
   const [input2, setInput2] = useState([]);
   const [trigo, setTrigo] = useState([] && false);
@@ -87,57 +87,64 @@ const Demo = ({setActive,active,setEdit}) => {
     <div className="App ">
       <div className="container-fluid background ps-0">
 
-      <NavBar />
-      <div className="row">
-        <div className="col-2 background">
-          <SideBar 
-          active={active}
-          setActive={setActive}
-          setEdit={setEdit}/>
-        </div>
-        <div className="col-10 mt-4 d-flex justify-content-center"> 
-        <div className="card p-3 ms-5 w-50 h-75  back ">
-          <h5 className="text-center text-white ">Calculator</h5>
-          <RadioButton
-            setTrigo={setTrigo}
-            trigo={trigo}
-             />
+        <NavBar />
+        <div className="row">
+          <div className="col-2 background">
+            <SideBar
+              active={active}
+              setActive={setActive}
+              setEdit={setEdit} />
+          </div>
             
-          {trigo ? <TrigoOperation
-            trigo={trigo}
-            setTrigo={setTrigo}
-          />
-            : <BasicOperation
-              basic={basic}
-              setBasic={setBasic}
-            />}
+          <div className="col-10 mt-4 ">
+          
+              <div className=" d-flex fw-medium ">
+                <h5 className="pe-2 ">Calculator</h5> 
+                
+                 </div>
+            <div className="row d-flex justify-content-center mt-3">
+            <div className="card p-3 ms-5 w-50 h-75  back ">
+              <h5 className="text-center text-white ">Calculator</h5>
+              <RadioButton
+                setTrigo={setTrigo}
+                trigo={trigo}
+              />
 
-          <Number1Input
-            input1={input1}
-            setInput1={setInput1}
-            input2={input2}
-            setInput2={setInput2}
-            trigo={trigo}
-            basic={basic}
-          />
-          {/* {(!trigo ? (basic !== "Square" && basic !== "Cube" ? <Number2Input
+              {trigo ? <TrigoOperation
+                trigo={trigo}
+                setTrigo={setTrigo}
+              />
+                : <BasicOperation
+                  basic={basic}
+                  setBasic={setBasic}
+                />}
+
+              <Number1Input
+                input1={input1}
+                setInput1={setInput1}
+                input2={input2}
+                setInput2={setInput2}
+                trigo={trigo}
+                basic={basic}
+              />
+              {/* {(!trigo ? (basic !== "Square" && basic !== "Cube" ? <Number2Input
             input2={input2}
             setInput2={setInput2}
           />
             : null) : null)} */}
-          <Buttons
-            handleFinalSubmit={handleFinalSubmit}
-            clearState={clearState}
-             />
-             <div className="bg-white pt-2">
-          {!trigo ? (basic === '4' ? (<p className=" ms-2 pt-1">  Quotient :- {result} Remainder :- {remainder}</p>)
-            : <p className=" ms-2 pt-1"> Result is:{result} </p>)
-            : (result ? <p className=" ms-2 pt-1"> Result is:{result1} </p> : null)}
+              <Buttons
+                handleFinalSubmit={handleFinalSubmit}
+                clearState={clearState}
+              />
+              <div className="bg-white pt-2">
+                {!trigo ? (basic === '4' ? (<p className=" ms-2 pt-1">  Quotient :- {result} Remainder :- {remainder}</p>)
+                  : <p className=" ms-2 pt-1"> Result is:{result} </p>)
+                  : (result ? <p className=" ms-2 pt-1"> Result is:{result1} </p> : null)}
+              </div>
             </div>
+            </div>
+          </div>
         </div>
-      
-        </div>
-      </div>
       </div>
     </div>
   );
