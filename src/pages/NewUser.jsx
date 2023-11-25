@@ -9,7 +9,8 @@ import NavBar from '../components/layout/Navbar';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
-
+import * as yup from 'yup';
+import { Formik } from 'formik';
 const NewUser = ({ setActive, active, setEdit, data, setData }) => {
     const navigate = useNavigate();
     const [formData, setFormData] = useState({
@@ -19,15 +20,30 @@ const NewUser = ({ setActive, active, setEdit, data, setData }) => {
         message: ""
     });
     const handleChange = (e) => {
-        setFormData({ ...formData, [e.target.name]: e.target.value })
+        e.persist();
+        const value = e.target.name === 'phone_number' ? String(e.target.value) : e.target.value;
+        setFormData({ ...formData, [e.target.name]: value });
     }
 
-    const handleSubmit = () => {
-        axios.post("https://fts-backend.onrender.com/user/newRegistration", formData)
-            .then(response => setFormData(response))
+    const handleSubmit = (values, { setSubmitting }) => {
+        axios.post("https://fts-backend.onrender.com/user/newRegistration", values)
+            .then(response => setData(response.data))
             .catch(err => console.log(err))
-        navigate("/Api-Table");
-
+            .finally(() => {
+                setSubmitting(false);
+            });
+        navigate("/user-list");
+                                            
+    }
+    const schema = yup.object().shape({
+        name: yup.string().required(),
+        email: yup.string().email().required(),
+        phone_number: yup.string().required(),
+        message: yup.string().required(),
+    });
+    const convert =()=>
+    {
+        String(values.phone_number);
     }
 
     return (
@@ -49,30 +65,46 @@ const NewUser = ({ setActive, active, setEdit, data, setData }) => {
                         <Card className=' px-0' >
                             <Card.Header ><span className='textcolor1 fw-bold '> Add User</span></Card.Header>
                             <Card.Body>
+                                <Formik
+                                    validationSchema={schema}
+                                    onSubmit={handleSubmit}
+                                    initialValues={{
+                                        name: '',
+                                        email: '',
+                                        phone_number: '',
+                                        message: '',
+                                    }}
+                                >
+                                    {({ handleSubmit,handleChange, values, errors }) => (
+                                        <Form noValidate onSubmit={handleSubmit} >
+                                            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                                                <Form.Label className='fw-medium'>Name:</Form.Label>
+                                                <Form.Control type="text" placeholder="Enter Name" name="name" value={values.name} onChange={(e) => handleChange(e)}  onBlur={(e) => handleChange(e)} isInvalid={!!errors.name}/>
+                                                <Form.Control.Feedback type ={"invalid"} >{errors.name}</Form.Control.Feedback>
+                                            </Form.Group>
+                                            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                                                <Form.Label className='fw-medium'>Email: </Form.Label>
+                                                <Form.Control type="email" placeholder="Enter Email " name="email" value={values.email} onChange={(e) => handleChange(e)} onBlur={(e) => handleChange(e)} isInvalid={!!errors.email}/>
+                                                <Form.Control.Feedback type ={"invalid"} >{errors.email}</Form.Control.Feedback>
+                                            </Form.Group>
+                                            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                                                <Form.Label className='fw-medium'>Mobile Number:</Form.Label>
+                                                <Form.Control type="number" placeholder="Enter Mobile Number" name="phone_number" value={String(values.phone_number)} onChange={(e) => handleChange(e)} onBlur={() =>  convert()} isInvalid={!!errors.phone_number} />
+                                                <Form.Control.Feedback type ={"invalid"} >{errors.phone_number}</Form.Control.Feedback>
+                                            </Form.Group>
+                                            <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
+                                                <Form.Label className='fw-medium'>Message:</Form.Label>
+                                                <Form.Control as="textarea" rows={4} cols={50} style={{ resize: "none" }} name="message" value={values.message} placeholder=" Enter Message" onChange={(e) => handleChange(e)} onBlur={(e) => handleChange(e)} isInvalid={!!errors.message}/>
+                                                <Form.Control.Feedback type ={"invalid"} >{errors.message}</Form.Control.Feedback>
+                                            </Form.Group>
+                                            <div className='text-end p-3  '>
 
-                                <Form  >
-                                    <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                                        <Form.Label className='fw-medium'>Name:</Form.Label>
-                                        <Form.Control type="text" placeholder="Enter Name" name="name" value={formData.name} onChange={(e) => handleChange(e)} />
-                                    </Form.Group>
-                                    <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                                        <Form.Label className='fw-medium'>Email: </Form.Label>
-                                        <Form.Control type="email" placeholder="Enter Email " name="email" value={formData.email} onChange={(e) => handleChange(e)} />
-                                    </Form.Group>
-                                    <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                                        <Form.Label className='fw-medium'>Mobile Number:</Form.Label>
-                                        <Form.Control type="number" placeholder="Enter Mobile Number" name="phone_number" value={formData.phone_number} onChange={(e) => handleChange(e)} />
-                                    </Form.Group>
-                                    <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
-                                        <Form.Label className='fw-medium'>Message:</Form.Label>
-                                        <Form.Control as="textarea" rows={4} cols={50} style={{ resize: "none" }} name="message" value={formData.message} placeholder=" Enter Message" onChange={(e) => handleChange(e)} />
-                                    </Form.Group>
-                                    <div className='text-end p-3  '>
-
-                                        <Button variant="primary" type="submit" className=' alignbtn btncolor' onClick={(e) => handleSubmit(e)}>Submit</Button>{' '}
-                                        <Button variant="primary" className=' alignbtn btncolor'>Cancel</Button>{' '}
-                                    </div>
-                                </Form>
+                                                <Button variant="primary" type="submit" className=' alignbtn btncolor' >Submit</Button>{' '}
+                                                <Button variant="primary" className=' alignbtn btncolor' onClick={() =>navigate("/user-list")}>Cancel</Button>{' '}
+                                            </div>
+                                        </Form>
+                                    )}
+                                </Formik>
                             </Card.Body>
                         </Card>
                     </Row>

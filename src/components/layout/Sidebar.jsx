@@ -19,13 +19,13 @@ const SideBar = ({ setEdit ,setActive,active }) => {
                 <Icon icon="mingcute:user-add-fill" color="black" className="mb-1 ms-3" /> <span className="ms-1 ">Createprofile</span>
             </div> </p> </Link>
             <Link to="/calculator"> <p  className={`${active ==="Calculator"?"a1 rounded-3  text-white":"text-black text-decoration-none"}`} onClick={()=>setActive("Calculator")}> <div className=" Calculator  fw-bold p-2 ">
-                <Icon icon="mdi:calculator" color="black" className="mb-1 ms-3" /> <span className="ms-1 ">Calculator</span>
+                <Icon icon="ph:calculator" color="black" className="mb-1 ms-3" /> <span className="ms-1 ">Calculator</span>
             </div> </p> </Link>
             <Link to="/new-user" > <p className={`${active ==="NewUser"?"a1 rounded-3  text-white":"text-black text-decoration-none"}`} onClick={()=>setActive("NewUser")}> <div className=" Calculator  fw-bold p-2 ">
                 <Icon icon="mingcute:user-add-fill" color="black" className="mb-1 ms-3" /> <span className="ms-1 "> FTS New User</span>
             </div> </p> </Link>
             <Link to="/user-list" > <p className={`${active ==="ApiTable"?"a1 rounded-3  text-white":"text-black text-decoration-none"}`} onClick={()=>setActive("ApiTable")}> <div className=" Calculator  fw-bold p-2 ">
-                <Icon icon="ph:table-duotone" color="black" className="mb-1 ms-3" /> <span className="ms-1 ">FTS Registered User</span>
+                <Icon icon="ph:table-fill" color="black" className="mb-1 ms-3" /> <span className="ms-1 ">FTS Registered User</span>
             </div> </p> </Link>
            
         </div>
