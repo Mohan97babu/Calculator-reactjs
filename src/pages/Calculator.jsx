@@ -10,7 +10,7 @@ import NavBar from "../components/layout/Navbar";
 import SideBar from "../components/layout/Sidebar";
 
 
-const Demo = ({ setActive, active, setEdit }) => {
+const Demo = ({ setActive, active, setEdit ,setPutApiShow }) => {
   const [input1, setInput1] = useState([]);
   const [input2, setInput2] = useState([]);
   const [trigo, setTrigo] = useState([] && false);
@@ -93,7 +93,8 @@ const Demo = ({ setActive, active, setEdit }) => {
             <SideBar
               active={active}
               setActive={setActive}
-              setEdit={setEdit} />
+              setEdit={setEdit}
+               />
           </div>
             
           <div className="col-10 mt-4 ">

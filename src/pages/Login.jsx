@@ -1,12 +1,12 @@
 import { useState } from "react"
 import Reactlogin from "../assets/images/Reactlogin.png"
 import reactlogotrans1 from "../assets/images/reactwhitetextlogin-removebg-preview.png"
-
+import axios from 'axios'
 import { useNavigate } from "react-router-dom";
 const Login = () => {
      const navigate = useNavigate();
     const [login,setLogin] = useState({
-        userName :"",
+        email :"",
         password :"",
         
     })
@@ -17,8 +17,12 @@ const Login = () => {
     };
     const handleSubmit =() =>
     {  
-        
-        console.log(login)
+        axios.post("https://fts-backend.onrender.com/admin/login",login)
+        .then(response => {
+            const { accesstoken, refreshtoken } = response.data;
+            localStorage.setItem("accesstoken", JSON.stringify(accesstoken));
+            localStorage.setItem("refreshtoken", JSON.stringify(refreshtoken));
+          })
         navigate("/dashboard")
     }
     return (
@@ -48,7 +52,7 @@ const Login = () => {
                             <img src={reactlogotrans1} alt="....." className="logo" />
                             <div className="mb-3">
                                 <label htmlFor="exampleformControlInput1" className="form-label text1 textcolor fw-medium">Username</label>
-                                <input type="text" className="form-control inputfield " id="exampleformControlInput1" name ="userName" value={login.userName} onChange={handleChange} placeholder="Username" />
+                                <input type="email" className="form-control inputfield " id="exampleformControlInput1" name ="email" value={login.email} onChange={handleChange} placeholder="Username" />
                             </div>
                             <div className="mb-3"> 
                                 <label htmlFor="exampleformControlInput2" className="form-label text1 textcolor fw-medium ">Password</label>

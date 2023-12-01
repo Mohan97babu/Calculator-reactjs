@@ -7,8 +7,10 @@ const TableMain =({createProfileData,setCreateProfileData,edit,setEdit})=>
    
     const deleteRow = (index ) =>
     {
+        
+        console.log(index);
         const dataRow = [...createProfileData];
-       dataRow.splice(index+1,1)
+       dataRow.slice(index+1,3)
        setCreateProfileData(dataRow)
     }
    

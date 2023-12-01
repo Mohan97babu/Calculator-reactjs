@@ -2,11 +2,11 @@
 
 import NavBar from "../components/layout/Navbar";
 
-import TableMain from "../Tablemain";
+import TableMain from "../components/Table/Tablemain";
 import SideBar from "../components/layout/Sidebar";
 
 
-const Dashboard = ({createProfile,createProfileData,setCreateProfileData,edit,setEdit ,active,setActive}) => {
+const Dashboard = ({createProfile,createProfileData,setCreateProfileData,edit,setEdit ,active,setActive,setPutApiShow}) => {
     const tablehead =[
         {label:"S.No."},
         {label:"E-Mail"},
@@ -36,6 +36,7 @@ const Dashboard = ({createProfile,createProfileData,setCreateProfileData,edit,se
                         setEdit={setEdit}
                         active={active}
                         setActive={setActive}
+                        
                         />
                     </div>
                     <div className="col-10">

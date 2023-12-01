@@ -4,35 +4,55 @@ import Row from 'react-bootstrap/Row';
 import SideBar from "../components/layout/Sidebar";
 import NavBar from "../components/layout/Navbar";
 import axios from "axios";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Icon } from "@iconify/react";
+import { Link } from "react-router-dom";
 
-const ApiTable = ({ setActive, active, setEdit, data, setData }) => {
+const ApiTable = ({ setActive, active, setEdit, data, setData, formData, setFormData, putApiShow, setPutApiShow }) => {
 
+    // const handlePut =(key) =>
+    // {
+    //     axios.put(`https://fts-backend.onrender.com/admin/testing/editUserById?id=${key}`)
+    //     .then(response => { listApi(); console.log(response.data.key);})
+    //     // .then(response =>console.log("123456789",response))
+    //     .catch(err => console.log(err))
+    //     navigate("/new-user");
+    //     console.log(key)
+    // }
+    const [state, setState] = useState({
+
+        limit: 4,
+        activePage: 1
+    });
+    const handlePageChange = (pageNumber) => {
+        setState({ ...state, activePage: pageNumber })
+    }
     const listApi = () => {
-        axios.get(" https://fts-backend.onrender.com/admin/testing/getallusers?page=1&size=10")
+        axios.get(`https://fts-backend.onrender.com/admin/testing/getallusers?page=${state.activePage}&size=${state.limit}`)
             .then(response => { setData(response.data.response.paginationOutput.results); })
             .catch(err => { console.log(err) });
     }
 
     const handleDelete = (id) => {
         axios.delete(`https://fts-backend.onrender.com/admin/testing/deleteUserById?id=${id}`)
-            // .then(setData(data.filter((data) => data.id !== id)))
             .then(response => { console.log("deleted successfully", response); listApi(); })
-            .catch(err => console.log(err, "error deleting data"))
-
-
+            .catch(err => { console.log(err, "error deleting data") })
     }
 
     useEffect(() => {
-        listApi()
-    }, [])
+        listApi();
+    }, []);
+
+    useEffect(() => {
+        listApi();
+    }, [state.activePage]);
     // useEffect(() => {
     //     axios.get(" https://fts-backend.onrender.com/admin/testing/getallusers?page=1&size=10")
     //         .then(response => { setData(response.data.response.paginationOutput.results); })
     //         .catch(err => { console.log(err) });
-    // }, [handleDelete])
-
+    // }, [[],handleDelete])
+    console.log("Active Page:", state.activePage);
+    console.log("Data:", state.data);
     return (
         <Container fluid className='ps-0' >
             <NavBar />
@@ -41,7 +61,8 @@ const ApiTable = ({ setActive, active, setEdit, data, setData }) => {
                     <SideBar
                         active={active}
                         setActive={setActive}
-                        setEdit={setEdit} />
+                        setEdit={setEdit}
+                    />
 
                 </Col>
                 <Col md={8} lg={10} xl={10} className='d-block pe-4'>
@@ -60,7 +81,7 @@ const ApiTable = ({ setActive, active, setEdit, data, setData }) => {
                                             <td className="fw-bold text-secondary">E-mail id</td>
                                             <td className="fw-bold text-secondary">Mobile Number</td>
                                             <td className="fw-bold text-secondary">Message</td>
-                                            <td className="fw-bold text-secondary">Actions</td>
+                                            <td className="fw-bold text-secondary text-center">Actions</td>
 
                                         </tr>
                                     </thead>
@@ -75,7 +96,7 @@ const ApiTable = ({ setActive, active, setEdit, data, setData }) => {
                                                 <td>{user.message}</td>
                                                 <td>
                                                     <div className="d-flex justify-content-between" >
-                                                        <span> <Icon icon="uil:edit" color="#7464bc" width="20" height="20" style={{ cursor: "pointer" }} /> </span>
+                                                        <Link to={`/edit-user/${user.id}`} > <Icon icon="uil:edit" color="#7464bc" width="20" height="20" style={{ cursor: "pointer" }} /> </Link>
                                                         <span> <Icon icon="fluent:delete-16-filled" color="#7464bc" width="20" height="20" style={{ cursor: "pointer" }} onClick={() => handleDelete(user.id)} /> </span>
                                                         <span> <Icon icon="carbon:view" color="#7464bc" width="20" height="20" style={{ cursor: "pointer" }} /></span>
                                                     </div>
@@ -89,11 +110,17 @@ const ApiTable = ({ setActive, active, setEdit, data, setData }) => {
                                 </Table>
                                 <div className="d-flex justify-content-end px-2">
                                     <Pagination>
-                                        <Pagination.Prev />
-                                        <Pagination.Item>{1}</Pagination.Item>
-                                        <Pagination.Item>{2}</Pagination.Item>
-                                        <Pagination.Item>{3}</Pagination.Item>
-                                        <Pagination.Next />
+                                        <Pagination.Prev onClick={() => setState((prev) => ({ ...prev, activePage: prev.activePage - 1 }))} />
+                                        {Array.isArray(data) && data?.map((_, index) => (
+                                            <Pagination.Item
+                                                key={index + 1}
+                                                onClick={() => handlePageChange(index + 1)}
+                                                active={index + 1 === state.activePage}
+                                            >
+                                                {index + 1}
+                                            </Pagination.Item>
+                                        ))}
+                                        <Pagination.Next onClick={() => setState((prev) => ({ ...prev, activePage: prev.activePage + 1 }))} />
                                     </Pagination>
                                 </div>
                             </Card.Body>

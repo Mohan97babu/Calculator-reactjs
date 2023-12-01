@@ -1,10 +1,11 @@
 import NavBar from "../components/layout/Navbar"
 import { useNavigate } from "react-router-dom"
 import SideBar from "../components/layout/Sidebar"
+import { useState } from "react"
+import avatar from "../assets/images/avatar.png"
 
-
-const CreateProfile = ({ setCreateProfile, createProfile, setCreateProfileData, createProfileData, edit, setEdit, active, setActive }) => {
-
+const CreateProfile = ({ setCreateProfile, createProfile, setCreateProfileData, createProfileData, edit, setEdit, active, setActive, setPutApiShow }) => {
+    const [imagePreview, setImagePreview] = useState(createProfile.imagePreview || null);
     const navigate = useNavigate();
     const clearState = () => {
         setCreateProfile({
@@ -71,7 +72,19 @@ const CreateProfile = ({ setCreateProfile, createProfile, setCreateProfileData, 
 
     }
     const handleChange = (e) => {
-        setCreateProfile({ ...createProfile, [e.target.name]: e.target.value })
+        if (e.target.name === 'cvFile') {
+            const file = e.target.files[0];
+
+           
+            if (file) {
+                setImagePreview(URL.createObjectURL(file));
+            }
+        }
+
+        
+        setCreateProfile({ ...createProfile, [e.target.name]: e.target.value, imagePreview });
+
+        // setCreateProfile({ ...createProfile, [e.target.name]: e.target.value })
     }
 
     const handleSubmit = () => {
@@ -96,6 +109,7 @@ const CreateProfile = ({ setCreateProfile, createProfile, setCreateProfileData, 
                         active={active}
                         setActive={setActive}
                         setEdit={setEdit}
+
                     />
                 </div>
                 <div className="col-10">
@@ -108,7 +122,10 @@ const CreateProfile = ({ setCreateProfile, createProfile, setCreateProfileData, 
                                 <h5 className="card-header "><span className="textcolor1 cursorpoint"> Profile Picture</span></h5>
                                 <div className="card-body">
                                     <div className="text-center" >
-                                        <img src={createProfile.cvFile} width="200px" height="200px" className="rounded-pill CreAvavtar" alt="..." />
+                                        {imagePreview ? (
+                                            <img  src={imagePreview}  width="200px" height="200px"  className="rounded-pill CreAvavtar" alt="Preview" />
+                                         ) : <img src={avatar} width="200px" height="200px" className="rounded-pill CreAvatar" alt="...." />
+                                         }
                                     </div>
 
                                 </div>
@@ -228,7 +245,7 @@ const CreateProfile = ({ setCreateProfile, createProfile, setCreateProfileData, 
                                         <div className="col-6">
                                             <label htmlFor="customRange1" className="form-label"> Minimum Income Range:</label>
                                             <input type="range" className="form-range shadow-none" id="customRange1" max="20000" step="100" name="incomeRange" value={createProfile.incomeRange} onInput={(e) => handleChange(e)} />
-                                            <p className="text-black">{createProfile.incomeRange}</p>
+                                            <p className="text-black">{createProfile.incomeRange ? createProfile.incomeRange : 0}</p>
                                         </div>
                                     </div>
                                     <div className="row">
