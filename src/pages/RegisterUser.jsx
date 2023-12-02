@@ -20,16 +20,21 @@ const ApiTable = ({ setActive, active, setEdit, data, setData, formData, setForm
     //     console.log(key)
     // }
     const [state, setState] = useState({
-
-        limit: 4,
+        totalPages:"",
+        totalResults:"",
+        limit: 5,
         activePage: 1
     });
+    
     const handlePageChange = (pageNumber) => {
         setState({ ...state, activePage: pageNumber })
     }
     const listApi = () => {
         axios.get(`https://fts-backend.onrender.com/admin/testing/getallusers?page=${state.activePage}&size=${state.limit}`)
-            .then(response => { setData(response.data.response.paginationOutput.results); })
+            .then(response => { setData(response.data.response.paginationOutput.results);  })
+            .then(response =>{ setState( state.totalPages === response.data.response.paginationOutput.totalPages) })
+            .then(response =>{ setState( state.totalResults === response.data.response.paginationOutput.totalResults)})
+            
             .catch(err => { console.log(err) });
     }
 
@@ -53,6 +58,8 @@ const ApiTable = ({ setActive, active, setEdit, data, setData, formData, setForm
     // }, [[],handleDelete])
     console.log("Active Page:", state.activePage);
     console.log("Data:", state.data);
+    console.log(state.totalPages,"totalpages");
+    console.log(state.totalResults,"totalresults");
     return (
         <Container fluid className='ps-0' >
             <NavBar />
@@ -88,8 +95,9 @@ const ApiTable = ({ setActive, active, setEdit, data, setData, formData, setForm
                                     <tbody>
 
                                         {data.map((user, index) => {
+                                            const serialNumber = (state.activePage-1) * (state.limit) + index+1;
                                             return <tr key={index}>
-                                                <td>{index + 1}</td>
+                                                <td>{serialNumber}</td>
                                                 <td>{user.name}</td>
                                                 <td>{user.email}</td>
                                                 <td>{user.phone_number}</td>
@@ -110,17 +118,17 @@ const ApiTable = ({ setActive, active, setEdit, data, setData, formData, setForm
                                 </Table>
                                 <div className="d-flex justify-content-end px-2">
                                     <Pagination>
-                                        <Pagination.Prev onClick={() => setState((prev) => ({ ...prev, activePage: prev.activePage - 1 }))} />
-                                        {Array.isArray(data) && data?.map((_, index) => (
+                                        <Pagination.Prev onClick={() => setState((prev) => ({ ...prev, activePage: prev.activePage - 1 }))} disabled={state.activePage === 1} />
+                                        {Array.isArray(data) && data?.map((_, i) => (
                                             <Pagination.Item
-                                                key={index + 1}
-                                                onClick={() => handlePageChange(index + 1)}
-                                                active={index + 1 === state.activePage}
+                                                key={i+ 1}
+                                                onClick={() => handlePageChange(i + 1)}
+                                                active={i + 1 === state.activePage}
                                             >
-                                                {index + 1}
+                                                {i + 1}
                                             </Pagination.Item>
                                         ))}
-                                        <Pagination.Next onClick={() => setState((prev) => ({ ...prev, activePage: prev.activePage + 1 }))} />
+                                        <Pagination.Next onClick={() => setState((prev) => ({ ...prev, activePage: prev.activePage + 1 }))} disabled={state.totalPages} />
                                     </Pagination>
                                 </div>
                             </Card.Body>
