@@ -89,8 +89,8 @@ const CreateProfile = ({ setCreateProfile, createProfile, setCreateProfileData, 
 
     const handleSubmit = () => {
 
-        if (!edit.check) {
-
+        if (!edit.check) 
+        {
             setCreateProfileData([...createProfileData, createProfile]);
         } else {
             const data = [...createProfileData];
