@@ -1,4 +1,3 @@
-
 import reactlogotrans1 from "../../assets/images/reactlogotrans1.png"
 import avatar from "../../assets/images/avatar.png"
 import { Link } from "react-router-dom"
@@ -14,14 +13,10 @@ const NavBar = () => {
                 <a className="navbar-brand " >
                     <img src={reactlogotrans1} width="150px" height="50px" alt ="...."/>
                 </a>
-
                 <div className="collapse navbar-collapse " id="navbarSupportedContent">
                     <ul className="navbar-nav me-auto mb-2 mb-lg-0 d-sm-block d-md-none">
                         <SideBar />
-                      
-
-                    </ul>
-                   
+                    </ul>                  
                 </div>
                     <div>
                         <div className="btn-group dropstart bg-transparent d-none d-sm-none d-md-block ">
@@ -47,9 +42,7 @@ const NavBar = () => {
                                 <li><hr className="dropdown-divider" /></li>
                                <Link to ="/" > <li><p className="dropdown-item a2" ><span className="textcolor1 text-decoration-none">Sign Out</span></p></li> </Link>
                             </ul>
-                        </div>
-
-                       
+                        </div>                       
                     </div>
             </div>
         </nav>

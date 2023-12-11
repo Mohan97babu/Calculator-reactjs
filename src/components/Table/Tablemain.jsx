@@ -1,27 +1,20 @@
 
 import TableRows from "./TableRows";
 const TableMain =({createProfileData,setCreateProfileData,edit,setEdit})=>
-{
-    
-   
-   
+{  
     const deleteRow = (index ) =>
-    {
-        
-        console.log(index);
+    { 
+       
         const dataRow = [...createProfileData];
-       dataRow.slice(index+1,3)
+       dataRow.splice(index,1)
        setCreateProfileData(dataRow)
     }
-   
-   
     return (
         <TableRows
         deleteRow={deleteRow} 
         createProfileData={createProfileData}
         edit={edit}
-        setEdit={setEdit}
-       
+        setEdit={setEdit}       
         />
     )
 }

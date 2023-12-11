@@ -12,7 +12,6 @@ const TrigoOperation = ({ trigo, setTrigo }) => {
   const handleTrigoSelect = (e) => {
     { setTrigo(e.target.value) }
   }
-
   return (
     <>
        <label htmlFor="trigoselect" className="form-label text-white">Trigonometry Functions</label>

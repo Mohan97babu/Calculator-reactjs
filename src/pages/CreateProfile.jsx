@@ -4,7 +4,7 @@ import SideBar from "../components/layout/Sidebar"
 import { useState } from "react"
 import avatar from "../assets/images/avatar.png"
 
-const CreateProfile = ({ setCreateProfile, createProfile, setCreateProfileData, createProfileData, edit, setEdit, active, setActive, setPutApiShow }) => {
+const CreateProfile = ({ setCreateProfile, createProfile, setCreateProfileData, createProfileData, edit, setEdit, active, setActive }) => {
     const [imagePreview, setImagePreview] = useState(createProfile.imagePreview || null);
     const navigate = useNavigate();
     const clearState = () => {
@@ -27,9 +27,7 @@ const CreateProfile = ({ setCreateProfile, createProfile, setCreateProfileData, 
             cvFile: "",
         });
         navigate("/dashboard");
-
     }
-
     const degree = [
         { label: "Choose Degree", value: " " },
         { label: "B.E", value: "B.E" },
@@ -56,39 +54,26 @@ const CreateProfile = ({ setCreateProfile, createProfile, setCreateProfileData, 
     ]
 
     const handleChangeCheck = (e) => {
-
         if ((e.target.checked)) {
             setCreateProfile({ ...createProfile, jobType: [...createProfile.jobType, e.target.value] })
         }
         else {
             const temp = (createProfile.jobType.filter(
-
                 (item) => item !== e.target.value
             ));
             setCreateProfile({ ...createProfile, jobType: temp })
-
-
         }
-
     }
     const handleChange = (e) => {
         if (e.target.name === 'cvFile') {
-            const file = e.target.files[0];
-
-           
+            const file = e.target.files[0];          
             if (file) {
                 setImagePreview(URL.createObjectURL(file));
             }
-        }
-
-        
-        setCreateProfile({ ...createProfile, [e.target.name]: e.target.value, imagePreview });
-
-        // setCreateProfile({ ...createProfile, [e.target.name]: e.target.value })
+        }        
+        setCreateProfile({ ...createProfile, [e.target.name]: e.target.value, imagePreview });       
     }
-
     const handleSubmit = () => {
-
         if (!edit.check) 
         {
             setCreateProfileData([...createProfileData, createProfile]);
@@ -98,7 +83,6 @@ const CreateProfile = ({ setCreateProfile, createProfile, setCreateProfileData, 
             setCreateProfileData(data);
         }
         navigate("/dashboard");
-
     }
     return (
         <div className="container-fluid px-0 alignnav ">
@@ -109,11 +93,10 @@ const CreateProfile = ({ setCreateProfile, createProfile, setCreateProfileData, 
                         active={active}
                         setActive={setActive}
                         setEdit={setEdit}
-
                     />
                 </div>
                 <div className="col-10">
-                    <div className="row pt-4">
+                    <div className="row pt-4 mb-2">
                         <div className="d-flex fw-medium "><h5 className="pe-2 text-secondary">Create Profile</h5> &#10095; <h5 className="ps-2">Account Details</h5> </div>
                     </div>
                     <div className="row">
@@ -127,7 +110,6 @@ const CreateProfile = ({ setCreateProfile, createProfile, setCreateProfileData, 
                                          ) : <img src={avatar} width="200px" height="200px" className="rounded-pill CreAvatar" alt="...." />
                                          }
                                     </div>
-
                                 </div>
                             </div>
                         </div>
@@ -181,7 +163,6 @@ const CreateProfile = ({ setCreateProfile, createProfile, setCreateProfileData, 
                                         <div className="col-6">
                                             <label htmlFor="exampleInputaddress" className="form-label">Address:</label>
                                             <textarea id="exampleInputaddress" className="form-control address " name="address" placeholder="Enter Address" rows="4" cols="50" value={createProfile.address} onChange={(e) => handleChange(e)} >
-
                                             </textarea>
                                         </div>
                                         <div className="col-6">
@@ -220,13 +201,10 @@ const CreateProfile = ({ setCreateProfile, createProfile, setCreateProfileData, 
                                         <div className="col-6">
                                             <label htmlFor="exampleInputpassout" className="form-label">Passed Out:</label>
                                             <select className="form-select" aria-label="Default select example" value={createProfile.passout} placeholder="Enter Passed Out" name="passout" onChange={(e) => handleChange(e)}>
-
                                                 {passout.map((option, index) => {
                                                     return <option value={option.value} key={index}>{option.label}</option>
                                                 })
-
                                                 }
-
                                             </select>
                                         </div>
                                     </div>
@@ -256,13 +234,9 @@ const CreateProfile = ({ setCreateProfile, createProfile, setCreateProfileData, 
                                                 <input type="file" className="form-control" id="inputGroupFile01" name="cvFile" value={createProfile.cvFile} onChange={(e) => handleChange(e)} />
                                             </div>
                                         </div>
-
-
                                     </div>
                                     <button className="btn btn-primary btncolor fw-medium" onClick={() => handleSubmit()}>Submit</button>
                                     <button className="btn btn-primary btncolor fw-medium ms-3" onClick={() => clearState()}>Cancel</button>
-
-
                                 </div>
                             </div>
                         </div>

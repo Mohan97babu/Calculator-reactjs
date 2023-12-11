@@ -1,34 +1,150 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import Reactlogin from "../assets/images/Reactlogin.png"
 import reactlogotrans1 from "../assets/images/reactwhitetextlogin-removebg-preview.png"
 import axios from 'axios'
 import { useNavigate } from "react-router-dom";
 const Login = () => {
      const navigate = useNavigate();
+     const loginUrl = process.env.REACT_APP_LOGINAPI_NEWUSER;
+     const refreshUrl = process.env.REACT_APP_REFRESHTOKENAPI_LOGIN;
+     console.log(refreshUrl,"123");
     const [login,setLogin] = useState({
         email :"",
         password :"",
-        
-    })
-    
+               
+    }) 
+       
     const handleChange =(e) =>
     {
         setLogin({...login,[e.target.name] : e.target.value})
     };
+    
+    // axios.interceptors.request.use(
+    //     (config) => {
+    //       const accessToken = localStorage.getItem('accesstoken');
+    //       if (accessToken) {
+    //         config.headers['Authorization'] = `Bearer ${accessToken}`;
+    //       }
+    //       return config;
+    //     },
+    //     (error) => {
+    //       return Promise.reject(error);
+    //     }
+    //   );
+    
+    
+    // axios.interceptors.response.use(
+    //     (response) => {
+    //         if (response.status === 200) {
+    //             console.log(response.data);  
+    //         }
+    //         return response;
+    //     },
+    //     (error) => {
+    //         if ( error.response.status === 400) {
+    //             console.log('Redirect to login page.');
+               
+    //              navigate("/");
+                
+    //         }   
+    //         return Promise.reject(error);
+    //     }
+    // );
+    // axios.interceptors.request.use(
+    //     (config) => {
+    //         const accessToken = localStorage.getItem('accesstoken');
+    //         console.log(accessToken);
+    //         if (accessToken) {
+    //             config.headers.Authorization = `Bearer ${accessToken}`;
+    //             // console.log(config);
+    //         }
+    //         return config;
+    //     },
+    //     (error) => {
+    //         return Promise.reject(error);
+    //     }
+    // );
+    // axios.interceptors.response.use(
+    //     (response) => {
+    //         if (response.status === 200) {
+    //             console.log(response.data);  
+    //         }
+    //         return response;
+    //     },
+    //     (error) => {
+    //         if ( error.response.status === 400) {
+    //             console.log('Redirect to login page.');
+                
+    //         localStorage.removeItem("accesstoken");
+    //             navigate("/");
+    //         }   
+    //         return Promise.reject(error);
+    //     }
+    // );
+     axios.interceptors.request.use(
+        (config) => {
+          // Get the access token from wherever you have stored it (e.g., localStorage)
+          const accessToken = localStorage.getItem('accesstoken');
+    
+          // Add the access token to the request headers
+          if (accessToken) {
+            config.headers['Authorization'] = `Bearer ${accessToken}`;
+          }
+    
+          return config;
+        },
+        (error) => {
+          return Promise.reject(error);
+        }
+      );
+      axios.interceptors.response.use(
+        (response) => {
+          
+          return response;
+        },
+        async (error) => {
+          
+         
+       console.log(error.response.status,"12345x`");
+          if (error.response.status === 400) {
+            
+            console.log(error.response.status,"123");
+            axios({
+                method:"post",
+                url:refreshUrl,
+                data : localStorage.getItem("refreshtoken")
+            })
+            .then(response => console.log(response.data))
+            .catch(err => console.log(err))
+           navigate("/");
+          
+           // originalRequest[`refreshtoken`] = localStorage.getItem("refreshtoken");
+    
+            return Promise.reject(error);
+          }
+    
+          return Promise.reject(error);
+        }
+      );
     const handleSubmit =() =>
     {  
-        axios.post("https://fts-backend.onrender.com/admin/login",login)
+       axios({
+        method:"post",
+        url:`${loginUrl}`,
+        data:login,
+       })
+        // axios.post("https://fts-backend.onrender.com/admin/login",login)
         .then(response => {
             const { accesstoken, refreshtoken } = response.data;
             localStorage.setItem("accesstoken", JSON.stringify(accesstoken));
             localStorage.setItem("refreshtoken", JSON.stringify(refreshtoken));
           })
+          .catch(err => console.log(err));
         navigate("/dashboard")
     }
     return (
         <>
-            <div className="container-fluid background d-flex justify-content-center align-items-center p-0 cardcolor ">
-            
+            <div className="container-fluid background d-flex justify-content-center align-items-center p-0 cardcolor ">            
             <div className="row w-100 h-100">
                     <div className="col-6 d-flex justify-content-center align-items-center back curved  p-0">
                         <div className="card rounded-0 border-0 back1 w-75">
@@ -42,8 +158,7 @@ const Login = () => {
                             <img src={Reactlogin} className="image back "  alt="...." />
                             </div>
                             <div className="row back bord ">
-                            <p className="border-0 text-white fs-5 fw-medium text-center"> A Connect Between Job Providers And Job Seekers </p>
-                               
+                            <p className="border-0 text-white fs-5 fw-medium text-center"> A Connect Between Job Providers And Job Seekers </p>                               
                             </div>
                         </div>
                     </div>
@@ -70,18 +185,13 @@ const Login = () => {
                                 <div className="col-6 text-end textcolor ">
                                     <span>forgot Password ?</span>
                                 </div>
-                            </div>
-                           
-                           <button type="button" className="btn btn-primary btncolor inputfield textcolor border-0 w-100" onClick={(e) => handleSubmit(e) }>LOGIN</button>
-                            
-                           
+                            </div>                          
+                           <button type="button" className="btn btn-primary btncolor inputfield textcolor border-0 w-100" onClick={(e) => handleSubmit(e) }>LOGIN</button>                          
                         </div>
                     </div>
                 </div>
-            </div>
-           
+            </div>           
         </>
     )
-
 }
 export default Login;

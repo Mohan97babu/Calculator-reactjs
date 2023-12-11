@@ -6,85 +6,160 @@ import NavBar from "../components/layout/Navbar";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Icon } from "@iconify/react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import ReactPaginate from "react-paginate";
+import { ToastContainer, toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
-
-const ApiTable = ({ setActive, active, setEdit, data, setData, formData, setFormData, putApiShow, setPutApiShow }) => {
-    // const [page, setPage] = useState()
+const ApiTable = ({ setActive, active, setEdit, data, setData }) => {
     const [currentPage, setCurrentPage] = useState(1)
-    // const handlePut =(key) =>
-    // {
-    //     axios.put(`https://fts-backend.onrender.com/admin/testing/editUserById?id=${key}`)
-    //     .then(response => { listApi(); console.log(response.data.key);})
-    //     // .then(response =>console.log("123456789",response))
-    //     .catch(err => console.log(err))
-    //     navigate("/new-user");
-    //     console.log(key)
-    // }
-    // const [state, setState] = useState({
-    //     totalPages:"",
-    //     totalResults:"",
-    //     limit: 5,
-    //     activePage: 1
-    // });
     const [pageCount, setPageCount] = useState(0)
     let limit = 5;
-
-    // const handlePageChange = (pageNumber) => {
-    //     setState({ ...state, activePage: pageNumber })
-    // }
     const [show, setShow] = useState(false)
     const handleOpen = (user) => { setShow(true); setUser(user) }
-    const handleClose = () =>{ setShow(false); setUser(null)}
+    const handleClose = () => { setShow(false); setUser(null) }
     const [user, setUser] = useState(null)
+    const [deleteShow, setDeleteShow] = useState({
+        openModal: false,
+        confirmDelete: false,
+        deleteId: "",
+    });
+    let id1;
+    const handleOpenDelete = (id) => {
+       // id1 = id;
+        console.log(id1, "789");
+        setDeleteShow({ openModal: true, confirmDelete: true, deleteId: id });
+    };
+    const handleCloseDelete = () => setDeleteShow({ openModal: false, confirmDelete: false, deleteId: "" });
+    const apiUrl = process.env.REACT_APP_GETAPI_REGISTEREDUSER;
+    const navigate = useNavigate();
+    axios.interceptors.request.use(
+        (config) => {
 
-    const listApi = (currentPage) => {
+            const accessToken = localStorage.getItem('accesstoken');
 
-        axios.get(`https://fts-backend.onrender.com/admin/testing/getallusers?page=${currentPage}&size=${limit}`)
-            .then(response => {
-                let total = response.data.response.paginationOutput.totalResults;
-                setPageCount(Math.ceil(total / limit));
-                //   setPage(response.data.response.paginationOutput.page) 
-                setData(response.data.response.paginationOutput.results);
+
+            if (accessToken) {
+                config.headers['Authorization'] = `Bearer ${accessToken}`;
+                config.headers[`object`] =`hiii;`;
+            }
+
+            return config;
+        },
+        (error) => {
+            return Promise.reject(error);
+        }
+    );
+    axios.interceptors.response.use(
+        (response) => {
+
+            return response;
+        },
+        async (error) => {
+
+
+
+            if (error.response.status === 400) {
+
+                console.log("error");
+
+                navigate("/");
+
+                return Promise.reject(error);
+            }
+
+            return Promise.reject(error);
+        }
+    );
+
+    const listApi = async (page) => {
+        try {
+            const response = await axios({
+                method: 'get',
+                url: apiUrl,
+                params: {
+                    page: page,
+                    size: limit,
+                },
+            });
+
+            const total = response.data.response.paginationOutput.totalResults;
+            setPageCount(Math.ceil(total / limit));
+            setData(response.data.response.paginationOutput.results);
+        } catch (error) {
+            console.error("Error in listApi:", error);
+
+
+            if (error.response && error.response.status === 400) {
+                console.log("Data not found");
+            } else {
+                console.log("Server is busy");
+            }
+
+
+            navigate("/dashboard");
+        }
+    };
+    const handleDelete = async () => {
+        
+        // setDeleteShow({ ...deleteShow, openModal: true });
+
+        if (deleteShow.confirmDelete) {
+
+            await axios({
+                method: 'delete',
+                url: `https://fts-backend.onrender.com/admin/testing/deleteUserById?id=${deleteShow.deleteId}`,
             })
-            // .then(response =>{ setState( state.totalPages === response.data.response.paginationOutput.totalPages) })
-            // .then(response =>{ setState( state.totalResults === response.data.response.paginationOutput.totalResults)})  
-            .catch(err => { console.log(err) });
+                .then(response => { console.log("deleted successfully", response); listApi(); toast.success("Deleted successfully"); setDeleteShow({ openModal:false,deleteId:"", confirmDelete: false }); })
+                .catch(err => { console.log(err, "error deleting data") })
+        }
+        else {
+            setDeleteShow({ openModal: true, confirmDelete: false });
+        }
     }
+    // const handleDelete = async (id) => {
 
-    const handleDelete = (id) => {
-        axios.delete(`https://fts-backend.onrender.com/admin/testing/deleteUserById?id=${id}`)
-            .then(response => { console.log("deleted successfully", response); listApi(); })
-            .catch(err => { console.log(err, "error deleting data") })
-    }
+    //   console.log(deleteShow,"ok button");
+    //     try {
+    //         if (deleteShow.confirmDelete) {
 
+    //              await axios.delete(`https://fts-backend.onrender.com/admin/testing/deleteUserById?id=${deleteShow.deleteId}`);
+
+    //             console.log(`User with ID ${id} deleted successfully`);
+
+
+    //             listApi();
+
+
+    //             setDeleteShow({ openModal: false, confirmDelete: false });
+
+    //             toast.success("Deleted successfully");
+    //         } else {
+    //             // If confirmDelete is not true, open the modal for confirmatio
+    //             setDeleteShow({ openModal: true, confirmDelete: false });
+    //         }
+    //     } catch (error) {
+    //         console.error(`Error deleting user with ID ${id}:`, error);
+    //         // Handle error scenarios, display error messages, etc.
+    //         setDeleteShow({ openModal: false, confirmDelete: false });
+    //     }
+    // };
+    
     useEffect(() => {
+        
         listApi(currentPage);
-        // setPage(1)
     }, []);
-
     const handlePageClick = (data) => {
-        setCurrentPage(data.selected + 1);
+        const newPage = data.selected + 1;
+        setCurrentPage(newPage);
 
-        const commentsFromServer = listApi(data.selected + 1)
-        setData(commentsFromServer)
-
-
-    }
-    // useEffect(() => {
-    //     listApi();
-    // }, [limit]);
-    // useEffect(() => {
-    //     axios.get(" https://fts-backend.onrender.com/admin/testing/getallusers?page=1&size=10")
-    //         .then(response => { setData(response.data.response.paginationOutput.results); })
-    //         .catch(err => { console.log(err) });
-    // }, [[],handleDelete])
-    // console.log("Active Page:", state.activePage);
-    // console.log("Data:", state.data);
-    // console.log(state.totalPages,"totalpages");
-    // console.log(state.totalResults,"totalresults");
-
+        try {
+            const commentsFromServer = listApi(newPage);
+            setData(commentsFromServer);
+        } catch (error) {
+            console.error('Error handling page click:', error);
+        }
+    };
     return (
         <Container fluid className='ps-0' >
             <NavBar />
@@ -95,7 +170,6 @@ const ApiTable = ({ setActive, active, setEdit, data, setData, formData, setForm
                         setActive={setActive}
                         setEdit={setEdit}
                     />
-
                 </Col>
                 <Col md={8} lg={10} xl={10} className='d-block pe-4'>
                     <div className="row pt-4">
@@ -114,11 +188,9 @@ const ApiTable = ({ setActive, active, setEdit, data, setData, formData, setForm
                                             <td className="fw-bold text-secondary">Mobile Number</td>
                                             <td className="fw-bold text-secondary">Message</td>
                                             <td className="fw-bold text-secondary text-center">Actions</td>
-
                                         </tr>
                                     </thead>
                                     <tbody>
-
                                         {Array.isArray(data) && data.map((user, index) => {
                                             const serialNumber = (currentPage - 1) * (limit) + index + 1;
                                             return (
@@ -132,88 +204,83 @@ const ApiTable = ({ setActive, active, setEdit, data, setData, formData, setForm
                                                         <td>
                                                             <div className="d-flex justify-content-between" >
                                                                 <Link to={`/edit-user/${user.id}`} > <Icon icon="uil:edit" color="#7464bc" width="20" height="20" style={{ cursor: "pointer" }} /> </Link>
-                                                                <span> <Icon icon="fluent:delete-16-filled" color="#7464bc" width="20" height="20" style={{ cursor: "pointer" }} onClick={() => handleDelete(user.id)} /> </span>
+                                                                <span> <Icon icon="fluent:delete-16-filled" color="#7464bc" width="20" height="20" style={{ cursor: "pointer" }} onClick={() => handleOpenDelete(user.id)} /> </span>
                                                                 <span> <Icon icon="carbon:view" color="#7464bc" width="20" height="20" style={{ cursor: "pointer" }} onClick={() => handleOpen(user)} /></span>
                                                             </div>
                                                         </td>
                                                     </tr>
-
                                                 </>
-
                                             )
                                         })}
-
-
                                     </tbody>
                                 </Table>
-
                                 <Modal show={show} onHide={handleClose}>
                                     <Modal.Header className="cardcolor textcolor1 " closeButton>
                                         <Modal.Title>User Details</Modal.Title>
                                     </Modal.Header>
-                                    <Modal.Body className="" >
-                                       
-                                        {user !== null ? 
-                                        <div key={user.id}>
-                                            {console.log(user)}
-                                            <label className="text-secondary">Name:</label>
-                                            <div className="fw-medium mb-2">{user.name}</div>
-                                            <label className="text-secondary" >E-mail:</label>
-                                            <div className="fw-medium mb-2">{user.email}</div>
-                                            <label className="text-secondary" >Mobile Number:</label>
-                                            <div className="fw-medium mb-2">{user.phone_number}</div>
-                                            <label className="text-secondary" >Message:</label>
-                                            <div className="fw-medium mb-2">{user.message}</div>
-                                        </div>
-                                        : <div> No data found</div>}
+                                    <Modal.Body  >
+                                        {user !== null ?
+                                            <div key={user.id}>
+                                                {console.log(user)}
+                                                <label className="text-secondary">Name:</label>
+                                                <div className="fw-medium mb-2">{user.name}</div>
+                                                <label className="text-secondary" >Email:</label>
+                                                <div className="fw-medium mb-2">{user.email}</div>
+                                                <label className="text-secondary" >Mobile Number:</label>
+                                                <div className="fw-medium mb-2">{user.phone_number}</div>
+                                                <label className="text-secondary" >Message:</label>
+                                                <div className="fw-medium mb-2">{user.message}</div>
+                                            </div>
+                                            : <div> No data found</div>}
                                     </Modal.Body >
                                     <Modal.Footer className="cardcolor" >
-
                                         <Button variant="primary" className="btncolor" onClick={handleClose}>
                                             Ok
                                         </Button>
                                     </Modal.Footer>
                                 </Modal>
-                                <div className="d-flex justify-content-end px-2">
-                                    {/* <Pagination>
-                                        <Pagination.Prev onClick={() => setState((prev) => ({ ...prev, activePage: prev.activePage - 1 }))} disabled={state.activePage === 1} />
-                                        {Array.isArray(data) && data?.map((_, i) => (
-                                            <Pagination.Item
-                                                key={i+ 1}
-                                                onClick={() => handlePageChange(i + 1)}
-                                                active={i + 1 === state.activePage}
-                                            >
-                                                {i + 1}
-                                            </Pagination.Item>
-                                        ))}
-                                        <Pagination.Next onClick={() => setState((prev) => ({ ...prev, activePage: prev.activePage + 1 }))} disabled={state.totalPages} />
-                                    </Pagination> */}
+                                <Modal show={deleteShow.openModal} onHide={handleCloseDelete}>
+                                    <Modal.Header className="cardcolor"closeButton>
+                                        {/* <Modal.Title></Modal.Title> */}
+                                    </Modal.Header>
+                                    <Modal.Body>
+                                        <p className="fw-semibold">Are you sure you want to Delete this Entry???</p>
+                                    </Modal.Body>
+                                    <Modal.Footer className="cardcolor">
+                                        <Button  className="btncolor" onClick={() => { handleDelete() }}>
+                                            Ok
+                                        </Button>
+                                        <Button  className="btncolor" onClick={handleCloseDelete}>
+                                            Cancel
+                                        </Button>
+                                    </Modal.Footer>
+                                </Modal>
+                                <div className="d-flex justify-content-end  px-2">
                                     <ReactPaginate
-                                        previousLabel={"previous"}
-                                        nextLabel={"next"}
+                                        previousLabel={"<<"}
+                                        nextLabel={">>"}
                                         breakLabel={"..."}
                                         pageCount={pageCount}
-                                        marginPagesDisplayed={2}
-                                        pageRangeDisplayed={5}
+                                        pageRangeDisplayed={limit}
                                         onPageChange={handlePageClick}
-                                        containerClassName={"pagination"}
-                                        pageClassName={"page-item"}
-                                        pageLinkClassName={"page-link"}
-                                        previousClassName={"page-item"}
-                                        previousLinkClassName={"page-link"}
-                                        nextClassName={"page-item"}
-                                        nextLinkClassName={"page-link"}
+                                        containerClassName={"pagination  "}
+                                        pageClassName={"page-item "}
+                                        pageLinkClassName={"page-link  "}
+                                        previousClassName={"page-item  "}
+                                        previousLinkClassName={"page-link  "}
+                                        nextClassName={"page-item  "}
+                                        nextLinkClassName={"page-link "}
                                         breakClassName={"page-item"}
                                         breakLinkClassName={"page-link"}
-                                        activeClassName={"active"} />
+                                        activeClassName={"active "} />
                                 </div>
                             </Card.Body>
                         </Card>
                     </Row>
                 </Col>
             </Row>
+            <ToastContainer />
         </Container>
-
     );
 }
 export default ApiTable

@@ -1,4 +1,3 @@
-
 const Number1Input = (props) => {
     const handleInput1 = (e) => {
         {props.setInput1(e.target.value) }
@@ -7,7 +6,6 @@ const Number1Input = (props) => {
     {
        {props.setInput2(e.target.value)}
     }
-
     return (
         <>
             <div className="mb-3">

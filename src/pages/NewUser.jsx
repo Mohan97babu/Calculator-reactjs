@@ -11,57 +11,155 @@ import { useNavigate, useParams } from 'react-router-dom';
 import * as yup from 'yup';
 import { Formik } from 'formik';
 import { useEffect } from 'react';
-const NewUser = ({ setActive, active, setEdit, data, setData, formData, setFormData, putApiShow, setPutApiShow, clearState }) => {
+import { toast, ToastContainer } from 'react-toastify';
+
+const NewUser = ({ setActive, active, setEdit, data, setData, formData, setFormData, clearState }) => {
     const navigate = useNavigate();
+    const postapiUrl = process.env.REACT_APP_POSTAPI_NEWUSER;
+    
+    const putapiUrl = process.env.REACT_APP_PUTAPI_NEWUSER;
+    
+    const getapiUrl = process.env.REACT_APP_GETAPI_NEWUSER;
+    
+    axios.interceptors.request.use(
+        (config) => {
 
-    // const handleChange = (e) => {
+            const accessToken = localStorage.getItem('accesstoken');
 
-    //     setFormData({ ...formData, [e.target.name]: e.target.value });
+            if (accessToken) {
+                config.headers['Authorization'] = `Bearer ${accessToken}`;
+            }
 
-    // }
-
-    const handleSubmit = (values, { setSubmitting }) => {
-        
-        if (param.id) {
-             axios.put(`https://fts-backend.onrender.com/admin/testing/editUserById?id=${param.id}`, values)
-                .then(response => { setData(response.data.response.paginationOutput.results(formData)); })
-                .catch(err => console.log(err))
-            navigate("/user-list");
-            // setPutApiShow(false)
-            
+            return config;
+        },
+        (error) => {
+            return Promise.reject(error);
         }
+    );
+    axios.interceptors.response.use(
+        (response) => {
+
+            return response;
+        },
+        async (error) => {
+            const originalRequest = error.config;
+
+
+            if (error.response.status === 401 && !originalRequest._retry) {
+                originalRequest._retry = true;
+
+
+                navigate("/");
+
+                return Promise.reject(error);
+            }
+
+            return Promise.reject(error);
+        }
+    );
+    const handleSubmit  = async (values, { setSubmitting }) => {
+
+        if (param.id) {
+           await axios({
+                method: "put",
+                url: `${putapiUrl}id=${param.id}`,
+                data: values,
+            })
+                // axios.put(`https://fts-backend.onrender.com/admin/testing/editUserById?id=${param.id}`, values)
+                .then(response => {
+                    console.log(response);
+                 setData(response.data.response.user);
+                    console.log(setData,"546");
+                    console.log("toast work1");
+                    toast.success("Edited Successfully");
+                    console.log("toast work2");
+                })
+                .catch(err => console.log(err))
+                .finally(() => {
+                    setSubmitting(false);
+                });
+
+        }
+
         else {
             values.phone_number = values.phone_number.toString();
-              axios.post("https://fts-backend.onrender.com/user/newRegistration", values)
-                .then(response => setFormData(response.formData))
+          await axios({
+                method: "post",
+                url: `${postapiUrl}`,
+                data: values,
+            })
+                //    axios.post("https://fts-backend.onrender.com/user/newRegistration", values)
+                .then(response => { setFormData(response.formData); toast.success("Submitted Successfully"); })
                 .catch(err => console.log(err))
                 .finally(() => {
                     setSubmitting(false);
                 });
         }
-        navigate("/user-list")
-        
+        setTimeout(() => {
+            navigate("/user-list");
+        }, 2000);
         clearState();
     }
+
+
+    // const handleSuccessToast = () => {
+    //     toast.success("Edited Successfully");
+    //   };
+    // const handleSubmit = async (values, { setSubmitting }) => {
+    //     try {
+    //         if (param.id) {
+    //             const response = await axios.put(`${putapiUrl}id=${param.id}`, values);
+    //             setData(response.data.response.paginationOutput.results(formData));
+    //             toast.success("Edited Successfully");
+
+    //         } else {
+    //             values.phone_number = values.phone_number.toString();
+    //             const response = await axios.post(postapiUrl, values);
+    //             setFormData(response.data.formData);
+    //             toast.success("submitted Successfully");
+
+    //         }
+    //     } catch (error) {
+    //         console.error(error);
+    //         // Handle error as needed
+    //     } finally {
+    //         setSubmitting(false);
+    //         setTimeout(() => {
+    //             navigate("/user-list");
+    //             clearState();
+    //         }, 2000);
+    //     }
+    // };
+
+
+
     const schema = yup.object().shape({
-        name: yup.string("enter valid name").required(),
-        email: yup.string().email("enter valid email").required(),
-        phone_number: yup.string("enter valid mobile number").required(),
+        name: yup.string("Enter Valid Name").required(),
+        email: yup.string().email("Enter Valid Email").required(),
+        phone_number: yup.string("Enter Valid mobile number").required(),
         message: yup.string().required(),
     });
     const param = useParams();
-    console.log(param, "123");
-    
+
+
+
+
     useEffect(() => {
-        if(param.id)
-        {
-        axios.get(` https://fts-backend.onrender.com/admin/testing/getUserById?id=${param.id}`)
-            .then(response => { setFormData(response.data.response.user); })
-            .catch(err => console.log(err))
+      
+        if (param.id) {
+            axios({
+                method: "get",
+                url: `${getapiUrl}id=${param.id}`
+            })
+                // axios.get(` https://fts-backend.onrender.com/admin/testing/getUserById?id=${param.id}`)
+                .then(response => { setFormData(response.data.response.user); })
+                .catch(err => console.log(err))
         }
     }, [param.id])
 
+
     return (
+
         <Container fluid className='ps-0'  >
             <NavBar />
             <Row className=' background' >
@@ -84,37 +182,38 @@ const NewUser = ({ setActive, active, setEdit, data, setData, formData, setFormD
                                 <Formik
                                     validationSchema={schema}
                                     onSubmit={handleSubmit}
-                                    initialValues={{  name: formData.name || "",
-                                    email: formData.email || "",
-                                    phone_number: formData.phone_number || "",
-                                    message: formData.message || "", }}  
-                                    enableReinitialize={true}                                            
+                                    initialValues={{
+                                        name: formData.name || "",
+                                        email: formData.email || "",
+                                        phone_number: formData.phone_number || "",
+                                        message: formData.message || "",
+                                    }}
+                                    enableReinitialize={true}
                                 >
                                     {({ handleSubmit, handleChange, values, errors }) => (
                                         <Form noValidate onSubmit={handleSubmit} >
                                             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                                                 <Form.Label className='fw-medium'>Name:</Form.Label>
-                                                <Form.Control type="text" placeholder="Enter Name" name="name" value={values.name } onChange={handleChange} onBlur={handleChange} onKeyDown={(e) => ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "+", "-", "/", "*"].includes(e.key) && e.preventDefault()} isInvalid={!!errors.name} />
+                                                <Form.Control type="text" placeholder="Enter Name" name="name" value={values.name} onChange={handleChange} onBlur={handleChange} onKeyDown={(e) => ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "+", "-", "/", "*"].includes(e.key) && e.preventDefault()} isInvalid={!!errors.name} />
                                                 <Form.Control.Feedback type={"invalid"} >{errors.name}</Form.Control.Feedback>
                                             </Form.Group>
                                             <Form.Group className="mb-3" controlId="exampleForm.ControlInput2">
                                                 <Form.Label className='fw-medium'>Email: </Form.Label>
-                                                <Form.Control type="email" placeholder="Enter Email " name="email" value={values.email } onChange={handleChange} onBlur={handleChange} isInvalid={!!errors.email} />
+                                                <Form.Control type="email" placeholder="Enter Email " name="email" value={values.email} onChange={handleChange} onBlur={handleChange} isInvalid={!!errors.email} />
                                                 <Form.Control.Feedback type={"invalid"} >{errors.email}</Form.Control.Feedback>
                                             </Form.Group>
                                             <Form.Group className="mb-3" controlId="exampleForm.ControlInput3">
                                                 <Form.Label className='fw-medium'>Mobile Number:</Form.Label>
-                                                <Form.Control type="number" placeholder="Enter Mobile Number" name="phone_number" value={values.phone_number } onChange={handleChange} onBlur={handleChange} onKeyDown={(e) => ["e", "E", "+", "-"].includes(e.key) && e.preventDefault()} isInvalid={!!errors.phone_number} />
+                                                <Form.Control type="number" placeholder="Enter Mobile Number" name="phone_number" value={values.phone_number} onChange={handleChange} onBlur={handleChange} onKeyDown={(e) => ["e", "E", "+", "-"].includes(e.key) && e.preventDefault()} isInvalid={!!errors.phone_number} />
                                                 <Form.Control.Feedback type={"invalid"} >{errors.phone_number}</Form.Control.Feedback>
                                             </Form.Group>
                                             <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
                                                 <Form.Label className='fw-medium'>Message:</Form.Label>
-                                                <Form.Control as="textarea" rows={4} cols={50} style={{ resize: "none" }} name="message" value={values.message } placeholder=" Enter Message" onChange={handleChange} onBlur={handleChange} isInvalid={!!errors.message} />
+                                                <Form.Control as="textarea" rows={4} cols={50} style={{ resize: "none" }} name="message" value={values.message} placeholder=" Enter Message" onChange={handleChange} onBlur={handleChange} isInvalid={!!errors.message} />
                                                 <Form.Control.Feedback type={"invalid"} >{errors.message}</Form.Control.Feedback>
                                             </Form.Group>
-                                            <div className='text-end p-3  '>
-
-                                                <Button variant="primary" type="submit" className=' alignbtn btncolor' >{param.id ? "Update" : "Submit"}</Button>
+                                            <div className='text-end p-3 '>
+                                                <Button variant="primary" type="submit" className=' alignbtn btncolor me-2' >{param.id ? "Update" : "Submit"}</Button>
                                                 <Button variant="primary" className=' alignbtn btncolor' onClick={() => (clearState(), navigate("/user-list"))}>Cancel</Button>
                                             </div>
                                         </Form>
@@ -125,6 +224,7 @@ const NewUser = ({ setActive, active, setEdit, data, setData, formData, setFormD
                     </Row>
                 </Col>
             </Row>
+            <ToastContainer />
         </Container>
     );
 }

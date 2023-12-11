@@ -1,12 +1,8 @@
-
-
 import NavBar from "../components/layout/Navbar";
-
 import TableMain from "../components/Table/Tablemain";
 import SideBar from "../components/layout/Sidebar";
 
-
-const Dashboard = ({createProfile,createProfileData,setCreateProfileData,edit,setEdit ,active,setActive,setPutApiShow}) => {
+const Dashboard = ({createProfileData,setCreateProfileData,edit,setEdit ,active,setActive}) => {
     const tablehead =[
         {label:"S.No."},
         {label:"E-Mail"},
@@ -15,19 +11,10 @@ const Dashboard = ({createProfile,createProfileData,setCreateProfileData,edit,se
         {label:"Created At"},
         {label:"Modified At"},
         {label:"Actions"}
-    ];
+    ];      
    
-    const handleInput = (e) =>
-    {  
-        
-        e.preventDefault();
-    }
-   
-
-    
     return (
-        <>
-           
+        <>          
             <div className="container-fluid px-0 ">
                 <NavBar />
                 <div className="row">
@@ -35,8 +22,7 @@ const Dashboard = ({createProfile,createProfileData,setCreateProfileData,edit,se
                         <SideBar
                         setEdit={setEdit}
                         active={active}
-                        setActive={setActive}
-                        
+                        setActive={setActive}                       
                         />
                     </div>
                     <div className="col-10">
@@ -51,44 +37,35 @@ const Dashboard = ({createProfile,createProfileData,setCreateProfileData,edit,se
                             <div className="col-6 ">                               
                                     <form className="d-flex justify-content-end" role="search">
                                         <input className="form-control me-2 w-50" type="search" placeholder="Search" aria-label="Search" />
-                                        <button className="btn btn-primary btncolor w-25" type="submit" onClick={(e) =>handleInput(e)}>Search</button>
+                                        <button className="btn btn-primary btncolor w-25" type="submit" >Search</button>
                                     </form>
                             </div>
                               </div>
-                            <div className="card-body  p-0">
-                               
+                            <div className="card-body  p-0">                               
                                 <table className="table border border-secondary-subtle   cursorpoint">
-                                    <thead className="" >
-                                        <tr  >
-                                            
+                                    <thead>
+                                        <tr>                                           
                                             {tablehead.map((option)=>{
                                                 return <th><span className="text-secondary ">{option.label}</span></th>
                                             })}
                                         </tr>
-                                    </thead>
-                                   
+                                    </thead>                                   
                                     <tbody>
-                                        <TableMain 
-                                       
-                                        createProfileData={createProfileData}
+                                        <TableMain                                        
+                                       createProfileData={createProfileData}
                                         setCreateProfileData={setCreateProfileData}
                                         edit={edit}
-                                        setEdit={setEdit}
-                                        
-                                        />
-                                        
-                                       
+                                        setEdit={setEdit}                                       
+                                        />                                       
                                     </tbody>
                                 </table>
                                 <div className="d-flex justify-content-between px-2">
                                     <select className="form-select w-25 h-25" aria-label="Default select example">
-
                                         <option value="1">2 items per page</option>
                                         <option value="2">4 items per page</option>
                                         <option value="3">6 items per page</option>
                                     </select>
-                                    <p className="cursorpoint">Total of Entries</p>
-                                    
+                                    <p className="cursorpoint">Total of Entries</p>                                    
                                     <nav aria-label="Page navigation example">
                                         <ul className="pagination">
                                             <li className="page-item">
@@ -111,10 +88,8 @@ const Dashboard = ({createProfile,createProfileData,setCreateProfileData,edit,se
                         </div>
                     </div>
                 </div>
-
             </div>
-
-
+            
         </>
     )
 }

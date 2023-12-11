@@ -10,7 +10,7 @@ import NavBar from "../components/layout/Navbar";
 import SideBar from "../components/layout/Sidebar";
 
 
-const Demo = ({ setActive, active, setEdit ,setPutApiShow }) => {
+const Demo = ({ setActive, active, setEdit  }) => {
   const [input1, setInput1] = useState([]);
   const [input2, setInput2] = useState([]);
   const [trigo, setTrigo] = useState([] && false);
@@ -95,13 +95,10 @@ const Demo = ({ setActive, active, setEdit ,setPutApiShow }) => {
               setActive={setActive}
               setEdit={setEdit}
                />
-          </div>
-            
-          <div className="col-10 mt-4 ">
-          
+          </div>            
+          <div className="col-10 mt-4 ">          
               <div className=" d-flex fw-medium ">
-                <h5 className="pe-2 ">Calculator</h5> 
-                
+                <h5 className="pe-2 ">Calculator</h5>                 
                  </div>
             <div className="row d-flex justify-content-center mt-3">
             <div className="card p-3 ms-5 w-50 h-75  back ">
@@ -110,7 +107,6 @@ const Demo = ({ setActive, active, setEdit ,setPutApiShow }) => {
                 setTrigo={setTrigo}
                 trigo={trigo}
               />
-
               {trigo ? <TrigoOperation
                 trigo={trigo}
                 setTrigo={setTrigo}
@@ -128,11 +124,6 @@ const Demo = ({ setActive, active, setEdit ,setPutApiShow }) => {
                 trigo={trigo}
                 basic={basic}
               />
-              {/* {(!trigo ? (basic !== "Square" && basic !== "Cube" ? <Number2Input
-            input2={input2}
-            setInput2={setInput2}
-          />
-            : null) : null)} */}
               <Buttons
                 handleFinalSubmit={handleFinalSubmit}
                 clearState={clearState}

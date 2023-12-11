@@ -1,6 +1,5 @@
 const BasicOperation = ({basic,setBasic}) => {
-  const basicOption = [
-   
+  const basicOption = [   
     { label: "Select An Operator ", value: " ", },
     { label: "Addition",value: "1", },
     { label: "Subtraction", value: "2",},
@@ -14,7 +13,6 @@ const BasicOperation = ({basic,setBasic}) => {
   {
     {setBasic(e.target.value)}
   }
-  
   return (
     <>
        <label htmlFor="basicselect" className="form-label text-white mt-3 " id="hideLabel1">Basic Operators</label> 
@@ -27,6 +25,5 @@ const BasicOperation = ({basic,setBasic}) => {
       </select> 
     </>
   )
-
 }
 export default BasicOperation;

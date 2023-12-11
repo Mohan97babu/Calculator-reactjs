@@ -1,7 +1,6 @@
 
 const RadioButton = (props) => {
   return (
-
     <div className="radios">
       <div className="form-check" >
         <input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" onClick={() => {
@@ -20,8 +19,6 @@ const RadioButton = (props) => {
         </label>
       </div>
     </div>
-
   )
 }
-
 export default RadioButton;

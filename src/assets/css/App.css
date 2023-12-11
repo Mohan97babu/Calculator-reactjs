@@ -1,7 +1,4 @@
-/* *
-{
-  overflow-x:hidden;
-} */
+
 .back
 {
   background-color: #7464bc !important;
@@ -17,8 +14,7 @@
 }
 .btncolor 
 {
-    background-color:#310750!important;
-    
+    background-color:#310750!important;    
 }
 .checkbox
 {
@@ -27,39 +23,31 @@
 }
 .background
 {
-  /* background-image: url("../images/reactbackground.jpg");
-  background-position: center;
-  background-size:cover; */
   height:100vh;
 }
-
 .cardcolor
 {
   background-color:  #cdc1f2 !important;
 }
 .curved
 {
-  border-bottom-right-radius: 10%;
-  
+  border-bottom-right-radius: 10%;  
 }
 .text1
 {
   font-size:15px;
-
 }
 .image
 {
   width:200px !important;
   height:200px !important;
-
 }
 .alignimage
 {
   display:flex;
   justify-content: center;
   align-items: center;
-  background-color: #7464bc !important;
-  
+  background-color: #7464bc !important; 
 }
 .bord
 {
@@ -123,26 +111,11 @@ a
 }
 .a1  {
   background-color: #7464bc !important;
-  color:white !important;
-  
+  color:white !important;  
 }
 .a3{
   border-radius: 5px !important;
 }
-/* .image1
-{ 
-  background-image: url("../src/images/math-rulers-supplies-with-dices-empty-notebook.jpg");
-  background-size: contain;
-  
-  background-position-x: 655px;
-  background-position-y: 452px;
-}
-.image2
-{
-  background-image: url("../src/images/wepik-export-20231106130024VXnB.jpeg");
-  background-position: bottom;
-} */
-
 .cardalign
 {
   height:100vh;
