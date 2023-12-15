@@ -3,7 +3,7 @@ import avatar from "../../assets/images/avatar.png"
 import { Link } from "react-router-dom"
 import SideBar from "./Sidebar"
 
-const NavBar = () => {
+const NavBar = ({setIsSignedIn}) => {
     return (
         <nav className="navbar navbar-expand-lg back alignnav">
             <div className="container-fluid">
@@ -28,7 +28,7 @@ const NavBar = () => {
                             <li><a className="dropdown-item " ><span className="textcolor1">Action</span></a></li>
                                 <li><a className="dropdown-item" ><span className="textcolor1">Another Action</span></a></li>
                                 <li><hr className="dropdown-divider" /></li>
-                               <Link to ="/" > <li><p className="dropdown-item a2" ><span className="textcolor1 text-decoration-none">Sign Out</span></p></li> </Link>
+                               <Link to ="/" > <li onClick={() => {setIsSignedIn(false);  }}><p className="dropdown-item a2" ><span className="textcolor1 text-decoration-none">Sign Out</span></p></li> </Link>
                             </ul>
                         </div>
                         <div className="btn-group dropstart bg-transparent d-block d-sm-block d-md-none ">

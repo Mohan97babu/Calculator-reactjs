@@ -5,11 +5,16 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import '../node_modules/bootstrap/dist/js/bootstrap';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
-
+import interceptors from "../src/global/interceptors.js"
+import { Provider } from 'react-redux';
+import store from "../src/redux/Store.js"
 const root = ReactDOM.createRoot(document.getElementById('root'));
+interceptors();
 root.render(
   <React.StrictMode>
-    <App />
+    <Provider store ={store}>
+    <App/>
+    </Provider>
   </React.StrictMode>
 );
 

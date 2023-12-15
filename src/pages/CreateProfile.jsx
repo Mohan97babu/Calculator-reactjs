@@ -4,7 +4,7 @@ import SideBar from "../components/layout/Sidebar"
 import { useState } from "react"
 import avatar from "../assets/images/avatar.png"
 
-const CreateProfile = ({ setCreateProfile, createProfile, setCreateProfileData, createProfileData, edit, setEdit, active, setActive }) => {
+const CreateProfile = ({ setCreateProfile, createProfile, setCreateProfileData, createProfileData, edit, setEdit, active, setActive ,setIsSignedIn}) => {
     const [imagePreview, setImagePreview] = useState(createProfile.imagePreview || null);
     const navigate = useNavigate();
     const clearState = () => {
@@ -86,16 +86,17 @@ const CreateProfile = ({ setCreateProfile, createProfile, setCreateProfileData, 
     }
     return (
         <div className="container-fluid px-0 alignnav ">
-            <NavBar />
+            {/* <NavBar 
+            setIsSignedIn={setIsSignedIn}/> */}
             <div className="row ">
-                <div className="col-2 ">
+                {/* <div className="col-2 ">
                     <SideBar
                         active={active}
                         setActive={setActive}
                         setEdit={setEdit}
                     />
-                </div>
-                <div className="col-10">
+                </div> */}
+                {/* <div className="col-10"> */}
                     <div className="row pt-4 mb-2">
                         <div className="d-flex fw-medium "><h5 className="pe-2 text-secondary">Create Profile</h5> &#10095; <h5 className="ps-2">Account Details</h5> </div>
                     </div>
@@ -241,7 +242,7 @@ const CreateProfile = ({ setCreateProfile, createProfile, setCreateProfileData, 
                             </div>
                         </div>
                     </div>
-                </div>
+                {/* </div> */}
             </div>
         </div>
     )

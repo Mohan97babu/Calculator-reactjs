@@ -10,7 +10,7 @@ import NavBar from "../components/layout/Navbar";
 import SideBar from "../components/layout/Sidebar";
 
 
-const Demo = ({ setActive, active, setEdit  }) => {
+const Demo = ({ setActive, active, setEdit ,setIsSignedIn }) => {
   const [input1, setInput1] = useState([]);
   const [input2, setInput2] = useState([]);
   const [trigo, setTrigo] = useState([] && false);
@@ -87,21 +87,22 @@ const Demo = ({ setActive, active, setEdit  }) => {
     <div className="App ">
       <div className="container-fluid background ps-0">
 
-        <NavBar />
+        {/* <NavBar 
+        setIsSignedIn={setIsSignedIn}/> */}
         <div className="row">
-          <div className="col-2 background">
+          {/* <div className="col-2 background">
             <SideBar
               active={active}
               setActive={setActive}
               setEdit={setEdit}
                />
-          </div>            
-          <div className="col-10 mt-4 ">          
+          </div>             */}
+          {/* <div className="col-10 mt-4 ">           */}
               <div className=" d-flex fw-medium ">
                 <h5 className="pe-2 ">Calculator</h5>                 
                  </div>
             <div className="row d-flex justify-content-center mt-3">
-            <div className="card p-3 ms-5 w-50 h-75  back ">
+            <div className="card p-3 ms-5 w-50  back ">
               <h5 className="text-center text-white ">Calculator</h5>
               <RadioButton
                 setTrigo={setTrigo}
@@ -135,7 +136,7 @@ const Demo = ({ setActive, active, setEdit  }) => {
               </div>
             </div>
             </div>
-          </div>
+          {/* </div> */}
         </div>
       </div>
     </div>

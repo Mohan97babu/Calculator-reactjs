@@ -13,7 +13,7 @@ import { Formik } from 'formik';
 import { useEffect } from 'react';
 import { toast, ToastContainer } from 'react-toastify';
 
-const NewUser = ({ setActive, active, setEdit, data, setData, formData, setFormData, clearState }) => {
+const NewUser = ({ setActive, active, setEdit, data, setData, formData, setFormData, clearState ,setIsSignedIn }) => {
     const navigate = useNavigate();
     const postapiUrl = process.env.REACT_APP_POSTAPI_NEWUSER;
     
@@ -21,42 +21,42 @@ const NewUser = ({ setActive, active, setEdit, data, setData, formData, setFormD
     
     const getapiUrl = process.env.REACT_APP_GETAPI_NEWUSER;
     
-    axios.interceptors.request.use(
-        (config) => {
+    // axios.interceptors.request.use(
+    //     (config) => {
 
-            const accessToken = localStorage.getItem('accesstoken');
+    //         const accessToken = localStorage.getItem('accesstoken');
 
-            if (accessToken) {
-                config.headers['Authorization'] = `Bearer ${accessToken}`;
-            }
+    //         if (accessToken) {
+    //             config.headers['Authorization'] = `Bearer ${accessToken}`;
+    //         }
 
-            return config;
-        },
-        (error) => {
-            return Promise.reject(error);
-        }
-    );
-    axios.interceptors.response.use(
-        (response) => {
+    //         return config;
+    //     },
+    //     (error) => {
+    //         return Promise.reject(error);
+    //     }
+    // );
+    // axios.interceptors.response.use(
+    //     (response) => {
 
-            return response;
-        },
-        async (error) => {
-            const originalRequest = error.config;
-
-
-            if (error.response.status === 401 && !originalRequest._retry) {
-                originalRequest._retry = true;
+    //         return response;
+    //     },
+    //     async (error) => {
+    //         const originalRequest = error.config;
 
 
-                navigate("/");
+    //         if (error.response.status === 401 && !originalRequest._retry) {
+    //             originalRequest._retry = true;
 
-                return Promise.reject(error);
-            }
 
-            return Promise.reject(error);
-        }
-    );
+    //             navigate("/");
+
+    //             return Promise.reject(error);
+    //         }
+
+    //         return Promise.reject(error);
+    //     }
+    // );
     const handleSubmit  = async (values, { setSubmitting }) => {
 
         if (param.id) {
@@ -161,21 +161,21 @@ const NewUser = ({ setActive, active, setEdit, data, setData, formData, setFormD
     return (
 
         <Container fluid className='ps-0'  >
-            <NavBar />
-            <Row className=' background' >
-                <Col md={4} lg={2} xl={2} className='d-none d-md-block '>
+            {/* <NavBar 
+            setIsSignedIn={setIsSignedIn}/> */}
+            <Row  >
+                {/* <Col md={4} lg={2} xl={2} className='d-none d-md-block '>
                     <SideBar
                         active={active}
                         setActive={setActive}
                         setEdit={setEdit}
                     />
-                </Col>
-                <Col md={8} lg={10} xl={10} className='d-block pe-4' >
+                </Col> */}
+                {/* <Col md={8} lg={10} xl={10} className='d-block pe-4' > */}
                     <div className="row pt-4">
                         <div className="d-flex fw-medium "><h5 className="pe-2 text-secondary">FTS New User</h5> &#10095; <h5 className="ps-2">{param.id ? "Edit" : "Add"}User</h5> </div>
                     </div>
                     <Row className=' mt-3 ms-3'>
-
                         <Card className=' px-0' >
                             <Card.Header ><span className='textcolor1 fw-bold '>{param.id ? "Edit" : "Add"} User</span></Card.Header>
                             <Card.Body>
@@ -222,7 +222,7 @@ const NewUser = ({ setActive, active, setEdit, data, setData, formData, setFormD
                             </Card.Body>
                         </Card>
                     </Row>
-                </Col>
+                {/* </Col> */}
             </Row>
             <ToastContainer />
         </Container>

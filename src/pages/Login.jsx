@@ -1,19 +1,22 @@
-import { useEffect, useState } from "react"
+import {  useState } from "react"
 import Reactlogin from "../assets/images/Reactlogin.png"
 import reactlogotrans1 from "../assets/images/reactwhitetextlogin-removebg-preview.png"
 import axios from 'axios'
 import { useNavigate } from "react-router-dom";
-const Login = () => {
+const Login = ({isSignedIn,setIsSignedIn}) => {
      const navigate = useNavigate();
      const loginUrl = process.env.REACT_APP_LOGINAPI_NEWUSER;
      const refreshUrl = process.env.REACT_APP_REFRESHTOKENAPI_LOGIN;
-     console.log(refreshUrl,"123");
+    // console.log(refreshUrl,"123");
+     const refreshtoken = localStorage.getItem("refreshtoken");
+  //   console.log(refreshtoken,"456");
     const [login,setLogin] = useState({
         email :"",
         password :"",
                
     }) 
-       
+    
+    
     const handleChange =(e) =>
     {
         setLogin({...login,[e.target.name] : e.target.value})
@@ -81,62 +84,74 @@ const Login = () => {
     //         return Promise.reject(error);
     //     }
     // );
-     axios.interceptors.request.use(
-        (config) => {
-          // Get the access token from wherever you have stored it (e.g., localStorage)
-          const accessToken = localStorage.getItem('accesstoken');
+    //  axios.interceptors.request.use(
+    //     (config) => {
+    //       // Get the access token from wherever you have stored it (e.g., localStorage)
+    //       const accessToken = localStorage.getItem('accesstoken');
     
-          // Add the access token to the request headers
-          if (accessToken) {
-            config.headers['Authorization'] = `Bearer ${accessToken}`;
-          }
+    //       // Add the access token to the request headers
+    //       if (accessToken) {
+    //         config.headers['Authorization'] = `Bearer ${accessToken}`;
+    //       }
     
-          return config;
-        },
-        (error) => {
-          return Promise.reject(error);
-        }
-      );
-      axios.interceptors.response.use(
-        (response) => {
+    //       return config;
+    //     },
+    //   async  (error) => {
+    //       return Promise.reject(error);
+    //     }
+    //   );
+    //   axios.interceptors.response.use(
+    //     (response) => {
           
-          return response;
-        },
-        async (error) => {
+    //       return response;
+    //     },
+    //     async (error) => {
           
          
-       console.log(error.response.status,"12345x`");
-          if (error.response.status === 400) {
-            
-            console.log(error.response.status,"123");
-            axios({
-                method:"post",
-                url:refreshUrl,
-                data : localStorage.getItem("refreshtoken")
-            })
-            .then(response => console.log(response.data))
-            .catch(err => console.log(err))
-           navigate("/");
-          
-           // originalRequest[`refreshtoken`] = localStorage.getItem("refreshtoken");
+    // //   console.log(error.response.status,"12345x`");
+    //       if (error.response.status === 400) {
+    //         // console.log(refreshtoken,"789");
+    //         // console.log(error.response.status,"123");
+    //         // const handleRefresh =() =>
+    //         // {
+
+    //             axios({
+    //                 method:"post",
+    //                 url:`${refreshUrl}`,
+    //                 data : refreshtoken,
+    //             })
+    //             .then(response =>{ 
+    //                 console.log(response,"12354");
+    //                 localStorage.setItem('accesstoken', response.data.access_token); 
+    //                  navigate("/"); })
+    //             .catch(err => console.log(err))
+    //      //   }
+           
+    //         // handleRefresh();
+    //        // originalRequest[`refreshtoken`] = localStorage.getItem("refreshtoken");
     
-            return Promise.reject(error);
-          }
+    //         return Promise.reject(error);
+    //       }
     
-          return Promise.reject(error);
-        }
-      );
+    //       return Promise.reject(error);
+    //     }
+    //   );
     const handleSubmit =() =>
     {  
+        setIsSignedIn(true);
+      // localStorage.setItem("isSignedIn","true");
        axios({
         method:"post",
         url:`${loginUrl}`,
-        data:login,
+        data: login,
        })
         // axios.post("https://fts-backend.onrender.com/admin/login",login)
         .then(response => {
-            const { accesstoken, refreshtoken } = response.data;
-            localStorage.setItem("accesstoken", JSON.stringify(accesstoken));
+           
+           const accesstoken =response.data.accesstoken.accessToken;
+           const refreshtoken =response.data.refreshtoken;
+          
+           localStorage.setItem("accesstoken", JSON.stringify(accesstoken));
             localStorage.setItem("refreshtoken", JSON.stringify(refreshtoken));
           })
           .catch(err => console.log(err));

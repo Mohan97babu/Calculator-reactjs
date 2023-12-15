@@ -2,7 +2,7 @@ import NavBar from "../components/layout/Navbar";
 import TableMain from "../components/Table/Tablemain";
 import SideBar from "../components/layout/Sidebar";
 
-const Dashboard = ({createProfileData,setCreateProfileData,edit,setEdit ,active,setActive}) => {
+const Dashboard = ({createProfileData,setCreateProfileData,edit,setEdit ,active,setActive,setIsSignedIn}) => {
     const tablehead =[
         {label:"S.No."},
         {label:"E-Mail"},
@@ -16,20 +16,21 @@ const Dashboard = ({createProfileData,setCreateProfileData,edit,setEdit ,active,
     return (
         <>          
             <div className="container-fluid px-0 ">
-                <NavBar />
+                {/* <NavBar 
+                setIsSignedIn={setIsSignedIn}/> */}
                 <div className="row">
-                    <div className="col-2 background ">
+                    {/* <div className="col-2 background ">
                         <SideBar
                         setEdit={setEdit}
                         active={active}
                         setActive={setActive}                       
                         />
-                    </div>
-                    <div className="col-10">
+                    </div> */}
+                    {/* <div className="col-10"> */}
                         <div className="row pt-4">
                           <p className="d-flex fw-medium "><h5 className="pe-2 text-secondary">Dashboard</h5> &#10095; <h5 className="ps-2">User table</h5> </p>
                         </div>
-                        <div className="card mt-3">
+                        <div className="card mt-3 px-0 ">
                               <div className=" cardcolor  row  d-flex justify-content-between py-2 mx-0">
                             <div className="col-6">
                             <h5 className=" cursorpoint mb-0 pt-2"><span className="textcolor1">User table</span></h5>
@@ -86,7 +87,7 @@ const Dashboard = ({createProfileData,setCreateProfileData,edit,setEdit ,active,
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    {/* </div> */}
                 </div>
             </div>
             
