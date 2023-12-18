@@ -49,6 +49,7 @@ export default function App() {
     setIsSignedIn(false);
     localStorage.removeItem("accesstoken");
     localStorage.removeItem("refreshtoken");
+    localStorage.removeItem("isSignedIn");
   }
   }, [isSignedIn]);
 

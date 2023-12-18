@@ -12,9 +12,13 @@ import * as yup from 'yup';
 import { Formik } from 'formik';
 import { useEffect } from 'react';
 import { toast, ToastContainer } from 'react-toastify';
+import { productList } from '../redux/actions/productList';
+import { useDispatch } from 'react-redux';
+
 
 const NewUser = ({ setActive, active, setEdit, data, setData, formData, setFormData, clearState ,setIsSignedIn }) => {
     const navigate = useNavigate();
+    const dispatch = useDispatch();
     const postapiUrl = process.env.REACT_APP_POSTAPI_NEWUSER;
     
     const putapiUrl = process.env.REACT_APP_PUTAPI_NEWUSER;
@@ -156,8 +160,8 @@ const NewUser = ({ setActive, active, setEdit, data, setData, formData, setFormD
                 .catch(err => console.log(err))
         }
     }, [param.id])
-
-
+    
+    productList(dispatch);
     return (
 
         <Container fluid className='ps-0'  >
@@ -175,6 +179,7 @@ const NewUser = ({ setActive, active, setEdit, data, setData, formData, setFormD
                     <div className="row pt-4">
                         <div className="d-flex fw-medium "><h5 className="pe-2 text-secondary">FTS New User</h5> &#10095; <h5 className="ps-2">{param.id ? "Edit" : "Add"}User</h5> </div>
                     </div>
+                    
                     <Row className=' mt-3 ms-3'>
                         <Card className=' px-0' >
                             <Card.Header ><span className='textcolor1 fw-bold '>{param.id ? "Edit" : "Add"} User</span></Card.Header>

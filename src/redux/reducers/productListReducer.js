@@ -1,13 +1,18 @@
-import {Constants} from "../constants/constants"
-const initialvalues ={
+import {Constants} from "../constants/constants";
+
+const initialValues ={
     productList :[],
-}
-export const productListReducer =(state =initialvalues ,{type,payload}) =>
+    singleProduct :[],
+};
+export const productListReducer = (state = initialValues ,{type,payload}) =>
 {
    switch(type)
    {
     case Constants.GETAPI_PRODUCTS:
-    return {...state , productList:payload}
+    return {...state , productList : payload}
+
+    case Constants.GETAPI_PRODUCTS_SINGLE:
+    return {...state , singleProduct : payload}
 
     default:
         return state;

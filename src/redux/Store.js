@@ -6,6 +6,8 @@ let initialValues ={}
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(
-    reducers,initialValues,composeEnhancers(applyMiddleware(thunk))
+    reducers,
+    initialValues,
+    composeEnhancers(applyMiddleware(thunk))
 );
 export default store;
