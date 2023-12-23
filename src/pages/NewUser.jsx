@@ -12,13 +12,13 @@ import * as yup from 'yup';
 import { Formik } from 'formik';
 import { useEffect } from 'react';
 import { toast, ToastContainer } from 'react-toastify';
-import { productList } from '../redux/actions/productList';
-import { useDispatch } from 'react-redux';
+
+
 
 
 const NewUser = ({ setActive, active, setEdit, data, setData, formData, setFormData, clearState ,setIsSignedIn }) => {
     const navigate = useNavigate();
-    const dispatch = useDispatch();
+    
     const postapiUrl = process.env.REACT_APP_POSTAPI_NEWUSER;
     
     const putapiUrl = process.env.REACT_APP_PUTAPI_NEWUSER;
@@ -145,7 +145,8 @@ const NewUser = ({ setActive, active, setEdit, data, setData, formData, setFormD
     });
     const param = useParams();
 
-
+//    const product =useSelector((state) => state.productListData)
+//    console.log(product,"product");
 
 
     useEffect(() => {
@@ -161,7 +162,7 @@ const NewUser = ({ setActive, active, setEdit, data, setData, formData, setFormD
         }
     }, [param.id])
     
-    productList(dispatch);
+    
     return (
 
         <Container fluid className='ps-0'  >
@@ -218,8 +219,8 @@ const NewUser = ({ setActive, active, setEdit, data, setData, formData, setFormD
                                                 <Form.Control.Feedback type={"invalid"} >{errors.message}</Form.Control.Feedback>
                                             </Form.Group>
                                             <div className='text-end p-3 '>
-                                                <Button variant="primary" type="submit" className=' alignbtn btncolor me-2' >{param.id ? "Update" : "Submit"}</Button>
-                                                <Button variant="primary" className=' alignbtn btncolor' onClick={() => (clearState(), navigate("/user-list"))}>Cancel</Button>
+                                                <Button variant="primary" type="submit" className=' alignbtn btncolor me-2 text-black fw-medium' >{param.id ? "Update" : "Submit"}</Button>
+                                                <Button variant="primary" className=' alignbtn btncolor text-black fw-medium' onClick={() => (clearState(), navigate("/user-list"))}>Cancel</Button>
                                             </div>
                                         </Form>
                                     )}

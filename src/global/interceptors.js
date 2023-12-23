@@ -8,11 +8,10 @@ const interceptors =() =>
         (config) => {
     
             const accessToken = JSON.parse(localStorage.getItem('accesstoken'));
-            console.log(accessToken,"412");
-             console.log(config,"456");
+           
              if (accessToken) {
                  config.headers['Authorization'] = `Bearer ${accessToken}`;
-                 console.log(accessToken,"445");
+                
                 
             }
             else
@@ -37,7 +36,7 @@ const interceptors =() =>
     
             if (error.response.status === 401) {
                 const refreshtoken = JSON.parse( localStorage.getItem("refreshtoken"));
-                console.log(refreshtoken,"012");
+                
                 try{
                 const response = await axios({
                     method:"post",

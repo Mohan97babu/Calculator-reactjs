@@ -204,7 +204,7 @@ const ApiTable = ({ setActive, active, setEdit, data, setData, setIsSignedIn }) 
                 </div>
                 <Row className='mt-3 ms-1 '>
                     <Card className="px-0">
-                        <Card.Header className="cardcolor py-2 "><h5 className="textcolor1 mt-1 "> User List</h5></Card.Header>
+                        <Card.Header className="back py-2 "><h5 className="text-white mt-1 "> User List</h5></Card.Header>
                         <Card.Body className="p-0">
                             <Table striped bordered hover responsive>
                                 <thead>
@@ -230,9 +230,9 @@ const ApiTable = ({ setActive, active, setEdit, data, setData, setIsSignedIn }) 
                                                     <td>{user.message}</td>
                                                     <td>
                                                         <div className="d-flex justify-content-between" >
-                                                            <Link to={`/edit-user/${user.id}`} > <Icon icon="uil:edit" color="#7464bc" width="20" height="20" style={{ cursor: "pointer" }} /> </Link>
-                                                            <span> <Icon icon="fluent:delete-16-filled" color="#7464bc" width="20" height="20" style={{ cursor: "pointer" }} onClick={() => handleOpenDelete(user)} /> </span>
-                                                            <span> <Icon icon="carbon:view" color="#7464bc" width="20" height="20" style={{ cursor: "pointer" }} onClick={() => handleOpen(user)} /></span>
+                                                            <Link title = "Edit" to={`/edit-user/${user.id}`} > <Icon  icon="uil:edit" color="#7464bc" width="20" height="20" style={{ cursor: "pointer" }} /> </Link>
+                                                            <span  title = "Delete"> <Icon  icon="fluent:delete-16-filled" color="#7464bc" width="20" height="20" style={{ cursor: "pointer" }} onClick={() => handleOpenDelete(user)} /> </span>
+                                                            <span title = "View"> <Icon  icon="carbon:view" color="#7464bc" width="20" height="20" style={{ cursor: "pointer" }} onClick={() => handleOpen(user)} /></span>
                                                         </div>
                                                     </td>
                                                 </tr>

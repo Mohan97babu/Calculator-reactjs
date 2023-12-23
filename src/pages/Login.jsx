@@ -162,14 +162,14 @@ const Login = ({isSignedIn,setIsSignedIn}) => {
             <div className="container-fluid background d-flex justify-content-center align-items-center p-0 cardcolor ">            
             <div className="row w-100 h-100">
                     <div className="col-6 d-flex justify-content-center align-items-center back curved  p-0">
-                        <div className="card rounded-0 border-0 back1 w-75">
-                            <div className="row back1 ">
+                        <div className="card rounded-0 border-0 bg-transparent back1 w-75">
+                            <div className="row back1 bg-transparent ">
                                 <img src={reactlogotrans1} width="200px" height="200px" alt="....." className="logo1 back " />
                             </div>
                             <div className="row back bord ">
                                 <h3 className="border-0 text-white text-center">Welcome To CONNECT</h3>
                             </div>
-                            <div className="row alignimage  ">
+                            <div className="row alignimage bg-transparent ">
                             <img src={Reactlogin} className="image back "  alt="...." />
                             </div>
                             <div className="row back bord ">
@@ -201,7 +201,7 @@ const Login = ({isSignedIn,setIsSignedIn}) => {
                                     <span>forgot Password ?</span>
                                 </div>
                             </div>                          
-                           <button type="button" className="btn btn-primary btncolor inputfield textcolor border-0 w-100" onClick={(e) => handleSubmit(e) }>LOGIN</button>                          
+                           <button type="button" className="btn btn-primary btncolor inputfield textcolor border-0 fw-medium w-100" onClick={(e) => handleSubmit(e) }>LOGIN</button>                          
                         </div>
                     </div>
                 </div>

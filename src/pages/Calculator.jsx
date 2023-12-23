@@ -99,7 +99,7 @@ const Demo = ({ setActive, active, setEdit ,setIsSignedIn }) => {
           </div>             */}
           {/* <div className="col-10 mt-4 ">           */}
               <div className=" d-flex fw-medium ">
-                <h5 className="pe-2 ">Calculator</h5>                 
+                <h5 className="pe-2  mt-3">Calculator</h5>                 
                  </div>
             <div className="row d-flex justify-content-center mt-3">
             <div className="card p-3 ms-5 w-50  back ">

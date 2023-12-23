@@ -236,8 +236,8 @@ const CreateProfile = ({ setCreateProfile, createProfile, setCreateProfileData, 
                                             </div>
                                         </div>
                                     </div>
-                                    <button className="btn btn-primary btncolor fw-medium" onClick={() => handleSubmit()}>Submit</button>
-                                    <button className="btn btn-primary btncolor fw-medium ms-3" onClick={() => clearState()}>Cancel</button>
+                                    <button className="btn btn-primary btncolor fw-medium text-black" onClick={() => handleSubmit()}>Submit</button>
+                                    <button className="btn btn-primary btncolor fw-medium ms-3 text-black" onClick={() => clearState()}>Cancel</button>
                                 </div>
                             </div>
                         </div>

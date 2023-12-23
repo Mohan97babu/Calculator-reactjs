@@ -24,6 +24,12 @@ const SideBar = ({ setEdit ,setActive,active}) => {
             <Link to="/user-list" > <p className={`${active ==="ApiTable"?"a1 rounded-3  text-white":"text-black text-decoration-none"}`} onClick={()=>setActive("ApiTable")}> <div className=" Calculator  fw-bold p-2 ">
                 <Icon icon="ph:table-fill" color="black" className="mb-1 ms-3" /> <span className="ms-1 ">FTS Registered User</span>
             </div> </p> </Link>           
+            <Link to="/product-list" > <p className={`${active ==="productlist"?"a1 rounded-3  text-white":"text-black text-decoration-none"}`} onClick={()=>setActive("productlist")}> <div className=" Calculator  fw-bold p-2 ">
+                <Icon icon="ic:outline-list" color="black" className="mb-1 ms-3" /> <span className="ms-1 ">Product Listing</span>
+            </div> </p> </Link>           
+            <Link to="/product-form" > <p className={`${active ==="productform"?"a1 rounded-3  text-white":"text-black text-decoration-none"}`} onClick={()=>setActive("productform")}> <div className=" Calculator  fw-bold p-2 ">
+                <Icon icon="ic:outline-list" color="black" className="mb-1 ms-3" /> <span className="ms-1 ">Add Products</span>
+            </div> </p> </Link>           
         </div>
     )
 }

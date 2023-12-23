@@ -5,13 +5,16 @@ import NewUser from './pages/NewUser';
 import ApiTable from './pages/RegisterUser';
 import { useState } from 'react';
 import Login from './pages/Login';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, useParams } from 'react-router-dom';
 import CreateProfile from './pages/CreateProfile';
 import Demo from './pages/Calculator';
 import PrivateRoutes from "../src/PrivateRoutes/PrivateRoutes";
 import { useEffect } from 'react';
 import SideBar from './components/layout/Sidebar';
 import NavBar from './components/layout/Navbar';
+import ProductShow from './pages/ProductShow';
+import ProductForm from './pages/ProductForm';
+import SingleProductShow from './pages/SingleProductShow';
 
 export default function App() {
   const [isSignedIn, setIsSignedIn] = useState(localStorage.getItem('isSignedIn') === 'true');
@@ -34,7 +37,15 @@ export default function App() {
     incomeRange: "",
     cvFile: "",
   })
-  
+  const [addProducts,setAddProducts] = useState({
+    imageurl:"",
+    title:"",
+    category:"",
+    price :"",
+    count :"",
+    rating :"",
+    description :"",
+});
   const currentpath = window.location.pathname;
   // if(currentpath === "/")
   // {
@@ -73,18 +84,18 @@ export default function App() {
       message: ""
     })
   }
-  
+  const params = useParams();
 
 
 
   return (
     <>
 
-      <div className='conatiner-fluid'>
+      <div className='container-fluid p-0'>
         <BrowserRouter>
          
           {currentpath !== "/" ? 
-          <div className='container-fluid'>
+          <div className='container-fluid '>
           <div className='row'>
               <div className='col-12 ps-0 '>
                 <NavBar
@@ -95,7 +106,7 @@ export default function App() {
              :null}
           <div className='row'>
           {currentpath !== "/" ?
-            <div className='col-2 background'>
+            <div className={`col-2 ${currentpath === "/dashboard" ||  currentpath === "/user-list" || currentpath === "/new-user" ? "background" : "" } `}>
               <SideBar 
               active={active}
               setActive={setActive}
@@ -112,7 +123,9 @@ export default function App() {
                   <Route path="/new-user/" element={<NewUser active={active} setActive={setActive} setEdit={setEdit} data={data} setData={setData} formData={formData} setFormData={setFormData} clearState={clearState} isSignedIn={isSignedIn} setIsSignedIn={setIsSignedIn} />} />
                   <Route path="/edit-user/:id" element={<NewUser active={active} setActive={setActive} setEdit={setEdit} data={data} setData={setData} formData={formData} setFormData={setFormData} clearState={clearState} isSignedIn={isSignedIn} setIsSignedIn={setIsSignedIn} />} />
                   <Route path="/user-list" element={<ApiTable active={active} setActive={setActive} setEdit={setEdit} data={data} setData={setData} formData={formData} setFormData={setFormData} isSignedIn={isSignedIn} setIsSignedIn={setIsSignedIn} />} />
-
+                  <Route path="/product-list" element={<ProductShow active={active} setActive={setActive} setEdit={setEdit} data={data} setData={setData} formData={formData} setFormData={setFormData} isSignedIn={isSignedIn} setIsSignedIn={setIsSignedIn} />} />   
+                  <Route path="/product-form" element={<ProductForm active={active} setActive={setActive} setEdit={setEdit} data={data} setData={setData} formData={formData} setFormData={setFormData} isSignedIn={isSignedIn} setIsSignedIn={setIsSignedIn} addProducts={addProducts} setAddProducts={setAddProducts}/>} />
+                   <Route path ="/product-show/:id" element={<SingleProductShow />} />
                 </Route>
               </Routes>
             </div>

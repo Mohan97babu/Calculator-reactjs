@@ -12,7 +12,7 @@ const Dashboard = ({createProfileData,setCreateProfileData,edit,setEdit ,active,
         {label:"Modified At"},
         {label:"Actions"}
     ];      
-   
+    
     return (
         <>          
             <div className="container-fluid px-0 ">
@@ -31,14 +31,14 @@ const Dashboard = ({createProfileData,setCreateProfileData,edit,setEdit ,active,
                           <p className="d-flex fw-medium "><h5 className="pe-2 text-secondary">Dashboard</h5> &#10095; <h5 className="ps-2">User table</h5> </p>
                         </div>
                         <div className="card mt-3 px-0 ">
-                              <div className=" cardcolor  row  d-flex justify-content-between py-2 mx-0">
+                              <div className=" back  row  d-flex justify-content-between py-2 mx-0">
                             <div className="col-6">
-                            <h5 className=" cursorpoint mb-0 pt-2"><span className="textcolor1">User table</span></h5>
+                            <h5 className=" cursorpoint mb-0 pt-2"><span className="text-white">User table</span></h5>
                             </div>
                             <div className="col-6 ">                               
                                     <form className="d-flex justify-content-end" role="search">
                                         <input className="form-control me-2 w-50" type="search" placeholder="Search" aria-label="Search" />
-                                        <button className="btn btn-primary btncolor w-25" type="submit" >Search</button>
+                                        <button className="btn btn-primary btncolor w-25 text-black fw-medium" type="submit" >Search</button>
                                     </form>
                             </div>
                               </div>
