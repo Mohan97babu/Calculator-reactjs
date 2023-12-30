@@ -1,4 +1,3 @@
-
 const TrigoOperation = ({ trigo, setTrigo }) => {
   const trigooption = [
     { label: "Select An Operator", value: " ", },

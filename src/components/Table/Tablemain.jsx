@@ -1,4 +1,3 @@
-
 import TableRows from "./TableRows";
 const TableMain =({createProfileData,setCreateProfileData,edit,setEdit})=>
 {  

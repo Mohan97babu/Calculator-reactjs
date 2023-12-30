@@ -19,6 +19,7 @@ import SingleProductShow from './pages/SingleProductShow';
 export default function App() {
   const [isSignedIn, setIsSignedIn] = useState(localStorage.getItem('isSignedIn') === 'true');
   const [data, setData] = useState([]);
+  const [editOn, setEditOn] = useState(false);
   const [createProfile, setCreateProfile] = useState({
     firstName: "",
     lastName: "",
@@ -43,15 +44,10 @@ export default function App() {
     category:"",
     price :"",
     count :"",
-    rating :"",
+    rating :0,
     description :"",
 });
   const currentpath = window.location.pathname;
-  // if(currentpath === "/")
-  // {
-  //   console.log("in");
-  //   setIsSignedIn(false);
-  // }
   
   useEffect(() => {
     localStorage.setItem('isSignedIn', isSignedIn.toString());
@@ -84,17 +80,13 @@ export default function App() {
       message: ""
     })
   }
-  const params = useParams();
-
-
 
   return (
     <>
 
       <div className='container-fluid p-0'>
-        <BrowserRouter>
-         
-          {currentpath !== "/" ? 
+        <BrowserRouter>         
+          {currentpath !== "/" && isSignedIn ? 
           <div className='container-fluid '>
           <div className='row'>
               <div className='col-12 ps-0 '>
@@ -105,32 +97,32 @@ export default function App() {
           </div>
              :null}
           <div className='row'>
-          {currentpath !== "/" ?
-            <div className={`col-2 ${currentpath === "/dashboard" ||  currentpath === "/user-list" || currentpath === "/new-user" ? "background" : "" } `}>
+          {currentpath !== "/" && isSignedIn ?
+            <div className={`col-2 ${currentpath === "/dashboard" ||  currentpath === "/user-list" || currentpath === "/new-user" || currentpath === "/product-form" || currentpath === "/product-show"  ? "background" : "" } `}>
               <SideBar 
               active={active}
               setActive={setActive}
-              setEdit={setEdit}/>
+              setEdit={setEdit}
+              setEditOn ={setEditOn}/>
             </div> : null }
             <div className ={`${currentpath !== "/"? "col-10 pe-5" : "col-12 pe-0"}`}>
               <Routes>
-                <Route path="/" element={<Login isSignedIn={isSignedIn} setIsSignedIn={setIsSignedIn} />} />
-                <Route element={<PrivateRoutes isSignedIn={isSignedIn} setIsSignedIn={setIsSignedIn} />} >
-
-                  <Route path="/dashboard" element={<Dashboard createProfile={createProfile} createProfileData={createProfileData} setCreateProfileData={setCreateProfileData} edit={edit} setEdit={setEdit} active={active} setActive={setActive} isSignedIn={isSignedIn} setIsSignedIn={setIsSignedIn} />} />
-                  <Route path="/create-profile" element={<CreateProfile setCreateProfile={setCreateProfile} createProfile={createProfile} createProfileData={createProfileData} setCreateProfileData={setCreateProfileData} edit={edit} setEdit={setEdit} active={active} setActive={setActive} isSignedIn={isSignedIn} setIsSignedIn={setIsSignedIn} />} />
-                  <Route path="/calculator" element={<Demo active={active} setActive={setActive} setEdit={setEdit} isSignedIn={isSignedIn} setIsSignedIn={setIsSignedIn} />} />
-                  <Route path="/new-user/" element={<NewUser active={active} setActive={setActive} setEdit={setEdit} data={data} setData={setData} formData={formData} setFormData={setFormData} clearState={clearState} isSignedIn={isSignedIn} setIsSignedIn={setIsSignedIn} />} />
-                  <Route path="/edit-user/:id" element={<NewUser active={active} setActive={setActive} setEdit={setEdit} data={data} setData={setData} formData={formData} setFormData={setFormData} clearState={clearState} isSignedIn={isSignedIn} setIsSignedIn={setIsSignedIn} />} />
-                  <Route path="/user-list" element={<ApiTable active={active} setActive={setActive} setEdit={setEdit} data={data} setData={setData} formData={formData} setFormData={setFormData} isSignedIn={isSignedIn} setIsSignedIn={setIsSignedIn} />} />
-                  <Route path="/product-list" element={<ProductShow active={active} setActive={setActive} setEdit={setEdit} data={data} setData={setData} formData={formData} setFormData={setFormData} isSignedIn={isSignedIn} setIsSignedIn={setIsSignedIn} />} />   
-                  <Route path="/product-form" element={<ProductForm active={active} setActive={setActive} setEdit={setEdit} data={data} setData={setData} formData={formData} setFormData={setFormData} isSignedIn={isSignedIn} setIsSignedIn={setIsSignedIn} addProducts={addProducts} setAddProducts={setAddProducts}/>} />
-                   <Route path ="/product-show/:id" element={<SingleProductShow />} />
+                <Route path="/" element={<Login  setIsSignedIn={setIsSignedIn} />} />
+                <Route element={<PrivateRoutes isSignedIn={isSignedIn}  />} >
+                  <Route path="/dashboard" element={<Dashboard createProfile={createProfile} createProfileData={createProfileData} setCreateProfileData={setCreateProfileData} edit={edit} setEdit={setEdit}  />} />
+                  <Route path="/create-profile" element={<CreateProfile setCreateProfile={setCreateProfile} createProfile={createProfile} createProfileData={createProfileData} setCreateProfileData={setCreateProfileData} edit={edit}  />} />
+                  <Route path="/calculator" element={<Demo  />} />
+                  <Route path="/new-user/" element={<NewUser setData={setData} formData={formData} setFormData={setFormData} clearState={clearState}  />} />
+                  <Route path="/edit-user/:id" element={<NewUser  setData={setData} formData={formData} setFormData={setFormData} clearState={clearState}  />} />
+                  <Route path="/user-list" element={<ApiTable  data={data} setData={setData} />} />
+                  <Route path="/product-list" element={<ProductShow  />} />   
+                  <Route path="/product-form" element={<ProductForm  addProducts={addProducts} setAddProducts={setAddProducts} setEditOn={setEditOn} editOn={editOn}/>} />
+                   <Route path="/product-form/:id" element={<ProductForm  addProducts={addProducts} setAddProducts={setAddProducts} setEditOn={setEditOn} editOn={editOn} />} />
+                   <Route path ="/product-show/:id" element={<SingleProductShow setEditOn={setEditOn} editOn={editOn} />} />
                 </Route>
               </Routes>
             </div>
           </div>
-
         </BrowserRouter>
       </div>
     </>

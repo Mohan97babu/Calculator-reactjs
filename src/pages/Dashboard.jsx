@@ -1,8 +1,9 @@
-import NavBar from "../components/layout/Navbar";
+import { useNavigate } from "react-router-dom";
 import TableMain from "../components/Table/Tablemain";
-import SideBar from "../components/layout/Sidebar";
+import { Icon } from "@iconify/react";
 
-const Dashboard = ({createProfileData,setCreateProfileData,edit,setEdit ,active,setActive,setIsSignedIn}) => {
+const Dashboard = ({createProfileData,setCreateProfileData,edit,setEdit }) => {
+    const navigate = useNavigate();
     const tablehead =[
         {label:"S.No."},
         {label:"E-Mail"},
@@ -16,24 +17,22 @@ const Dashboard = ({createProfileData,setCreateProfileData,edit,setEdit ,active,
     return (
         <>          
             <div className="container-fluid px-0 ">
-                {/* <NavBar 
-                setIsSignedIn={setIsSignedIn}/> */}
                 <div className="row">
-                    {/* <div className="col-2 background ">
-                        <SideBar
-                        setEdit={setEdit}
-                        active={active}
-                        setActive={setActive}                       
-                        />
-                    </div> */}
-                    {/* <div className="col-10"> */}
-                        <div className="row pt-4">
-                          <p className="d-flex fw-medium "><h5 className="pe-2 text-secondary">Dashboard</h5> &#10095; <h5 className="ps-2">User table</h5> </p>
+                        <div className="row pt-4 pe-0">
+                            <div className="col-6">
+                          <h5 className="d-flex fw-bold textcolor2 fs-4">Dashboard</h5>
+
+                            </div>
+                            <div className="col-6 text-end pe-0">
+                                <button className="btn btn-primary btncolor textcolor2" onClick={() => navigate("/create-profile")}>
+                                <Icon icon="mingcute:user-add-fill"  className="mb-1 me-2 " />
+                                    Add</button>
+                            </div>
                         </div>
                         <div className="card mt-3 px-0 ">
                               <div className=" back  row  d-flex justify-content-between py-2 mx-0">
                             <div className="col-6">
-                            <h5 className=" cursorpoint mb-0 pt-2"><span className="text-white">User table</span></h5>
+                            <h5 className=" cursorpoint mb-0 pt-2"><span className="text-white">Dashboard</span></h5>
                             </div>
                             <div className="col-6 ">                               
                                     <form className="d-flex justify-content-end" role="search">
@@ -87,10 +86,8 @@ const Dashboard = ({createProfileData,setCreateProfileData,edit,setEdit ,active,
                                 </div>
                             </div>
                         </div>
-                    {/* </div> */}
                 </div>
-            </div>
-            
+            </div>            
         </>
     )
 }

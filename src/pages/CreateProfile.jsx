@@ -1,10 +1,8 @@
-import NavBar from "../components/layout/Navbar"
 import { useNavigate } from "react-router-dom"
-import SideBar from "../components/layout/Sidebar"
 import { useState } from "react"
 import avatar from "../assets/images/avatar.png"
 
-const CreateProfile = ({ setCreateProfile, createProfile, setCreateProfileData, createProfileData, edit, setEdit, active, setActive ,setIsSignedIn}) => {
+const CreateProfile = ({ setCreateProfile, createProfile, setCreateProfileData, createProfileData, edit}) => {
     const [imagePreview, setImagePreview] = useState(createProfile.imagePreview || null);
     const navigate = useNavigate();
     const clearState = () => {
@@ -23,7 +21,7 @@ const CreateProfile = ({ setCreateProfile, createProfile, setCreateProfileData, 
             skills: "",
             passout: "",
             jobType: [],
-            incomeRange: "",
+            incomeRange: 0,
             cvFile: "",
         });
         navigate("/dashboard");
@@ -86,20 +84,10 @@ const CreateProfile = ({ setCreateProfile, createProfile, setCreateProfileData, 
     }
     return (
         <div className="container-fluid px-0 alignnav ">
-            {/* <NavBar 
-            setIsSignedIn={setIsSignedIn}/> */}
-            <div className="row ">
-                {/* <div className="col-2 ">
-                    <SideBar
-                        active={active}
-                        setActive={setActive}
-                        setEdit={setEdit}
-                    />
-                </div> */}
-                {/* <div className="col-10"> */}
-                    <div className="row pt-4 mb-2">
-                        <div className="d-flex fw-medium "><h5 className="pe-2 text-secondary">Create Profile</h5> &#10095; <h5 className="ps-2">Account Details</h5> </div>
-                    </div>
+            <div className="row mt-3 ">
+                   
+                        <h5 className="d-flex fw-bold textcolor2 mb-3 fs-4 "><span className="text-secondary me-2" style={{cursor :"pointer"}} onClick={() => navigate("/dashboard")}>Dashboard</span> &#10095;&nbsp;{edit.check ? "Edit" : "Add"} User </h5>
+                    
                     <div className="row">
                         <div className="col-3 ">
                             <div className="card   ">
@@ -118,7 +106,7 @@ const CreateProfile = ({ setCreateProfile, createProfile, setCreateProfileData, 
                             <div className="card fw-medium">
                                 <h5 className="card-header  "><span className="textcolor1 cursorpoint">Account Details</span></h5>
                                 <div className="card-body">
-                                    <div className="row">
+                                    <div className="row mt-3">
                                         <div className="col-6">
                                             <label htmlFor="exampleInputFirstname" className="form-label">First Name:</label>
                                             <input type="text" className="form-control" id="exampleInputFirstname" aria-describedby="emailHelp" name="firstName" placeholder=" Enter First Name" value={createProfile.firstName} onChange={(e) => handleChange(e)} />
@@ -129,7 +117,7 @@ const CreateProfile = ({ setCreateProfile, createProfile, setCreateProfileData, 
                                         </div>
                                     </div>
 
-                                    <div className="row">
+                                    <div className="row mt-3">
                                         <div className="col-6">
                                             <label htmlFor="exampleInputEmail1" className="form-label">E-mail:</label>
                                             <input type="text" className="form-control" id="exampleInputlastname" aria-describedby="emailHelp" value={createProfile.email} name="email" placeholder="Enter E-mail" onChange={(e) => handleChange(e)} />
@@ -242,7 +230,6 @@ const CreateProfile = ({ setCreateProfile, createProfile, setCreateProfileData, 
                             </div>
                         </div>
                     </div>
-                {/* </div> */}
             </div>
         </div>
     )

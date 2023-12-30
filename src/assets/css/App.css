@@ -1,11 +1,6 @@
-
 .back
 {
-  /* background-color: #7464bc !important; */
-  /* background-color: #40366e !important; */
-   /* background-color: #d195fd!important; */
-   background-color:#392467 !important;
-   /* background-color: #5D3587 !important; */
+   background-color:#392467 !important;  
 }
 .inputfield
 {
@@ -18,12 +13,7 @@
 }
 .btncolor 
 {
-    /* background-color:#310750!important; */
-    /* background-color : #5D3587 !important; */
-    /* background-color:#FFD1E3 !important */
-    /* background-color:  #cdc1f2 !important; */
-     /* background-color:#A367B1 !important; */
-     background-color: #aa94ef !important;
+   background-color: #aa94ef !important;
 }
 .checkbox
 {
@@ -36,16 +26,7 @@
 }
 .cardcolor
 {
-  /* background-color:  #cdc1f2 !important; */
-  /* background-color: #310750!important; */
-  /* background-color: #ba5bff!important; */
-  /* background-color: #d195fd!important; */
-  /* background-color: #40366e !important; */
-  /* background-color: #aa94ef !important; */
   background-color:#A367B1 !important;
-  /* background-color: #5D3587 !important; */
- /* background-color:#FFD1E3 !important */
-
 }
 .curved
 {
@@ -99,6 +80,10 @@
 {
   color:#7464bc;
 }
+.textcolor2
+{
+  color:#392467 !important;
+}
 .a:hover
 {
   background-color:#310750!important;
@@ -128,7 +113,6 @@ a
   cursor:default;
 }
 .a1  {
-  /* background-color: #7464bc !important; */
   background-color:#392467;
   color:white !important;  
 }
@@ -163,35 +147,37 @@ input[type=radio]:checked {
 .hov:hover{
   
   border:1px solid;
-  border-color: #7464bc;;
-  /* box-shadow: 2px 3px 19px 3px rgba(0,0,0,0.75); */
+  border-color: #7464bc;
   box-shadow: 2px 3px 10px 2px rgba(0,0,0,0.75);  
   text-overflow: unset;
-  white-space:unset;
- 
+  white-space:unset; 
 }
-
 .textbright:hover{
   color:#7464bc !important;
   text-overflow:unset;
-   white-space:unset;
-  
-  
+   white-space:unset;  
 }
 ::-webkit-scrollbar{
   display: none;
 }
 .bordcolor
 {
-  /* border-color:#392467!important; */
   border-color: #392467;
 }
 .img-wrapper{
   overflow:hidden;
 }
 img.hover-zoom:hover {
-  transform: scale(1.25);
-  
+  transform: scale(1.25);  
 }
-
+.page-item {
+  margin-right: 0px;
+}
+.page-link:hover {
+  background-color: #eee;
+}
+.page-item.active .page-link {
+  color: #fff; 
+  background-color:#310750; 
+}
 

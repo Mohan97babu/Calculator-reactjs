@@ -1,21 +1,19 @@
-import { Card, Col, Table, Modal, Button } from "react-bootstrap";
+import { Card,  Table, Modal, Button, Col } from "react-bootstrap";
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
-import SideBar from "../components/layout/Sidebar";
-import NavBar from "../components/layout/Navbar";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Icon } from "@iconify/react";
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import ReactPaginate from "react-paginate";
 import { ToastContainer, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 
-const ApiTable = ({ setActive, active, setEdit, data, setData, setIsSignedIn }) => {
-    const loginUrl = process.env.REACT_APP_LOGINAPI_NEWUSER;
-    const refreshUrl = process.env.REACT_APP_REFRESHTOKENAPI_LOGIN;
+const ApiTable = ({  data, setData }) => {
+ 
     const [currentPage, setCurrentPage] = useState(1)
     const [pageCount, setPageCount] = useState(0)
+    const [spinner, setSpinner] = useState(true);
     const [show, setShow] = useState(false)
     const handleOpen = (user) => { setShow(true); setUser(user) }
     const handleClose = () => { setShow(false); setUser(null) }
@@ -29,69 +27,14 @@ const ApiTable = ({ setActive, active, setEdit, data, setData, setIsSignedIn }) 
         perPage: 2,
     });
     let limit = deleteShow.perPage;
-
+    const navigate =useNavigate();
     const handleOpenDelete = (user) => {
-        // id1 = id;
-
         setUser(user);
         setDeleteShow({ openModal: true, confirmDelete: true, deleteId: user.id });
     };
 
     const handleCloseDelete = () => { setDeleteShow({ openModal: false, confirmDelete: false, deleteId: "" }); setUser(null) };
     const apiUrl = process.env.REACT_APP_GETAPI_REGISTEREDUSER;
-    const navigate = useNavigate();
-    // axios.interceptors.request.use(
-    //     (config) => {
-
-    //         const accessToken = JSON.parse(localStorage.getItem('accesstoken'));
-    //         console.log(accessToken,"412");
-    //          console.log(config,"456");
-    //          if (accessToken) {
-    //              config.headers['Authorization'] = `Bearer ${accessToken}`;
-    //              console.log(accessToken,"445");
-
-    //         }
-
-    //         return config;
-    //     },
-    //     (error) => {
-    //         return Promise.reject(error);
-    //     }
-    // );
-    // axios.interceptors.response.use(
-    //     (response) => {
-
-    //         return response;
-    //     },
-    //     async (error) => {
-
-
-
-    //         if (error.response.status === 401) {
-    //             const refreshtoken = JSON.parse(localStorage.getItem("refreshtoken"));
-    //             axios({
-    //                 method:"post",
-    //                 url:`${refreshUrl}`,
-    //                 data : {refreshToken : refreshtoken} ,
-    //                 headers: {
-    //                     'Content-Type': 'application/json', 
-    //                 },
-    //             })
-    //             .then(response =>{ 
-    //                // console.log(response,"12354");
-    //                 localStorage.setItem('accesstoken', response.data.response.accessToken.accesstoken); 
-    //                 localStorage.setItem("refreshtoken",response.data.refreshtoken);
-    //                   })
-    //             .catch(err => console.log(err.response))
-
-
-
-    //             return Promise.reject(error);
-    //         }
-
-    //         return Promise.reject(error);
-    //     }
-    // );
 
     const listApi = async (page) => {
         try {
@@ -107,23 +50,12 @@ const ApiTable = ({ setActive, active, setEdit, data, setData, setIsSignedIn }) 
             setPageCount(Math.ceil(total / limit));
             setDeleteShow({ ...deleteShow, setTotal: total });
             setData(response.data.response.paginationOutput.results);
+            setSpinner(false);
         } catch (error) {
             console.error("Error in listApi:", error);
-            // if (error.response === 401) {
-            //     console.log("Data not found");
-            //     //  localStorage.removeItem("accesstoken");
-            //     //  localStorage.removeItem("refreshtoken");
-            // } else {
-            //     //  localStorage.removeItem("accesstoken");
-            //     //  localStorage.removeItem("refreshtoken");
-            //     <Navigate to="/" />
-            // }
-            // navigate("/dashboard");
         }
     };
     const handleDelete = async () => {
-
-        // setDeleteShow({ ...deleteShow, openModal: true });
 
         if (deleteShow.confirmDelete) {
 
@@ -138,33 +70,6 @@ const ApiTable = ({ setActive, active, setEdit, data, setData, setIsSignedIn }) 
             setDeleteShow({ openModal: true, confirmDelete: false });
         }
     }
-    // const handleDelete = async (id) => {
-
-    //   console.log(deleteShow,"ok button");
-    //     try {
-    //         if (deleteShow.confirmDelete) {
-
-    //              await axios.delete(`https://fts-backend.onrender.com/admin/testing/userById?id=${deleteShow.deleteId}`);
-
-    //             console.log(`User with ID ${id} deleted successfully`);
-
-
-    //             listApi();
-
-
-    //             setDeleteShow({ openModal: false, confirmDelete: false });
-
-    //             toast.success("Deleted successfully");
-    //         } else {
-    //             // If confirmDelete is not true, open the modal for confirmatio
-    //             setDeleteShow({ openModal: true, confirmDelete: false });
-    //         }
-    //     } catch (error) {
-    //         console.error(`Error deleting user with ID ${id}:`, error);
-    //         // Handle error scenarios, display error messages, etc.
-    //         setDeleteShow({ openModal: false, confirmDelete: false });
-    //     }
-    // };
 
     useEffect(() => {
 
@@ -173,7 +78,7 @@ const ApiTable = ({ setActive, active, setEdit, data, setData, setIsSignedIn }) 
     useEffect(() => {
         listApi(currentPage);
         setCurrentPage(1);
-        
+
     }, [deleteShow.perPage])
     const handlePageClick = (data) => {
         const newPage = data.selected + 1;
@@ -188,23 +93,27 @@ const ApiTable = ({ setActive, active, setEdit, data, setData, setIsSignedIn }) 
     };
     return (
         <Container fluid className='ps-0' >
-            {/* <NavBar 
-            setIsSignedIn={setIsSignedIn}/> */}
             <Row >
-                {/* <Col md={4} lg={2} xl={2} className='d-none d-md-block '>
-                    <SideBar
-                        active={active}
-                        setActive={setActive}
-                        setEdit={setEdit}
-                    />
-                </Col> */}
-                {/* <Col md={8} lg={10} xl={10} className='d-block pe-4'> */}
-                <div className="row pt-4">
-                    <div className="d-flex fw-medium  mb-3"><h5 className="pe-2 text-secondary">FTS Registered User</h5> &#10095; <h5 className="ps-2">User List</h5> </div>
+                <div className="row pt-4 px-0 d-flex ">
+                    <Col xs={6}>
+
+                    <span className="d-flex fw-bold textcolor2 mb-3 fs-4">FTS Dashboard  
+                    </span>
+                    </Col>
+                   <Col xs={6} className="text-end pe-0 ">
+                   
+                    <Button variant="primary" className="btncolor textcolor2" onClick={() => navigate("/new-user")}>
+                    <Icon icon="mingcute:user-add-fill"  className="mb-1 me-2" />
+                        Add</Button>
+                   </Col>  
                 </div>
                 <Row className='mt-3 ms-1 '>
-                    <Card className="px-0">
-                        <Card.Header className="back py-2 "><h5 className="text-white mt-1 "> User List</h5></Card.Header>
+                   {spinner ? <div className="d-flex justify-content-center align-items-center mt-5">                    
+                    <div class="spinner-border " role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div> 
+                </div> : <Card className="px-0">
+                        <Card.Header className="back py-2 "><h5 className="text-white mt-1 "> FTS Dashboard</h5></Card.Header>
                         <Card.Body className="p-0">
                             <Table striped bordered hover responsive>
                                 <thead>
@@ -222,7 +131,7 @@ const ApiTable = ({ setActive, active, setEdit, data, setData, setIsSignedIn }) 
                                         const serialNumber = (currentPage - 1) * (limit) + index + 1;
                                         return (
                                             <>
-                                                <tr key={index}>
+                                                    <tr key={index}>   
                                                     <td>{serialNumber}</td>
                                                     <td>{user.name}</td>
                                                     <td>{user.email}</td>
@@ -230,12 +139,12 @@ const ApiTable = ({ setActive, active, setEdit, data, setData, setIsSignedIn }) 
                                                     <td>{user.message}</td>
                                                     <td>
                                                         <div className="d-flex justify-content-between" >
-                                                            <Link title = "Edit" to={`/edit-user/${user.id}`} > <Icon  icon="uil:edit" color="#7464bc" width="20" height="20" style={{ cursor: "pointer" }} /> </Link>
-                                                            <span  title = "Delete"> <Icon  icon="fluent:delete-16-filled" color="#7464bc" width="20" height="20" style={{ cursor: "pointer" }} onClick={() => handleOpenDelete(user)} /> </span>
-                                                            <span title = "View"> <Icon  icon="carbon:view" color="#7464bc" width="20" height="20" style={{ cursor: "pointer" }} onClick={() => handleOpen(user)} /></span>
+                                                            <Link title="Edit" to={`/edit-user/${user.id}`} > <Icon icon="uil:edit" color="#7464bc" width="20" height="20" style={{ cursor: "pointer" }} /> </Link>
+                                                            <span title="Delete"> <Icon icon="fluent:delete-16-filled" color="#7464bc" width="20" height="20" style={{ cursor: "pointer" }} onClick={() => handleOpenDelete(user)} /> </span>
+                                                            <span title="View"> <Icon icon="carbon:view" color="#7464bc" width="20" height="20" style={{ cursor: "pointer" }} onClick={() => handleOpen(user)} /></span>
                                                         </div>
-                                                    </td>
-                                                </tr>
+                                                    </td>                                                    
+                                                </tr> 
                                             </>
                                         )
                                     })}
@@ -297,41 +206,41 @@ const ApiTable = ({ setActive, active, setEdit, data, setData, setIsSignedIn }) 
                                 </Modal.Footer>
                             </Modal>
                             <div className="d-flex justify-content-between px-2">
-                                
-                                    <select className="form-select w-25 h-25" aria-label="Default select example" onChange={(e) => setDeleteShow({ ...deleteShow, perPage: e.target.value })}>
-                                        <option value="2">2 items per page</option>
-                                        <option value="4">4 items per page</option>
-                                        <option value="6">6 items per page</option>
-                                    </select>
-                               
+
+                                <select className="form-select w-25 h-25" aria-label="Default select example" onChange={(e) => setDeleteShow({ ...deleteShow, perPage: e.target.value })}>
+                                    <option value="2">2 items per page</option>
+                                    <option value="4">4 items per page</option>
+                                    <option value="6">6 items per page</option>
+                                </select>
+
                                 <div>
-                                <p className="fw-medium me-3 mt-2">Total of Entries : {deleteShow.setTotal ? deleteShow.setTotal : 0}</p>
+                                    <p className="fw-medium me-3 mt-2">Total of Entries : {deleteShow.setTotal ? deleteShow.setTotal : 0}</p>
                                 </div>
-                                <div>
-                                <ReactPaginate
-                                    previousLabel={"<<"}
-                                    nextLabel={">>"}
-                                    breakLabel={"..."}
-                                    pageCount={pageCount}
-                                    pageRangeDisplayed={limit}
-                                    onPageChange={handlePageClick}
-                                    containerClassName={"pagination  "}
-                                    pageClassName={"page-item  "}
-                                    pageLinkClassName={"page-link  "}
-                                    previousClassName={"page-item  "}
-                                    previousLinkClassName={"page-link cardcolor "}
-                                    nextClassName={"page-item textcolor1 "}
-                                    nextLinkClassName={"page-link cardcolor"}
-                                    breakClassName={"page-item"}
-                                    breakLinkClassName={"page-link"}
-                                   activeClassName={"active "} 
-                                  />
+                                <div className="d-flex">
+                                     <ReactPaginate
+                                        previousLabel={"<<"}
+                                        nextLabel={">>"}
+                                        breakLabel={"..."}
+                                        pageCount={pageCount}
+                                        pageRangeDisplayed={limit}
+                                        onPageChange={handlePageClick}
+                                        containerClassName={"pagination  "}
+                                        pageClassName={"page-item  "}
+                                        pageLinkClassName={"page-link  "}
+                                        previousClassName={"page-item  "}
+                                        previousLinkClassName={"page-link  "}
+                                        nextClassName={"page-item "}
+                                        nextLinkClassName={"page-link "}
+                                        breakClassName={"page-item"}
+                                        breakLinkClassName={"page-link"}
+                                        activeClassName={"active "}
+                                        nextAriaLabel={">>>"}
+                                    /> 
                                 </div>
                             </div>
                         </Card.Body>
-                    </Card>
+                    </Card> }
                 </Row>
-                {/* </Col> */}
             </Row>
             <ToastContainer />
         </Container>

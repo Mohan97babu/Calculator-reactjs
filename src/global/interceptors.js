@@ -1,24 +1,18 @@
 import axios from "axios";
-import { Navigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 const refreshUrl = process.env.REACT_APP_REFRESHTOKENAPI_LOGIN;
 const interceptors =() =>
-{
-
+{ 
     axios.interceptors.request.use(
-        (config) => {
-    
-            const accessToken = JSON.parse(localStorage.getItem('accesstoken'));
-           
+        (config) => {   
+            const accessToken = JSON.parse(localStorage.getItem('accesstoken'));           
              if (accessToken) {
-                 config.headers['Authorization'] = `Bearer ${accessToken}`;
-                
-                
+                 config.headers['Authorization'] = `Bearer ${accessToken}`;                
             }
             else
             {
                 <Navigate to ="/" />
-            }
-    
+            }   
             return config;
         },
         (error) => {
@@ -26,17 +20,19 @@ const interceptors =() =>
         }
     );
     axios.interceptors.response.use(
-        (response) => {
-    
+        (response) => {    
             return response;
         },
         async (error) => {
           console.log(error.response.status,"456");
-    
+            if(error.response.status === 400)
+            {
+                console.log(error.response.data.code);
+                <Navigate to ="/" />
+            }
     
             if (error.response.status === 401) {
-                const refreshtoken = JSON.parse( localStorage.getItem("refreshtoken"));
-                
+                const refreshtoken = JSON.parse( localStorage.getItem("refreshtoken"));                
                 try{
                 const response = await axios({
                     method:"post",
@@ -45,31 +41,22 @@ const interceptors =() =>
                     headers: {
                         'Content-Type': 'application/json', 
                     },
-                });
-               
-                   // console.log(response,"12354");
+                });                                 
                    localStorage.removeItem("accesstoken");
                    localStorage.removeItem("refreshtoken");
                     localStorage.setItem("accesstoken",JSON.stringify(response.data.response.accessToken.accessToken)); 
                     localStorage.setItem("refreshtoken",JSON.stringify(response.data.response.refreshtoken));
-                    console.log("refreshsuccess");
-                    
+                    console.log("refreshsuccess");                   
                     }
-                catch(err) {console.log(err.response); 
-                    // window.location.href ="/"
-                }
-    
+                catch(err) {console.log(err.response);                     
+                }   
                console.log("true");
-             //   <Navigate to="/" replace={true}></Navigate>
                 return Promise.reject(error);
             }
             else  {
-             //   localStorage.removeItem("accesstoken");
-             //   localStorage.removeItem("refreshtoken");
-             //   <Navigate to="/" replace={true} />
                 console.log("false");
-            }
-            
+                window.location.href ="/"
+            }            
             return Promise.reject(error);
         }
     );

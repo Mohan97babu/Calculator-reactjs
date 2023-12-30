@@ -6,11 +6,8 @@ import BasicOperation from "../components/Calculator/BasicSelect";
 import TrigoOperation from "../components/Calculator/TrigonometrySelect";
 import Number1Input from "../components/Calculator/Number1Input";
 import Buttons from "../components/Calculator/Buttons";
-import NavBar from "../components/layout/Navbar";
-import SideBar from "../components/layout/Sidebar";
 
-
-const Demo = ({ setActive, active, setEdit ,setIsSignedIn }) => {
+const Demo = () => {
   const [input1, setInput1] = useState([]);
   const [input2, setInput2] = useState([]);
   const [trigo, setTrigo] = useState([] && false);
@@ -86,21 +83,10 @@ const Demo = ({ setActive, active, setEdit ,setIsSignedIn }) => {
   return (
     <div className="App ">
       <div className="container-fluid background ps-0">
-
-        {/* <NavBar 
-        setIsSignedIn={setIsSignedIn}/> */}
         <div className="row">
-          {/* <div className="col-2 background">
-            <SideBar
-              active={active}
-              setActive={setActive}
-              setEdit={setEdit}
-               />
-          </div>             */}
-          {/* <div className="col-10 mt-4 ">           */}
-              <div className=" d-flex fw-medium ">
-                <h5 className="pe-2  mt-3">Calculator</h5>                 
-                 </div>
+              
+                <h5 className="pe-2 fw-bold textcolor2 mt-3 fs-4">Calculator</h5>                 
+                 
             <div className="row d-flex justify-content-center mt-3">
             <div className="card p-3 ms-5 w-50  back ">
               <h5 className="text-center text-white ">Calculator</h5>
@@ -116,7 +102,6 @@ const Demo = ({ setActive, active, setEdit ,setIsSignedIn }) => {
                   basic={basic}
                   setBasic={setBasic}
                 />}
-
               <Number1Input
                 input1={input1}
                 setInput1={setInput1}
@@ -136,7 +121,6 @@ const Demo = ({ setActive, active, setEdit ,setIsSignedIn }) => {
               </div>
             </div>
             </div>
-          {/* </div> */}
         </div>
       </div>
     </div>
