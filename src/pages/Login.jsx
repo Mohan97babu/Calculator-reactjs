@@ -26,9 +26,10 @@ const Login = ({ setIsSignedIn }) => {
                 localStorage.setItem("accesstoken", JSON.stringify(accesstoken));
                 localStorage.setItem("refreshtoken", JSON.stringify(refreshtoken));
                 setIsSignedIn(true);
+                navigate("/dashboard")
             })
-            .catch(err => console.log(err));
-        navigate("/dashboard")
+            .catch(err => {console.log(err); navigate("/")});
+      
     }
 
     return (

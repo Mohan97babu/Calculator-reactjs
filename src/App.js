@@ -20,6 +20,7 @@ export default function App() {
   const [isSignedIn, setIsSignedIn] = useState(localStorage.getItem('isSignedIn') === 'true');
   const [data, setData] = useState([]);
   const [editOn, setEditOn] = useState(false);
+  const [spinner,setSpinner] = useState(true);
   const [createProfile, setCreateProfile] = useState({
     firstName: "",
     lastName: "",
@@ -51,15 +52,17 @@ export default function App() {
   
   useEffect(() => {
     localStorage.setItem('isSignedIn', isSignedIn.toString());
-     if(currentpath === "/")
-  {   
-    setIsSignedIn(false);
+    if(currentpath === "/")
+    {   
+      setIsSignedIn(false);
     localStorage.removeItem("accesstoken");
     localStorage.removeItem("refreshtoken");
     localStorage.removeItem("isSignedIn");
   }
-  }, [isSignedIn]);
+}, [isSignedIn]);
 
+const params = useParams();
+console.log(params,"current");
   const [createProfileData, setCreateProfileData] = useState([]);
   const [edit, setEdit] = useState({
     check: false,
@@ -80,7 +83,7 @@ export default function App() {
       message: ""
     })
   }
-
+  console.log(currentpath,"currentpath");
   return (
     <>
 
@@ -98,7 +101,7 @@ export default function App() {
              :null}
           <div className='row'>
           {currentpath !== "/" && isSignedIn ?
-            <div className={`col-2 ${currentpath === "/dashboard" ||  currentpath === "/user-list" || currentpath === "/new-user" || currentpath === "/product-form" || currentpath === "/product-show"  ? "background" : "" } `}>
+            <div className={`col-2 ${currentpath === "/dashboard" ||  currentpath === "/user-list" || spinner  ? "vh-100" : ""} `}>
               <SideBar 
               active={active}
               setActive={setActive}
@@ -109,16 +112,16 @@ export default function App() {
               <Routes>
                 <Route path="/" element={<Login  setIsSignedIn={setIsSignedIn} />} />
                 <Route element={<PrivateRoutes isSignedIn={isSignedIn}  />} >
-                  <Route path="/dashboard" element={<Dashboard createProfile={createProfile} createProfileData={createProfileData} setCreateProfileData={setCreateProfileData} edit={edit} setEdit={setEdit}  />} />
+                  <Route path="/dashboard" element={<Dashboard createProfile={createProfile} createProfileData={createProfileData} setCreateProfileData={setCreateProfileData} edit={edit} setEdit={setEdit}  spinner ={spinner}/>} />
                   <Route path="/create-profile" element={<CreateProfile setCreateProfile={setCreateProfile} createProfile={createProfile} createProfileData={createProfileData} setCreateProfileData={setCreateProfileData} edit={edit}  />} />
                   <Route path="/calculator" element={<Demo  />} />
                   <Route path="/new-user/" element={<NewUser setData={setData} formData={formData} setFormData={setFormData} clearState={clearState}  />} />
                   <Route path="/edit-user/:id" element={<NewUser  setData={setData} formData={formData} setFormData={setFormData} clearState={clearState}  />} />
-                  <Route path="/user-list" element={<ApiTable  data={data} setData={setData} />} />
-                  <Route path="/product-list" element={<ProductShow  />} />   
+                  <Route path="/user-list" element={<ApiTable  data={data} setData={setData} spinner={spinner} setSpinner={setSpinner} />} />
+                  <Route path="/product-list" element={<ProductShow spinner={spinner} setSpinner={setSpinner} />} />   
                   <Route path="/product-form" element={<ProductForm  addProducts={addProducts} setAddProducts={setAddProducts} setEditOn={setEditOn} editOn={editOn}/>} />
                    <Route path="/product-form/:id" element={<ProductForm  addProducts={addProducts} setAddProducts={setAddProducts} setEditOn={setEditOn} editOn={editOn} />} />
-                   <Route path ="/product-show/:id" element={<SingleProductShow setEditOn={setEditOn} editOn={editOn} />} />
+                   <Route path ="/product-show/:id?" element={<SingleProductShow setEditOn={setEditOn} editOn={editOn} spinner={spinner} setSpinner={setSpinner} />} />
                 </Route>
               </Routes>
             </div>

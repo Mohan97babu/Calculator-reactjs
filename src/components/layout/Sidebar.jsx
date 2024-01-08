@@ -7,6 +7,7 @@ const SideBar = ({ setEdit ,setActive,active,setEditOn}) => {
         setEdit({ check: false, index: "" })
         setActive("createprofile");
     }
+    
     return (
         <ul className=" cardcolor heights p-2">
             <Link to="/dashboard"  > <li className={`${active === "dashboard"? " a1 rounded-3 text-white":"textcolor2 text-decoration-none"} my-2`} onClick={()=>setActive("dashboard")}>  <div className="Dashboard fw-bold  p-2 ">

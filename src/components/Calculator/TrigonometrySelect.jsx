@@ -14,7 +14,7 @@ const TrigoOperation = ({ trigo, setTrigo }) => {
   return (
     <>
        <label htmlFor="trigoselect" className="form-label text-white">Trigonometry Functions</label>
-       <select className="form-select mb-3" value={trigo} id="trigoselect" onChange={(e) => handleTrigoSelect(e)} aria-label="Default select example" required>
+       <select className="form-select mb-3" value={trigo} id="trigoselect" onChange={(e) => handleTrigoSelect(e)} aria-label="Default select example" multiple={false} required>
         {trigooption.map((option,index) =>
         {
           return <option value={option.value} key={index}>{option.label}</option>

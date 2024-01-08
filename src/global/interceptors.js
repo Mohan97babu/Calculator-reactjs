@@ -1,5 +1,5 @@
 import axios from "axios";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate ,Navigate } from "react-router-dom";
 const refreshUrl = process.env.REACT_APP_REFRESHTOKENAPI_LOGIN;
 const interceptors =() =>
 { 
@@ -24,7 +24,7 @@ const interceptors =() =>
             return response;
         },
         async (error) => {
-          console.log(error.response.status,"456");
+          
             if(error.response.status === 400)
             {
                 console.log(error.response.data.code);
@@ -34,7 +34,8 @@ const interceptors =() =>
             if (error.response.status === 401) {
                 const refreshtoken = JSON.parse( localStorage.getItem("refreshtoken"));                
                 try{
-                const response = await axios({
+                const response = await 
+                axios({
                     method:"post",
                     url:`${refreshUrl}`,
                     data : {refreshToken : refreshtoken},
@@ -46,11 +47,12 @@ const interceptors =() =>
                    localStorage.removeItem("refreshtoken");
                     localStorage.setItem("accesstoken",JSON.stringify(response.data.response.accessToken.accessToken)); 
                     localStorage.setItem("refreshtoken",JSON.stringify(response.data.response.refreshtoken));
-                    console.log("refreshsuccess");                   
+                    console.log("refreshsuccess");
+                                  
                     }
                 catch(err) {console.log(err.response);                     
                 }   
-               console.log("true");
+             
                 return Promise.reject(error);
             }
             else  {

@@ -89,6 +89,7 @@ const NewUser = ({ setData, formData, setFormData, clearState}) => {
                                         phone_number: formData.phone_number || "",
                                         message: formData.message || "",
                                     }}
+                                    
                                     enableReinitialize={true}
                                 >
                                     {({ handleSubmit, handleChange, values, errors }) => (
@@ -99,7 +100,7 @@ const NewUser = ({ setData, formData, setFormData, clearState}) => {
                                                 <Form.Control.Feedback type={"invalid"} >{errors.name}</Form.Control.Feedback>
                                             </Form.Group>
                                             <Form.Group className="mb-3" controlId="exampleForm.ControlInput2">
-                                                <Form.Label className='fw-medium'>Email: </Form.Label>
+                                                <Form.Label className='fw-medium'>E-mail: </Form.Label>
                                                 <Form.Control type="email" placeholder="Enter Email " name="email" value={values.email} onChange={handleChange} onBlur={handleChange} isInvalid={!!errors.email} />
                                                 <Form.Control.Feedback type={"invalid"} >{errors.email}</Form.Control.Feedback>
                                             </Form.Group>

@@ -1,4 +1,4 @@
-import { Constants } from "../constants/constants";
+
 import axios from "axios"
 const DeleteProduct = async (deleteId) =>
 {

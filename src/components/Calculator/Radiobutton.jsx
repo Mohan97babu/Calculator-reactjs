@@ -4,7 +4,7 @@ const RadioButton = (props) => {
       <div className="form-check" >
         <input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" onClick={() => {
           { props.setTrigo(false) }
-        }} checked = {!props.trigo} />
+        }} checked = {!props.trigo} readOnly/>
         <label className="form-check-label text-white" htmlFor="flexRadioDefault1">
           Basic Operators
         </label>
@@ -12,7 +12,7 @@ const RadioButton = (props) => {
       <div className="form-check">
         <input className="form-check-input" type="radio" name="flexRadioDefault" id="trigo" onClick={() => {
           { props.setTrigo(true) }
-        }} checked={props.trigo} />
+        }} checked={props.trigo} readOnly/>
         <label className="form-check-label text-white" htmlFor="trigo">
           Trigonometry Functions
         </label>

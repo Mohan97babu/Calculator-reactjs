@@ -11,17 +11,17 @@ const Demo = () => {
   const [input1, setInput1] = useState([]);
   const [input2, setInput2] = useState([]);
   const [trigo, setTrigo] = useState([] && false);
-  const [basic, setBasic] = useState([]);
-  const [result, setResult] = useState([] && true);
+  const [basic, setBasic] = useState("");
+  const [result, setResult] = useState("" && true);
   const [result1, setResult1] = useState([]);
   const [remainder, setRemainder] = useState([]);
 
   const clearState = () => {
     setInput1(' ')
     setInput2('')
-    setTrigo('')
+    setTrigo(' ' && false)
     setBasic(' ')
-    setResult(' ')
+    setResult(' '&& true)
     setResult1('')
   }
 
@@ -85,9 +85,9 @@ const Demo = () => {
       <div className="container-fluid background ps-0">
         <div className="row">
               
-                <h5 className="pe-2 fw-bold textcolor2 mt-3 fs-4">Calculator</h5>                 
+                {/* <h5 className="pe-2 fw-bold textcolor2 mt-3 fs-4">Calculator</h5>                  */}
                  
-            <div className="row d-flex justify-content-center mt-3">
+            <div className="row d-flex justify-content-center mt-5">
             <div className="card p-3 ms-5 w-50  back ">
               <h5 className="text-center text-white ">Calculator</h5>
               <RadioButton
@@ -117,7 +117,7 @@ const Demo = () => {
               <div className="bg-white pt-2">
                 {!trigo ? (basic === '4' ? (<p className=" ms-2 pt-1">  Quotient :- {result} Remainder :- {remainder}</p>)
                   : <p className=" ms-2 pt-1"> Result is:{result} </p>)
-                  : (result ? <p className=" ms-2 pt-1"> Result is:{result1} </p> : null)}
+                  : <p className=" ms-2 pt-1"> Result is:{result1} </p> }
               </div>
             </div>
             </div>

@@ -6,14 +6,14 @@ import { useEffect, useState } from "react";
 import { Icon } from "@iconify/react";
 import { useNavigate } from "react-router-dom";
 
-const ProductShow = ({editon}) => {
-    const [spinner, setSpinner] = useState(true);
+const ProductShow = ({spinner,setSpinner}) => {
     const [textShow, setTextShow] = useState(false)
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const product = useSelector((state) => state.productListData)
 
     useEffect(() => {
+        setSpinner(true);
         const fetchdata = async () => {
             await productList(dispatch);
             setSpinner(false)
@@ -24,7 +24,7 @@ const ProductShow = ({editon}) => {
 
         navigate(`/product-show/${products.id}`);
     }
-    console.log(editon,"show");
+ 
     return (
         <div className="container-fluid ">
             <div className="row mt-3 ">
@@ -41,17 +41,23 @@ const ProductShow = ({editon}) => {
                 </div>
                 {spinner ? 
                 <div className="d-flex justify-content-center align-items-center mt-5">                    
-                    <div class="spinner-border " role="status">
-                    <span class="visually-hidden">Loading...</span>
+                    <div className="spinner-border " role="status">
+                    <span className="visually-hidden">Loading...</span>
                 </div> 
                 </div>
                 : Array.isArray(product.productList?.data) && product.productList?.data.map((products, index) => {
                     return (
-                        <Card className="  hov m-2 px-0   mt-3  h-100 text-trunacte " onMouseOver={() => setTextShow(index)} onMouseLeave={() => setTextShow(false)} style={{ width: "18rem", cursor: "pointer" }} onClick={() => handleSingleProduct(products)} >
+                        <Card className="  hov m-2 px-0 mt-3 " onMouseOver={() => setTextShow(index)} onMouseLeave={() => setTextShow(false)} style={{ width: "18rem",height:"14rem", cursor: "pointer",overflow:"hidden" }} onClick={() => handleSingleProduct(products)} >
                             <img variant="top" src={products.image} alt="..." width={"150px"} height="150px" className="px-2 mt-3 mx-auto " />
 
-                            <Card.Body className="">
-                                <Card.Title className={`${index !== textShow ? "text-truncate" : null}  textbright text-center`}>{products.title} </Card.Title>
+                            <Card.Body className="textbright" style={{"background-color" :"white"}}>
+                                <Card.Title  className="text-center text-truncate"><span title ={`${products.title}`}>{products.title}</span>
+                               {index === textShow ? <>
+                                <div className="textcolor3">Price : &#x20b9; {products.price} </div>
+                                <div className="textcolor3">Rating : <Icon icon="iconoir:star-solid" color="gold" width={"30px"}/><span style={{verticalAlign:"middle"}} className="ms-2">{products.rating.rate}/5</span>  </div>
+                               </>
+                                : null}
+                                 </Card.Title>
                             </Card.Body>
                         </Card>
                     )

@@ -39,15 +39,12 @@ const ProductForm = ({ addProducts, setAddProducts,setEditOn ,editOn }) => {
                 console.log(err);
             }
             setEditOn(false); 
-            toast.success("Edited Successfully")
-            
-
+            toast.success("Edited Successfully");
         }
         else
         {            
             try {
                 const actions =  await PostProductList(addProducts);
-                console.log(actions,"formact");
                 dispatch(actions);          
                 toast.success("Submitted Successfully")
                     
