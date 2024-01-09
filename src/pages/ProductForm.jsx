@@ -80,7 +80,7 @@ const ProductForm = ({ addProducts, setAddProducts,setEditOn ,editOn }) => {
                                 <Form.Control type="text" placeholder="Enter Title" name="title" value={(params.id ? product?.title:addProducts.title )} onChange={(e) => handleChange(e)} />
                             </Form.Group>
                             <Row>
-                                <Col>
+                                <Col xs={12} xl={6}>
                                     <Form.Label className="fw-medium ">Category:</Form.Label>
                                     <Form.Select aria-label="Default select example" className="mb-3" value={(params.id ?product?.category : addProducts.category ) } name="category" onChange={(e) => handleChange(e)} >
                                         <option>Select Category</option>

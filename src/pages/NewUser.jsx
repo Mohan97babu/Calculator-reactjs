@@ -76,7 +76,7 @@ const NewUser = ({ setData, formData, setFormData, clearState}) => {
                     <div className="row pt-4">
                         <div className="d-flex fw-medium "><h5 className="pe-2 text-secondary" style={{cursor :"pointer"}} onClick={() => navigate("/user-list")}>FTS Dashboard</h5> &#10095; <h5 className="ps-2">{param.id ? "Edit" : "Add"}User</h5> </div>
                     </div>                   
-                    <Row className=' mt-3 ms-3'>
+                    <Row className=' mt-3 ms-1'>
                         <Card className=' px-0' >
                             <Card.Header ><span className='textcolor1 fw-bold '>FTS {param.id ? "Edit" : "Add"} User</span></Card.Header>
                             <Card.Body>

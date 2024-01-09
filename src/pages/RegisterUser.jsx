@@ -91,9 +91,9 @@ const ApiTable = ({ data, setData, spinner, setSpinner }) => {
         }
     };
     return (
-        <Container fluid className='ps-0' >
-            <Row >
-                <div className="row pt-4 px-0 text-end ">
+        <Container fluid className='ps-0 pe-0' >
+            <Row  className="w-100">
+                <div className="row pt-4 px-0 w-100 text-end ">
                     {/* <Col xs={6}>
 
                     <span className="d-flex fw-bold textcolor2 mb-3 fs-4">FTS Dashboard  
@@ -106,7 +106,7 @@ const ApiTable = ({ data, setData, spinner, setSpinner }) => {
                             Add</Button>
                     </Col>
                 </div>
-                <Row className='mt-3 ms-1 '>
+                <Row className='mt-3 ms-1 pe-0 '>
                     {spinner ? <div className="d-flex justify-content-center align-items-center mt-5">
                         <div className="spinner-border " role="status">
                             <span className="visually-hidden">Loading...</span>
@@ -186,7 +186,7 @@ const ApiTable = ({ data, setData, spinner, setSpinner }) => {
                                 </Modal.Footer>
                             </Modal>
                             <Modal show={deleteShow.openModal} onHide={handleCloseDelete}>
-                                <Modal.Header className="cardcolor textcolor1" closeButton>
+                                <Modal.Header className="back text-white" closeButton>
                                     <Modal.Title>Delete User</Modal.Title>
                                 </Modal.Header>
                                 <Modal.Body>
@@ -205,27 +205,29 @@ const ApiTable = ({ data, setData, spinner, setSpinner }) => {
                                         </div>
                                         : <div> Are you sure you want to delelte this??</div>}
                                 </Modal.Body>
-                                <Modal.Footer className="cardcolor">
-                                    <Button className="btncolor" onClick={() => { handleDelete() }}>
+                                <Modal.Footer className="back">
+                                    <Button className="btncolor text-black" onClick={() => { handleDelete() }}>
                                         Ok
                                     </Button>
-                                    <Button className="btncolor" onClick={handleCloseDelete}>
+                                    <Button className="btncolor text-black" onClick={handleCloseDelete}>
                                         Cancel
                                     </Button>
                                 </Modal.Footer>
                             </Modal>
-                            <div className="d-flex justify-content-between px-2">
+                            <div className=" row d-flex justify-content-between px-2">
+                               <div className="col-sm-12 col-md-12 col-lg-4 col-xl-4">
 
-                                <select className="form-select w-25 h-25" aria-label="Default select example" onChange={(e) => setDeleteShow({ ...deleteShow, perPage: e.target.value })}>
+                                <select className="form-select " aria-label="Default select example" onChange={(e) => setDeleteShow({ ...deleteShow, perPage: e.target.value })}>
                                     <option value="5">5 items per page</option>
                                     <option value="10">10 items per page</option>
 
                                 </select>
+                               </div>
 
-                                <div>
+                                <div className="col-sm-12 col-md-12 col-lg-4 col-xl-4 text-center">
                                     <p className="fw-medium me-3 mt-2">Total of Entries : {deleteShow.setTotal ? deleteShow.setTotal : 0}</p>
                                 </div>
-                                <div className="d-flex">
+                                <div className="col-sm-12 col-md-12 col-lg-4 col-xl-4 text-end px-sm-5" style={{"overflow-x":"scroll"}}>
                                     <ReactPaginate
                                         previousLabel={"<<"}
                                         nextLabel={">>"}

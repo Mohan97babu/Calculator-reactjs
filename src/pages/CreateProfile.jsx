@@ -89,7 +89,7 @@ const CreateProfile = ({ setCreateProfile, createProfile, setCreateProfileData, 
                         <h5 className="d-flex fw-bold textcolor2 mb-3 fs-4 "><span className="text-secondary me-2" style={{cursor :"pointer"}} onClick={() => navigate("/dashboard")}>Dashboard</span> &#10095;&nbsp;{edit.check ? "Edit" : "Add"} User </h5>
                     
                     <div className="row">
-                        <div className="col-3 ">
+                        <div className=" col-sm-12 col-md-5 col-xl-3 mb-3">
                             <div className="card   ">
                                 <h5 className="card-header "><span className="textcolor1 cursorpoint"> Profile Picture</span></h5>
                                 <div className="card-body">
@@ -102,7 +102,7 @@ const CreateProfile = ({ setCreateProfile, createProfile, setCreateProfileData, 
                                 </div>
                             </div>
                         </div>
-                        <div className="col-9">
+                        <div className="col-sm-12 col-md-7 col-xl-9">
                             <div className="card fw-medium">
                                 <h5 className="card-header  "><span className="textcolor1 cursorpoint">Account Details</span></h5>
                                 <div className="card-body">
@@ -128,11 +128,11 @@ const CreateProfile = ({ setCreateProfile, createProfile, setCreateProfileData, 
                                         </div>
                                     </div>
                                     <div className="row mt-3">
-                                        <div className="col-6">
+                                        <div className=" col-sm-12 col-xl-6">
                                             <label htmlFor="exampleInputDOB" className="form-label">Date of Birth:</label>
                                             <input type="date" className="form-control" id="exampleInputDOB" aria-describedby="emailHelp" name="dob" value={createProfile.dob} onChange={(e) => handleChange(e)} />
                                         </div>
-                                        <div className="col-6 mt-4">
+                                        <div className="  col-sm-12 col-xl-6 mt-4">
                                             <label htmlFor="exampleInputGender" className="form-label mt-2">Gender:</label>
                                             <div className="form-check form-check-inline ms-3 mt-3">
                                                 <input className="form-check-input shadow-none " type="radio" name="gender" id="inlineRadio1" value="Male" onClick={(e) => handleChange(e)} />
@@ -198,7 +198,7 @@ const CreateProfile = ({ setCreateProfile, createProfile, setCreateProfileData, 
                                         </div>
                                     </div>
                                     <div className="row mt-3">
-                                        <div className="col-6 mt-4">
+                                        <div className=" col-sm-12 col-xl-6 mt-4">
                                             <label htmlFor="exampleInputjobtype" className="form-label me-3">Job Type:</label>
                                             <div className="form-check form-check-inline">
                                                 <input className="form-check-input" type="checkbox" id="inlineCheckbox1" value="IT" name="jobType" onChange={(e) => handleChangeCheck(e)} />
@@ -209,14 +209,14 @@ const CreateProfile = ({ setCreateProfile, createProfile, setCreateProfileData, 
                                                 <label className="form-check-label" htmlFor="inlineCheckbox2">Core</label>
                                             </div>
                                         </div>
-                                        <div className="col-6">
+                                        <div className=" col-sm-12 col-xl-6">
                                             <label htmlFor="customRange1" className="form-label"> Minimum Income Range:</label>
                                             <input type="range" className="form-range shadow-none" id="customRange1" max="20000" step="100" name="incomeRange" value={createProfile.incomeRange} onInput={(e) => handleChange(e)} />
                                             <p className="text-black">{createProfile.incomeRange ? createProfile.incomeRange : 0}</p>
                                         </div>
                                     </div>
                                     <div className="row">
-                                        <div className="col-6">
+                                        <div className="col-sm-12 col-xl-6">
                                             <label htmlFor="inputGroupFile01" className="form-label">Upload CV:</label>
                                             <div className="input-group mb-3">
 

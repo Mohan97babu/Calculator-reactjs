@@ -27,8 +27,8 @@ const ProductShow = ({spinner,setSpinner}) => {
  
     return (
         <div className="container-fluid ">
-            <div className="row mt-3 ">
-                <div className="row">
+            <div className="row mt-3 ms-0">
+                <div className="row w-100">
                    <div className="col-6">
 
                 <h5 className="pe-2  fw-bold textcolor2 rounded-3 fs-4 ">Product List</h5>
@@ -39,6 +39,9 @@ const ProductShow = ({spinner,setSpinner}) => {
                         Add</button>
                    </div>
                 </div>
+                
+
+
                 {spinner ? 
                 <div className="d-flex justify-content-center align-items-center mt-5">                    
                     <div className="spinner-border " role="status">
@@ -47,7 +50,7 @@ const ProductShow = ({spinner,setSpinner}) => {
                 </div>
                 : Array.isArray(product.productList?.data) && product.productList?.data.map((products, index) => {
                     return (
-                        <Card className="  hov m-2 px-0 mt-3 " onMouseOver={() => setTextShow(index)} onMouseLeave={() => setTextShow(false)} style={{ width: "18rem",height:"14rem", cursor: "pointer",overflow:"hidden" }} onClick={() => handleSingleProduct(products)} >
+                        <Card  className="  hov m-2 px-0 mt-3 " onMouseOver={() => setTextShow(index)} onMouseLeave={() => setTextShow(false)} style={{ width: "18rem",height:"14rem", cursor: "pointer",overflow:"hidden" }} onClick={() => handleSingleProduct(products)} >
                             <img variant="top" src={products.image} alt="..." width={"150px"} height="150px" className="px-2 mt-3 mx-auto " />
 
                             <Card.Body className="textbright" style={{"background-color" :"white"}}>
@@ -62,6 +65,7 @@ const ProductShow = ({spinner,setSpinner}) => {
                         </Card>
                     )
                 })}
+               
             </div>
         </div>
     )

@@ -53,12 +53,12 @@
 {
    border-color: #7464bc;
 }
-.logo
+/* .logo
 {
   width:300px;
   height:100px;
   align-self: center;
-}
+} */
 .textcolor
 {
   color: #e5caf8;
@@ -188,4 +188,30 @@ img.hover-zoom:hover {
 {
   color:#392467 !important;
 }
+@media (min-width:576px)
+{
+  .logo{
+    width:300px !important;
+    height:100px!important;
+    align-self:center;
+  }
+}
+@media (min-width:768px)
+{
+  .logo{
+    width:290px !important;
+    height:150px!important;
+    align-self:center;
+  }
+ 
+}
+@media (min-width:1200px)
+{
+  .logo{
+    width:290px !important;
+    height:130px!important;
+    align-self:center;
+  }
+}
+
 

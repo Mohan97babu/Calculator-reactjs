@@ -21,7 +21,7 @@ const Demo = () => {
     setInput2('')
     setTrigo(' ' && false)
     setBasic(' ')
-    setResult(' '&& true)
+    setResult(' ' && true)
     setResult1('')
   }
 
@@ -82,45 +82,46 @@ const Demo = () => {
 
   return (
     <div className="App ">
-      <div className="container-fluid background ps-0">
+      <div className="container-fluid background px-3">
         <div className="row">
-              
-                {/* <h5 className="pe-2 fw-bold textcolor2 mt-3 fs-4">Calculator</h5>                  */}
-                 
+
+          {/* <h5 className="pe-2 fw-bold textcolor2 mt-3 fs-4">Calculator</h5>                  */}
+          <div className="col-sm-12 col-md-10 col-lg-10 col-xl-7 ps-xl-5" >
             <div className="row d-flex justify-content-center mt-5">
-            <div className="card p-3 ms-5 w-50  back ">
-              <h5 className="text-center text-white ">Calculator</h5>
-              <RadioButton
-                setTrigo={setTrigo}
-                trigo={trigo}
-              />
-              {trigo ? <TrigoOperation
-                trigo={trigo}
-                setTrigo={setTrigo}
-              />
-                : <BasicOperation
+              <div className="card p-3   back ">
+                <h5 className="text-center text-white ">Calculator</h5>
+                <RadioButton
+                  setTrigo={setTrigo}
+                  trigo={trigo}
+                />
+                {trigo ? <TrigoOperation
+                  trigo={trigo}
+                  setTrigo={setTrigo}
+                />
+                  : <BasicOperation
+                    basic={basic}
+                    setBasic={setBasic}
+                  />}
+                <Number1Input
+                  input1={input1}
+                  setInput1={setInput1}
+                  input2={input2}
+                  setInput2={setInput2}
+                  trigo={trigo}
                   basic={basic}
-                  setBasic={setBasic}
-                />}
-              <Number1Input
-                input1={input1}
-                setInput1={setInput1}
-                input2={input2}
-                setInput2={setInput2}
-                trigo={trigo}
-                basic={basic}
-              />
-              <Buttons
-                handleFinalSubmit={handleFinalSubmit}
-                clearState={clearState}
-              />
-              <div className="bg-white pt-2">
-                {!trigo ? (basic === '4' ? (<p className=" ms-2 pt-1">  Quotient :- {result} Remainder :- {remainder}</p>)
-                  : <p className=" ms-2 pt-1"> Result is:{result} </p>)
-                  : <p className=" ms-2 pt-1"> Result is:{result1} </p> }
+                />
+                <Buttons
+                  handleFinalSubmit={handleFinalSubmit}
+                  clearState={clearState}
+                />
+                <div className="bg-white pt-2">
+                  {!trigo ? (basic === '4' ? (<p className=" ms-2 pt-1">  Quotient :- {result} Remainder :- {remainder}</p>)
+                    : <p className=" ms-2 pt-1"> Result is:{result} </p>)
+                    : <p className=" ms-2 pt-1"> Result is:{result1} </p>}
+                </div>
               </div>
             </div>
-            </div>
+          </div>
         </div>
       </div>
     </div>

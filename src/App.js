@@ -20,7 +20,7 @@ export default function App() {
   const [isSignedIn, setIsSignedIn] = useState(localStorage.getItem('isSignedIn') === 'true');
   const [data, setData] = useState([]);
   const [editOn, setEditOn] = useState(false);
-  const [spinner,setSpinner] = useState(true);
+  const [spinner, setSpinner] = useState(true);
   const [createProfile, setCreateProfile] = useState({
     firstName: "",
     lastName: "",
@@ -39,30 +39,29 @@ export default function App() {
     incomeRange: "",
     cvFile: "",
   })
-  const [addProducts,setAddProducts] = useState({
-    imageurl:"",
-    title:"",
-    category:"",
-    price :"",
-    count :"",
-    rating :0,
-    description :"",
-});
+  const [addProducts, setAddProducts] = useState({
+    imageurl: "",
+    title: "",
+    category: "",
+    price: "",
+    count: "",
+    rating: 0,
+    description: "",
+  });
   const currentpath = window.location.pathname;
-  
+
   useEffect(() => {
     localStorage.setItem('isSignedIn', isSignedIn.toString());
-    if(currentpath === "/")
-    {   
+    if (currentpath === "/") {
       setIsSignedIn(false);
-    localStorage.removeItem("accesstoken");
-    localStorage.removeItem("refreshtoken");
-    localStorage.removeItem("isSignedIn");
-  }
-}, [isSignedIn]);
+      localStorage.removeItem("accesstoken");
+      localStorage.removeItem("refreshtoken");
+      localStorage.removeItem("isSignedIn");
+    }
+  }, [isSignedIn]);
 
-const params = useParams();
-console.log(params,"current");
+  const params = useParams();
+  console.log(params, "current");
   const [createProfileData, setCreateProfileData] = useState([]);
   const [edit, setEdit] = useState({
     check: false,
@@ -83,45 +82,49 @@ console.log(params,"current");
       message: ""
     })
   }
-  console.log(currentpath,"currentpath");
+  console.log(currentpath, "currentpath");
   return (
     <>
 
-      <div className='container-fluid p-0'>
-        <BrowserRouter>         
-          {currentpath !== "/" && isSignedIn ? 
-          <div className='container-fluid '>
-          <div className='row'>
-              <div className='col-12 ps-0 '>
-                <NavBar
-                 setIsSignedIn={setIsSignedIn} />
+      <div className='container-fluid ps-0'>
+        <BrowserRouter>
+          {currentpath !== "/" && isSignedIn ?
+            <div className='container-fluid '>
+              <div className='row'>
+                <div className='col-12 ps-0 '>
+                  <NavBar
+                    setIsSignedIn={setIsSignedIn}
+                    active={active}
+                    setActive={setActive}
+                    setEdit={setEdit}
+                    setEditOn={setEditOn} />
+                </div>
               </div>
             </div>
-          </div>
-             :null}
+            : null}
           <div className='row'>
-          {currentpath !== "/" && isSignedIn ?
-            <div className={`col-2 ${currentpath === "/dashboard" ||  currentpath === "/user-list" || spinner  ? "vh-100" : ""} `}>
-              <SideBar 
-              active={active}
-              setActive={setActive}
-              setEdit={setEdit}
-              setEditOn ={setEditOn}/>
-            </div> : null }
-            <div className ={`${currentpath !== "/"? "col-10 pe-5" : "col-12 pe-0"}`}>
+            {currentpath !== "/" && isSignedIn ?
+              <div className={`col-md-3 col-lg-3  col-xl-2 ${currentpath === "/dashboard" || currentpath === "/user-list" || spinner ? "vh-100" : ""} d-none d-md-block `}>
+                <SideBar
+                  active={active}
+                  setActive={setActive}
+                  setEdit={setEdit}
+                  setEditOn={setEditOn} />
+              </div> : null}
+            <div className={`${currentpath !== "/" ? "col-sm-12 col-md-9 col-lg-9 col-xl-10 pe-0 " : "col-12 pe-0"}`}>
               <Routes>
-                <Route path="/" element={<Login  setIsSignedIn={setIsSignedIn} />} />
-                <Route element={<PrivateRoutes isSignedIn={isSignedIn}  />} >
-                  <Route path="/dashboard" element={<Dashboard createProfile={createProfile} createProfileData={createProfileData} setCreateProfileData={setCreateProfileData} edit={edit} setEdit={setEdit}  spinner ={spinner}/>} />
-                  <Route path="/create-profile" element={<CreateProfile setCreateProfile={setCreateProfile} createProfile={createProfile} createProfileData={createProfileData} setCreateProfileData={setCreateProfileData} edit={edit}  />} />
-                  <Route path="/calculator" element={<Demo  />} />
-                  <Route path="/new-user/" element={<NewUser setData={setData} formData={formData} setFormData={setFormData} clearState={clearState}  />} />
-                  <Route path="/edit-user/:id" element={<NewUser  setData={setData} formData={formData} setFormData={setFormData} clearState={clearState}  />} />
-                  <Route path="/user-list" element={<ApiTable  data={data} setData={setData} spinner={spinner} setSpinner={setSpinner} />} />
-                  <Route path="/product-list" element={<ProductShow spinner={spinner} setSpinner={setSpinner} />} />   
-                  <Route path="/product-form" element={<ProductForm  addProducts={addProducts} setAddProducts={setAddProducts} setEditOn={setEditOn} editOn={editOn}/>} />
-                   <Route path="/product-form/:id" element={<ProductForm  addProducts={addProducts} setAddProducts={setAddProducts} setEditOn={setEditOn} editOn={editOn} />} />
-                   <Route path ="/product-show/:id?" element={<SingleProductShow setEditOn={setEditOn} editOn={editOn} spinner={spinner} setSpinner={setSpinner} />} />
+                <Route path="/" element={<Login setIsSignedIn={setIsSignedIn} />} />
+                <Route element={<PrivateRoutes isSignedIn={isSignedIn} />} >
+                  <Route path="/dashboard" element={<Dashboard createProfile={createProfile} createProfileData={createProfileData} setCreateProfileData={setCreateProfileData} edit={edit} setEdit={setEdit} spinner={spinner} />} />
+                  <Route path="/create-profile" element={<CreateProfile setCreateProfile={setCreateProfile} createProfile={createProfile} createProfileData={createProfileData} setCreateProfileData={setCreateProfileData} edit={edit} />} />
+                  <Route path="/calculator" element={<Demo />} />
+                  <Route path="/new-user/" element={<NewUser setData={setData} formData={formData} setFormData={setFormData} clearState={clearState} />} />
+                  <Route path="/edit-user/:id" element={<NewUser setData={setData} formData={formData} setFormData={setFormData} clearState={clearState} />} />
+                  <Route path="/user-list" element={<ApiTable data={data} setData={setData} spinner={spinner} setSpinner={setSpinner} />} />
+                  <Route path="/product-list" element={<ProductShow spinner={spinner} setSpinner={setSpinner} />} />
+                  <Route path="/product-form" element={<ProductForm addProducts={addProducts} setAddProducts={setAddProducts} setEditOn={setEditOn} editOn={editOn} />} />
+                  <Route path="/product-form/:id" element={<ProductForm addProducts={addProducts} setAddProducts={setAddProducts} setEditOn={setEditOn} editOn={editOn} />} />
+                  <Route path="/product-show/:id?" element={<SingleProductShow setEditOn={setEditOn} editOn={editOn} spinner={spinner} setSpinner={setSpinner} />} />
                 </Route>
               </Routes>
             </div>

@@ -48,10 +48,10 @@ return (
                 </div> 
                 </div>) :
                  (<Row className="mt-3">
-          <Col xs={4} className="border p-2 border-3 bordcolor d-flex justify-content-center align-items-center img-wrapper h-75">
+          <Col xs={12} md={5} xl={4} className="border p-2 border-3 bordcolor d-flex justify-content-center align-items-center img-wrapper h-75">
          <Magnifier  src ={product.singleProduct?.data?.data.image} className="hover-zoom" width={"380px"} height={"380px"} mgShape="square" mgShowOverflow = {false}  mgWidth={200} mgHeight={150} /> 
           </Col>
-          <Col xs={8} className="ps-5">
+          <Col xs={12}  md={7} xl={8} className="ps-4">
            <h3>{product.singleProduct?.data?.data.title}</h3>
            <Row>
             <Col className="mt-4">
@@ -80,19 +80,19 @@ return (
          
             <Card className="border border-2 mt-5 p-2 cardcolor">
               <Row className="p-2 mx-1  ">
-                <Col className="border border-1 p-2 back text-white">
+                <Col xs={6} xl={3} className="border border-1 p-2 back text-center text-white">
                    <h5>Pack of 3</h5>
                    <h6>&#x20b9; { ((product.singleProduct?.data?.data.price)*3).toFixed(2) }</h6>
                 </Col>
-                <Col className="border border-1 p-2 back text-white">
+                <Col xs={6} xl={3} className="border border-1 p-2 back text-center text-white">
                 <h5>Pack of 6</h5>
                 <h6>&#x20b9; { ((product.singleProduct?.data?.data.price)*6).toFixed(2) }</h6>
                 </Col>
-                <Col className="border border-1 p-2 back text-white">
+                <Col xs={6} xl={3} className="border border-1 p-2 back text-center text-white">
                 <h5>Pack of 9</h5>
                 <h6>&#x20b9; { ((product.singleProduct?.data?.data.price)*9).toFixed(2) }</h6>
                 </Col>
-                <Col className="border border-1 p-2 back text-white">
+                <Col xs={6} xl={3} className="border border-1 p-2 back text-center text-white">
                 <h5>Avialable Colors</h5>
                 <h6>White , Blue</h6>
                 </Col>
