@@ -10,7 +10,7 @@ import { ToastContainer, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 
 const ApiTable = ({ data, setData, spinner, setSpinner }) => {
-
+    const baseurl = process.env.REACT_APP_BASEURL_INTERCEPTORS;
     const [currentPage, setCurrentPage] = useState(1)
     const [pageCount, setPageCount] = useState(0)
     const [show, setShow] = useState(false)
@@ -60,7 +60,7 @@ const ApiTable = ({ data, setData, spinner, setSpinner }) => {
 
             await axios({
                 method: 'delete',
-                url: `https://fts-backend.onrender.com/admin/testing/deleteUserById?id=${deleteShow.deleteId}`,
+                url: `${baseurl}/admin/testing/deleteUserById?id=${deleteShow.deleteId}`,
             })
                 .then(response => { console.log("deleted successfully", response); listApi(); toast.success("Deleted successfully"); setDeleteShow({ openModal: false, deleteId: "", confirmDelete: false }); })
                 .catch(err => { console.log(err, "error deleting data") })
@@ -147,9 +147,9 @@ const ApiTable = ({ data, setData, spinner, setSpinner }) => {
                                                     <td>{user.message}</td>
                                                     <td>
                                                         <div className="d-flex justify-content-between" >
-                                                            <Link title="Edit" to={`/edit-user/${user.id}`} > <Icon icon="uil:edit" color="#7464bc" width="20" height="20" style={{ cursor: "pointer" }} /> </Link>
-                                                            <span title="Delete"> <Icon icon="fluent:delete-16-filled" color="#7464bc" width="20" height="20" style={{ cursor: "pointer" }} onClick={() => handleOpenDelete(user)} /> </span>
-                                                            <span title="View"> <Icon icon="carbon:view" color="#7464bc" width="20" height="20" style={{ cursor: "pointer" }} onClick={() => handleOpen(user)} /></span>
+                                                            <Link title="Edit" to={`/edit-user/${user.id}`} > <Icon icon="uil:edit" color="#7464bc" width="20" height="20"  className="cursorhand" /> </Link>
+                                                            <span title="Delete"> <Icon icon="fluent:delete-16-filled" color="#7464bc" width="20" height="20" className="cursorhand" onClick={() => handleOpenDelete(user)} /> </span>
+                                                            <span title="View"> <Icon icon="carbon:view" color="#7464bc" width="20" height="20" className="cursorhand" onClick={() => handleOpen(user)} /></span>
                                                         </div>
                                                     </td>
                                                   </>
@@ -215,7 +215,7 @@ const ApiTable = ({ data, setData, spinner, setSpinner }) => {
                                 </Modal.Footer>
                             </Modal>
                             <div className=" row d-flex justify-content-between px-2">
-                               <div className="col-sm-12 col-md-12 col-lg-4 col-xl-4">
+                               <div className="col-sm-12 col-md-12 col-lg-3 col-xl-4">
 
                                 <select className="form-select " aria-label="Default select example" onChange={(e) => setDeleteShow({ ...deleteShow, perPage: e.target.value })}>
                                     <option value="5">5 items per page</option>
@@ -224,16 +224,16 @@ const ApiTable = ({ data, setData, spinner, setSpinner }) => {
                                 </select>
                                </div>
 
-                                <div className="col-sm-12 col-md-12 col-lg-4 col-xl-4 text-center">
+                                <div className="col-sm-12 col-md-12 col-lg-3 col-xl-4 text-center">
                                     <p className="fw-medium me-3 mt-2">Total of Entries : {deleteShow.setTotal ? deleteShow.setTotal : 0}</p>
                                 </div>
-                                <div className="col-sm-12 col-md-12 col-lg-4 col-xl-4 text-end px-sm-5" style={{"overflow-x":"scroll"}}>
+                                <div className="col-sm-12 col-md-12 col-lg-6 col-xl-4 d-flex justify-content-end " >
                                     <ReactPaginate
-                                        previousLabel={"<<"}
-                                        nextLabel={">>"}
-                                        breakLabel={"..."}
+                                        previousLabel={"<"}
+                                        nextLabel={">"}
+                                        breakLabel={window.innerWidth < 768 ?"...":null}
                                         pageCount={pageCount}
-                                        pageRangeDisplayed={limit}
+                                        pageRangeDisplayed={5}
                                         onPageChange={handlePageClick}
                                         containerClassName={"pagination  "}
                                         pageClassName={"page-item  "}
@@ -245,7 +245,7 @@ const ApiTable = ({ data, setData, spinner, setSpinner }) => {
                                         breakClassName={"page-item"}
                                         breakLinkClassName={"page-link"}
                                         activeClassName={"active  "}
-                                        nextAriaLabel={">>>"}
+                                      
                                     />
                                 </div>
                             </div>

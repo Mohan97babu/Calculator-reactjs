@@ -35,9 +35,8 @@ const Login = ({ setIsSignedIn }) => {
     return (
         <>
             <div className="container-fluid background d-flex justify-content-center align-items-center p-0 cardcolor ">
-                <div className="d-none d-sm-none d-md-block">
                 <div className="row w-100 h-100">
-                    <div className="  col-md-6 col-xl-6  d-flex justify-content-center align-items-center back curved  p-0 ">
+                    <div className="  col-md-6 col-xl-6 d-none d-sm-flex justify-content-center align-items-center back curved  p-0 ">
                         <div className="card rounded-0 border-0 bg-transparent back1 w-75">
                             <div className="row back1 bg-transparent ">
                                 <img src={reactlogotrans1} width="200px" height="200px" alt="....." className="logo1 back " />
@@ -54,7 +53,7 @@ const Login = ({ setIsSignedIn }) => {
                         </div>
                     </div>
                     <div className=" col-sm-12 col-md-6 col-xl-6 d-flex justify-content-center align-items-center  cardcolor border-0">
-                        <div className="card w-75 p-3  back border-0 rounded-5">
+                        <div className="card col-11 col-sm-8 p-3  back border-0 rounded-5">
                             <img src={reactlogotrans1} alt="....." className="logo" />
                             <div className="mb-3">
                                 <label htmlFor="exampleformControlInput1" className="form-label text1 textcolor fw-medium">Username</label>
@@ -66,26 +65,6 @@ const Login = ({ setIsSignedIn }) => {
                             </div>
                             <button type="button" className="btn btn-primary btncolor inputfield textcolor2 border-0 fw-bold w-100 mt-4" onClick={(e) => handleSubmit(e)}>LOGIN</button>
                         </div>
-                    </div>
-                </div>
-                </div>
-                <div className="d-block d-sm-block d-md-none">
-                    <div className="w-100 h-100">
-
-                <div className=" col-sm-12 col-md-6 col-xl-6 d-flex justify-content-center align-items-center  cardcolor border-0">
-                        <div className="card w-75 p-3  back border-0 rounded-5">
-                            <img src={reactlogotrans1} alt="....." className="logo" />
-                            <div className="mb-3">
-                                <label htmlFor="exampleformControlInput1" className="form-label text1 textcolor fw-medium">Username</label>
-                                <input type="email" className="form-control inputfield " id="exampleformControlInput1" name="email" value={login.email} onChange={handleChange} placeholder="Username" />
-                            </div>
-                            <div className="mb-3">
-                                <label htmlFor="exampleformControlInput2" className="form-label text1 textcolor fw-medium ">Password</label>
-                                <input type="password" className="form-control inputfield" id="exampleformControlInput2" name="password" value={login.password} onChange={handleChange} placeholder="Password" />
-                            </div>
-                            <button type="button" className="btn btn-primary btncolor inputfield textcolor2 border-0 fw-bold w-100 mt-4" onClick={(e) => handleSubmit(e)}>LOGIN</button>
-                        </div>
-                    </div>
                     </div>
                 </div>
             </div>

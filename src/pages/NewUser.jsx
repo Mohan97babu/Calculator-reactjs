@@ -51,10 +51,10 @@ const NewUser = ({ setData, formData, setFormData, clearState}) => {
         clearState();
     }
     const schema = yup.object().shape({
-        name: yup.string("Enter Valid Name").required(),
-        email: yup.string().email("Enter Valid Email").required(),
-        phone_number: yup.string("Enter Valid mobile number").required(),
-        message: yup.string().required(),
+        name: yup.string("Enter Valid Name").required("Name is Required"),
+        email: yup.string().email("Enter Valid Email").required("E-mail is Required"),
+        phone_number: yup.string("Enter Valid mobile number").required("Mobile Number is Required"),
+        message: yup.string().required("Message is Required"),
     });
     const param = useParams();
     useEffect(() => {
@@ -74,7 +74,7 @@ const NewUser = ({ setData, formData, setFormData, clearState}) => {
         <Container fluid className='ps-0'  >
             <Row>
                     <div className="row pt-4">
-                        <div className="d-flex fw-medium "><h5 className="pe-2 text-secondary" style={{cursor :"pointer"}} onClick={() => navigate("/user-list")}>FTS Dashboard</h5> &#10095; <h5 className="ps-2">{param.id ? "Edit" : "Add"}User</h5> </div>
+                        <div className="d-flex fw-medium "><h5 className="pe-2 text-secondary cursorhand" onClick={() => navigate("/user-list")}>FTS Dashboard</h5> &#10095; <h5 className="ps-2">{param.id ? "Edit" : "Add"}User</h5> </div>
                     </div>                   
                     <Row className=' mt-3 ms-1'>
                         <Card className=' px-0' >
@@ -111,7 +111,7 @@ const NewUser = ({ setData, formData, setFormData, clearState}) => {
                                             </Form.Group>
                                             <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
                                                 <Form.Label className='fw-medium'>Message:</Form.Label>
-                                                <Form.Control as="textarea" rows={4} cols={50} style={{ resize: "none" }} name="message" value={values.message} placeholder=" Enter Message" onChange={handleChange} onBlur={handleChange} isInvalid={!!errors.message} />
+                                                <Form.Control as="textarea" rows={4} cols={50} className='address' name="message" value={values.message} placeholder=" Enter Message" onChange={handleChange} onBlur={handleChange} isInvalid={!!errors.message} />
                                                 <Form.Control.Feedback type={"invalid"} >{errors.message}</Form.Control.Feedback>
                                             </Form.Group>
                                             <div className='text-end p-3 '>

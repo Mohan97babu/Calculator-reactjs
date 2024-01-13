@@ -1,4 +1,4 @@
-import { Card } from "react-bootstrap";
+import { Card, CardImg } from "react-bootstrap";
 import { useDispatch } from 'react-redux';
 import { useSelector } from "react-redux";
 import { productList } from '../redux/actions/productList';
@@ -50,19 +50,27 @@ const ProductShow = ({spinner,setSpinner}) => {
                 </div>
                 : Array.isArray(product.productList?.data) && product.productList?.data.map((products, index) => {
                     return (
-                        <Card  className="  hov m-2 px-0 mt-3 " onMouseOver={() => setTextShow(index)} onMouseLeave={() => setTextShow(false)} style={{ width: "18rem",height:"14rem", cursor: "pointer",overflow:"hidden" }} onClick={() => handleSingleProduct(products)} >
-                            <img variant="top" src={products.image} alt="..." width={"150px"} height="150px" className="px-2 mt-3 mx-auto " />
+                        
+                        <Card  className="  hov mx-auto   mt-3    col-xl-4 cursorhand img-wrapper border-0 innercardcolor px-0 mx-sm-auto " onMouseOver={() => setTextShow(index)} onMouseLeave={() => setTextShow(false)} style={{ width: "18rem",overflow:"hidden" }} onClick={() => handleSingleProduct(products)} >
+                           <div className="container">
 
-                            <Card.Body className="textbright" style={{"background-color" :"white"}}>
-                                <Card.Title  className="text-center text-truncate"><span title ={`${products.title}`}>{products.title}</span>
-                               {index === textShow ? <>
-                                <div className="textcolor3">Price : &#x20b9; {products.price} </div>
-                                <div className="textcolor3">Rating : <Icon icon="iconoir:star-solid" color="gold" width={"30px"}/><span style={{verticalAlign:"middle"}} className="ms-2">{products.rating.rate}/5</span>  </div>
-                               </>
-                                : null}
+                            <CardImg variant="top" src={products.image} alt="..." width={100} height={200} className=" mt-3 mx-auto hover-zoom innercardcolor  p-3 " title ={`${products.title}`} />
+                            <div className="overlay"><Icon icon="ph:heart" color="black" className="hearticon" /></div>
+                           </div>
+                            <Card.Body className=" border-0 bg-white mt-3" >
+                                <Card.Title  className="text-center text-truncate">
+                                    <span title ={`${products.title}`} >{products.title}</span>
+                                    <div className="mt-2"><Icon icon="iconoir:star-solid" color="gold" width={"30px"} /><span  className="ms-2 align-middle">{products.rating.rate} /5</span></div>
+                                    <div className="mt-2 text-secondary">&#8377; {(products.price).toFixed(2)}</div>
+                                 
                                  </Card.Title>
                             </Card.Body>
                         </Card>
+                        
+                           
+                        
+                        
+                        
                     )
                 })}
                

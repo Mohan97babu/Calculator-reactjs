@@ -88,7 +88,7 @@ const Dashboard = ({ createProfileData, setCreateProfileData, edit, setEdit, spi
         //     </div>
         // </div>  
         <DashBoardTemp
-            navigateContent={() => navigate("/create-profile")}
+            navigateContent={() =>{ navigate("/create-profile"); setEdit({ check: false, index: "" })}}
             title={"Dashboard"}
             spinner={spinner}
             createProfileData={createProfileData}

@@ -40,7 +40,7 @@ const SingleProductShow =  ({setEditOn,editOn,spinner,setSpinner}) =>{
 return (
      <Container fluid>
         <Row className="d-flex">
-          <h5 className="mt-3"><span className="text-secondary" onClick={() => {Navigate("/product-list");}} style={{cursor :"pointer"}}>Product List</span> &nbsp;&#10095;&nbsp;<span>{product.singleProduct?.data?.data.title}</span></h5>
+          <h5 className="mt-3 cursorhand"><span className="text-secondary" onClick={() => {Navigate("/product-list");}}>Product List</span> &nbsp;&#10095;&nbsp;<span>{product.singleProduct?.data?.data.title}</span></h5>
         </Row>
        {spinner  ? (<div className="d-flex justify-content-center align-items-center mt-5">                    
                     <div className="spinner-border " role="status">
@@ -48,37 +48,46 @@ return (
                 </div> 
                 </div>) :
                  (<Row className="mt-3">
-          <Col xs={12} md={5} xl={4} className="border p-2 border-3 bordcolor d-flex justify-content-center align-items-center img-wrapper h-75">
-         <Magnifier  src ={product.singleProduct?.data?.data.image} className="hover-zoom" width={"380px"} height={"380px"} mgShape="square" mgShowOverflow = {false}  mgWidth={200} mgHeight={150} /> 
+          <Col xs={12} md={5} xl={4} className="border p-2 border-3 bordcolor d-flex justify-content-center align-items-center innercardcolor  h-75">
+         <Magnifier  src ={product.singleProduct?.data?.data.image} className="innercardcolor" width={"380px"} height={"380px"} mgShape="square" mgShowOverflow = {false}  mgWidth={200} mgHeight={150} /> 
           </Col>
           <Col xs={12}  md={7} xl={8} className="ps-4">
            <h3>{product.singleProduct?.data?.data.title}</h3>
            <Row>
-            <Col className="mt-4">
+            <div className="fs-4 fw-medium " >
+               <Icon icon="game-icons:round-star" color="gold" width={"30px"}/> <span className="fs-2 align-middle textcolor3" >{product.singleProduct?.data?.data.rating?.rate}<span className="fs-4 text-secondary" > /5</span> </span>
+            </div>
+           </Row>
+           <Row>
+            <Col className="mt-5">
             <h4><span className="text-secondary  ">Category:</span><span className="fw-medium text-capitalize">&nbsp;{product.singleProduct?.data?.data.category}</span></h4>            
             </Col>
            </Row>
-           <Row className="mt-4">
-            <div className="fs-4 fw-medium"> <span className="text-secondary">Price:</span> &#8377;&nbsp;{product.singleProduct?.data?.data.price}</div>
+           
+           <Row className="mt-4 me-3">
+           <span className="fs-1 fw-bold textcolor3">&#8377;&nbsp;{product.singleProduct?.data?.data.price}</span>  
+           <hr className="mt-5 "/>
            </Row>
-           <Row className="mt-4">
-            <div className="fs-4 fw-medium" >
-              <span className="text-secondary">Rating:</span>  <Icon icon="iconoir:star-solid" color="gold" width={"30px"}/> <span className="fs-2" style={{verticalAlign :"middle"}}>{product.singleProduct?.data?.data.rating?.rate}<span className="fs-4 text-secondary" > /5</span> </span>
-            </div>
-           </Row>
-           <Row className="mt-4">
+          
+           <Row className="mt-3">
             <div className="fs-4 fw-normal" >
-              <span className="fw-medium text-secondary ">Description:&nbsp;</span><span className="fs-6 fw-medium">{product.singleProduct?.data?.data.description}</span>
+              <span className="fw-medium text-secondary">Stock Available:&nbsp;</span><span className="fw-bold textcolor3">{product.singleProduct?.data?.data.rating?.count}</span>
             </div>
            </Row>
-           <Row className="mt-4">
+           {/* <Row className="mt-4">
             <div className="fs-4 fw-normal" >
-              <span className="fw-medium text-secondary">Stock Available:&nbsp;</span>{product.singleProduct?.data?.data.rating?.count}
+              <span className="fw-medium text-secondary ">Description:&nbsp;</span><span className="fs-6 fw-medium">{product.singleProduct?.data?.data.description}.</span>
             </div>
-           </Row>
+           </Row> */}
           </Col>
          
-            <Card className="border border-2 mt-5 p-2 cardcolor">
+          <Row >
+            <Col className="d-flex justify-content-end mt-3 mb-1">
+          <Button variant="primary" className="btncolor text-black"onClick={() => handleEdit()}>Edit</Button>{' '}
+          <Button variant="primary" className="btncolor text-black ms-3"onClick={() => handleDelete()}>Delete</Button>{' '}
+            </Col>
+          </Row>
+            <Card className="border border-2 mt-3 p-2 cardcolor">
               <Row className="p-2 mx-1  ">
                 <Col xs={6} xl={3} className="border border-1 p-2 back text-center text-white">
                    <h5>Pack of 3</h5>
@@ -98,14 +107,15 @@ return (
                 </Col>
               </Row>
             </Card>
-         
+            <Row className="mt-4 mb-2">
+            <div className="fs-4 fw-normal" >
+              <span className="fw-medium text-secondary ">Description:&nbsp;</span>
+            </div>
+            <div className="col-8">
+            <span className="fs-6 fw-medium">{product.singleProduct?.data?.data.description}.</span>
+            </div>
+           </Row>
           
-          <Row >
-            <Col className="d-flex justify-content-end mt-3 mb-1">
-          <Button variant="primary" className="btncolor text-black"onClick={() => handleEdit()}>Edit</Button>{' '}
-          <Button variant="primary" className="btncolor text-black ms-3"onClick={() => handleDelete()}>Delete</Button>{' '}
-            </Col>
-          </Row>
         </Row>) }        
      </Container>
 )

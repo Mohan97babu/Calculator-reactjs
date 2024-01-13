@@ -28,7 +28,7 @@ const interceptors =() =>
             if(error.response.status === 400)
             {
                 console.log(error.response.data.code);
-                <Navigate to ="/" />
+               // <Navigate to ="/" />
             }
     
             if (error.response.status === 401) {
@@ -57,7 +57,7 @@ const interceptors =() =>
             }
             else  {
                 console.log("false");
-                window.location.href ="/"
+              //  window.location.href ="/"
             }            
             return Promise.reject(error);
         }

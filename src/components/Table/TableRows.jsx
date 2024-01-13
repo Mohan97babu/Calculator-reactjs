@@ -14,9 +14,9 @@ const TableRows =({deleteRow,createProfileData,setEdit}) =>
             <td>{item.mobile}</td>           
             <td>
                 <div className="row d-flex  pe-3  ">
-                 <Link to="/create-profile" className="w-25" onClick={()=>setEdit({check:true,index:index})} >  <Icon icon="uil:edit" color="#7464bc" width="20" height="20"  /> </Link>
-                    <Icon icon="fluent:delete-16-filled" color="#7464bc" width="20" height="20" className="w-25" onClick={() =>deleteRow(index)} style={{cursor:"pointer"}}/>
-                    <Icon icon="carbon:view" color="#7464bc" width="20" height="20" className="w-25" style={{cursor:"pointer"}} />
+                 <Link to="/create-profile" className="w-25 cursorhand" onClick={()=>setEdit({check:true,index:index})} >  <Icon icon="uil:edit" color="#7464bc" width="20" height="20"  /> </Link>
+                    <Icon icon="fluent:delete-16-filled" color="#7464bc" width="20" height="20" className="w-25 cursorhand" onClick={() =>deleteRow(index)} />
+                    <Icon icon="carbon:view" color="#7464bc" width="20" height="20" className="w-25 cursorhand"  />
                 </div>
             </td>
         </tr>

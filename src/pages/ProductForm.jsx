@@ -64,7 +64,7 @@ const ProductForm = ({ addProducts, setAddProducts,setEditOn ,editOn }) => {
         return (
             <Container fluid>
             <Row>
-                 <h5 className="mt-3"><span className="text-secondary" onClick={() => {navigate("/product-list"); }} style={{cursor :"pointer"}}>Product List</span> &nbsp;{ params.id ? (<span className="text-secondary" style={{cursor :"pointer"}} onClick={() => {navigate(`/product-show/${params.id}`); setEditOn(false);}}>&#10095;{product?.title}</span>): null}&nbsp;&#10095;&nbsp;{ params.id?"Edit":"Add"}</h5> 
+                 <h5 className="mt-3 cursorhand"><span className="text-secondary" onClick={() => {navigate("/product-list"); }} >Product List</span> &nbsp;{ params.id ? (<span className="text-secondary cursorhand"  onClick={() => {navigate(`/product-show/${params.id}`); setEditOn(false);}}>&#10095;{product?.title}</span>): null}&nbsp;&#10095;&nbsp;{ params.id?"Edit":"Add"}</h5> 
                 <Card className="px-0 mt-3">
                     <Card.Header >
                         <span className="textcolor1 fw-bold ">{params.id ? "Edit":"Add"} Product</span>
@@ -107,7 +107,7 @@ const ProductForm = ({ addProducts, setAddProducts,setEditOn ,editOn }) => {
                             </Row>                            
                             <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
                                 <Form.Label className="fw-medium">Description:</Form.Label>
-                                <Form.Control as="textarea" rows={4} placeholder="Enter Description" name="description" value={(params.id ?product?.description : addProducts.description )} style={{ resize: "none" }} onChange={(e) => handleChange(e)} />
+                                <Form.Control as="textarea" className="address" rows={4} placeholder="Enter Description" name="description" value={(params.id ?product?.description : addProducts.description )} onChange={(e) => handleChange(e)} />
                             </Form.Group>
                             <div className="d-flex justify-content-end">
                                 <Button variant="primary" className="btncolor me-2 text-black fw-medium" onClick={(e) => handleSubmit(e)}>{params.id ? "Update" :"Submit"}</Button>{' '}

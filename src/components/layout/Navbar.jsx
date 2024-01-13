@@ -14,14 +14,14 @@ const NavBar = ({setIsSignedIn,active,setActive,setEdit,setEditOn}) => {
                     <img src={reactlogotrans1} width="150px" height="50px" alt ="...."/>
                 </a>
                 <div className="collapse navbar-collapse " id="navbarSupportedContent">
-                    <ul className="navbar-nav me-auto mb-2 mb-lg-0 d-sm-block d-md-none">
+                    <div className="navbar-nav me-auto mb-2 mb-lg-0 d-sm-block d-md-none">
                         <SideBar 
                            active={active}
                            setActive={setActive}
                            setEdit={setEdit}
                            setEditOn ={setEditOn}
                         />
-                    </ul>                  
+                    </div>                  
                 </div>
                     <div>
                         <div className="btn-group dropstart bg-transparent d-none d-sm-none d-md-block ">

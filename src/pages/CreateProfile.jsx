@@ -86,7 +86,7 @@ const CreateProfile = ({ setCreateProfile, createProfile, setCreateProfileData, 
         <div className="container-fluid px-0 alignnav ">
             <div className="row mt-3 ">
                    
-                        <h5 className="d-flex fw-bold textcolor2 mb-3 fs-4 "><span className="text-secondary me-2" style={{cursor :"pointer"}} onClick={() => navigate("/dashboard")}>Dashboard</span> &#10095;&nbsp;{edit.check ? "Edit" : "Add"} User </h5>
+                        <h5 className="d-flex fw-bold textcolor2 mb-3 fs-4 "><span className="text-secondary me-2 cursorhand"  onClick={() => navigate("/dashboard")}>Dashboard</span> &#10095;&nbsp;{edit.check ? "Edit" : "Add"} User </h5>
                     
                     <div className="row">
                         <div className=" col-sm-12 col-md-5 col-xl-3 mb-3">

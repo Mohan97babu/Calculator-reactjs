@@ -147,10 +147,12 @@ input[type=radio]:checked {
 }
 .hov:hover{
   
-  border:1px solid;
+  /* border:1px solid;
   border-color: #7464bc;
-  box-shadow: 2px 3px 10px 2px rgba(0,0,0,0.75);  
-
+  box-shadow: 2px 3px 10px 2px rgba(0,0,0,0.75);  */
+  /* background-color: gainsboro; 
+  mix-blend-mode :darken !important;
+   */
 }
 .textbright:hover{
   color:#7464bc !important;
@@ -168,7 +170,9 @@ input[type=radio]:checked {
   overflow:hidden;
 }
 img.hover-zoom:hover {
-  transform: scale(1.25);  
+  transform: scale(1.10); 
+  background-color: gainsboro;
+  mix-blend-mode: darken; 
 }
 .page-item {
   margin-right: 0px;
@@ -188,6 +192,16 @@ img.hover-zoom:hover {
 {
   color:#392467 !important;
 }
+.cursorhand
+{
+  cursor:pointer;
+}
+.innercardcolor
+{
+  background-color: gainsboro !important;
+  mix-blend-mode: darken !important;
+}
+
 @media (min-width:576px)
 {
   .logo{
@@ -199,10 +213,11 @@ img.hover-zoom:hover {
 @media (min-width:768px)
 {
   .logo{
-    width:290px !important;
-    height:150px!important;
+    width: 200px !important;
+    height: 80px!important;
     align-self:center;
   }
+  
  
 }
 @media (min-width:1200px)
@@ -212,6 +227,33 @@ img.hover-zoom:hover {
     height:130px!important;
     align-self:center;
   }
+}
+.container {
+  position: relative;
+  width: 100%;
+  max-width: 400px;
+}
+.overlay {
+  position: absolute; 
+  /* color:blue !important; */
+  right: 5; 
+  top:0; 
+  color: #f1f1f1; 
+  width: 100%;
+  transition: .5s ease;
+  opacity:0;
+  color: white;
+  font-size: 20px;
+  padding-right: 20px;
+  text-align: end;
+}
+
+.container:hover .overlay {
+  opacity: 0.8;
+}
+.hearticon:hover
+{
+  color:red !important;
 }
 
 

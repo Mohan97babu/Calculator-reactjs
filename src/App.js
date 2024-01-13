@@ -86,12 +86,12 @@ export default function App() {
   return (
     <>
 
-      <div className='container-fluid ps-0'>
+      <div className='container-fluid ps-0 '>
         <BrowserRouter>
           {currentpath !== "/" && isSignedIn ?
             <div className='container-fluid '>
               <div className='row'>
-                <div className='col-12 ps-0 '>
+                <div className='col-12 ps-0  '>
                   <NavBar
                     setIsSignedIn={setIsSignedIn}
                     active={active}
@@ -111,7 +111,7 @@ export default function App() {
                   setEdit={setEdit}
                   setEditOn={setEditOn} />
               </div> : null}
-            <div className={`${currentpath !== "/" ? "col-sm-12 col-md-9 col-lg-9 col-xl-10 pe-0 " : "col-12 pe-0"}`}>
+            <div className={`${currentpath !== "/" ? "col-sm-12 col-md-9 col-lg-9 col-xl-10  " : "col-12 "} px-3`}>
               <Routes>
                 <Route path="/" element={<Login setIsSignedIn={setIsSignedIn} />} />
                 <Route element={<PrivateRoutes isSignedIn={isSignedIn} />} >
